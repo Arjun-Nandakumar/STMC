@@ -1,28 +1,80 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  text-align: center;
-  padding: 50px;
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-  background-color: #fff;
+body, html {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.background-overlay {
+  background: url('background.jpg') no-repeat center center/cover;
+  min-height: 100vh;
+  color: white;
+  padding: 20px;
+}
+
+/* Header and logo */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  padding-bottom: 10px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.company-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Navigation bar styled as tabs */
+nav {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.nav-tabs {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-tabs li a {
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.nav-tabs li a:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Main content */
+main section {
+  margin-top: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: inline-block;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #0077cc;
-  color: white;
-  border: none;
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #005fa3;
 }
