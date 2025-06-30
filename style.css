@@ -11,7 +11,7 @@ body, html {
 }
 
 .background-overlay {
-  background: url('C:\Codes\TestPage') no-repeat center center/cover;
+  background: url('https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/0415c0b5-c30b-4d42-aca5-ee550cfd21c0.png') no-repeat center center/cover;
   min-height: 100vh;
   color: white;
   padding: 20px;
