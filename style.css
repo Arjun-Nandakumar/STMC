@@ -78,3 +78,85 @@ footer {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 }
+
+.title-wrapper {
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 15px 30px;
+  margin: 20px auto;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  
+  /* Initial jagged clip-path (torn paper effect) */
+  clip-path: polygon(
+    0% 8%, 3% 13%, 6% 5%, 9% 17%, 12% 4%, 16% 18%, 
+    19% 6%, 23% 16%, 28% 5%, 31% 14%, 35% 4%, 39% 12%, 
+    42% 8%, 47% 20%, 51% 5%, 54% 16%, 59% 4%, 62% 19%, 
+    65% 7%, 70% 15%, 73% 4%, 78% 14%, 82% 6%, 87% 9%, 
+    92% 3%, 96% 10%, 100% 8%, 100% 100%, 0% 100%
+  );
+  
+  animation: soundWaveStraighten 3s ease-out forwards;
+}
+
+@keyframes soundWaveStraighten {
+  0% {
+    /* Initial jagged state (start of animation) */
+    clip-path: polygon(
+      0% 8%, 3% 13%, 6% 5%, 9% 17%, 12% 4%, 16% 18%, 
+      19% 6%, 23% 16%, 28% 5%, 31% 14%, 35% 4%, 39% 12%, 
+      42% 8%, 47% 20%, 51% 5%, 54% 16%, 59% 4%, 62% 19%, 
+      65% 7%, 70% 15%, 73% 4%, 78% 14%, 82% 6%, 87% 9%, 
+      92% 3%, 96% 10%, 100% 8%, 100% 100%, 0% 100%
+    );
+  }
+
+  25% {
+    /* At 25%, the left side starts smoothing out slightly */
+    clip-path: polygon(
+      0% 7%, 4% 12%, 8% 7%, 12% 15%, 16% 5%, 19% 18%, 
+      22% 9%, 26% 18%, 30% 8%, 34% 13%, 38% 6%, 42% 13%, 
+      46% 7%, 50% 20%, 54% 6%, 58% 17%, 62% 8%, 65% 18%, 
+      68% 9%, 72% 17%, 76% 6%, 80% 12%, 84% 5%, 88% 9%, 
+      92% 4%, 96% 11%, 100% 9%, 100% 100%, 0% 100%
+    );
+  }
+
+  50% {
+    /* At 50%, the middle part is smoothing out more */
+    clip-path: polygon(
+      0% 5%, 10% 10%, 20% 6%, 30% 11%, 40% 4%, 50% 14%, 
+      60% 5%, 70% 13%, 80% 7%, 90% 10%, 100% 6%, 100% 100%, 
+      0% 100%
+    );
+  }
+
+  75% {
+    /* 75% of the way, the edges are nearly straightened */
+    clip-path: polygon(
+      0% 3%, 12% 8%, 24% 4%, 36% 10%, 48% 3%, 60% 12%, 
+      72% 4%, 84% 10%, 96% 5%, 100% 100%, 0% 100%
+    );
+  }
+
+  100% {
+    /* Final state: fully straightened (no jagged edges) */
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 100%, 0% 100%
+    );
+  }
+}
+
+.company-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+
+
