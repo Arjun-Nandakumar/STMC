@@ -123,30 +123,6 @@ footer {
       92% 4%, 96% 11%, 100% 9%, 100% 100%, 0% 100%
     );
   }
-
-  50% {
-    /* At 50%, the middle part is smoothing out more */
-    clip-path: polygon(
-      0% 5%, 10% 10%, 20% 6%, 30% 11%, 40% 4%, 50% 14%, 
-      60% 5%, 70% 13%, 80% 7%, 90% 10%, 100% 6%, 100% 100%, 
-      0% 100%
-    );
-  }
-
-  75% {
-    /* 75% of the way, the edges are nearly straightened */
-    clip-path: polygon(
-      0% 3%, 12% 8%, 24% 4%, 36% 10%, 48% 3%, 60% 12%, 
-      72% 4%, 84% 10%, 96% 5%, 100% 100%, 0% 100%
-    );
-  }
-
-  100% {
-    /* Final state: fully straightened (no jagged edges) */
-    clip-path: polygon(
-      0% 0%, 100% 0%, 100% 100%, 0% 100%
-    );
-  }
 }
 
 .company-title {
