@@ -5,30 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sigma Training and Management Consultants</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Add this inside <head> -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="background-overlay">
     <header>
       <div class="header-container">
-          <h1 class="company-title"><img src="https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/STMC.png" alt="Company Logo" width="100%" height="500px"></h1>
+          <h1 class="company-title"><img src="https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/STMC.png" alt="Company Logo" width="100%" height="170px"></h1>
       </div>
       <nav>
         <ul class="nav-tabs">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Services Offered</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Login</a></li>
+          <li><a href="#" onclick="loadContent('home')">Home</a></li>
+          <li><a href="#" onclick="loadContent('about')">About Us</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn" onclick="return false;">Services Offered &#9662;</a>
+            <div class="dropdown-content">
+              <a href="#" onclick="loadContent('system-implementation')">System Implementation</a>
+              <a href="#" onclick="loadContent('management-training')">Management Training</a>
+              <a href="#" onclick="loadContent('inspection-testing')">Inspection and Testing</a>
+              <a href="#" onclick="loadContent('general-training')">General Training</a>
+              <a href="#" onclick="loadContent('academic-support')">Academic Support</a>
+              <a href="#" onclick="loadContent('system-implementation')">System Implementation</a>
+            </div>
+          </li>
+          <li><a href="#" onclick="loadContent('contact')">Contact Us</a></li>
+          <li><a href="#" onclick="loadContent('login')">Login</a></li>
         </ul>
       </nav>
+
     </header>
 
     <main>
-      <section>
-        <h2>Welcome to Sigma Training and Management Consultants</h2><br>
-        <p>Your trusted partner in training and management consulting.</p>
+      <!-- Static Welcome Message (always visible) -->
+      <section id="welcome-message">
+        <center><h2>Welcome to STMC!</h2></center>
+        <p class="motto">Your trusted partner in training and management consulting.</p>
       </section>
+
+      <!-- Dynamic content section (changes on click) -->
+      <section id="content-area"></section>
     </main>
+
+
 
     <footer>
       <p>&copy; 2025 Sigma Training and Management Consultants. All rights reserved.</p>

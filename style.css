@@ -79,6 +79,46 @@ nav {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
+/* Dropdown container */
+.nav-tabs .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-tabs .dropbtn {
+  cursor: pointer;
+}
+
+/* Dropdown content (hidden by default) */
+.nav-tabs .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(20,27,46,0.95); /* Black with slight transparency */
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+  z-index: 1;
+  margin-top: 10px;
+}
+
+/* Dropdown links */
+.nav-tabs .dropdown-content a {
+  color: #fff; /* White text */
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Show the dropdown on hover */
+.nav-tabs .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Optional: Highlight dropdown links on hover */
+.nav-tabs .dropdown-content a:hover {
+  background-color: rgba(81,106,154,1.0); /* Subtle highlight */
+  color: #fff;
+}
+
 /* Main content */
 main section {
   margin-top: 50px;
@@ -94,4 +134,126 @@ footer {
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
+}
+
+.motto {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.0em;
+  color: white;
+  font-weight: 500;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#content-area {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+
+/* Assuming this is your current overlay style */
+#content-area.overlay {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+
+.about-content {
+  text-align: left;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: white;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-content h3 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+/* ===== SERVICE BLOCKS GRID ===== */
+.service-blocks-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin: 24px auto;
+  max-width: 100%;
+  justify-items: stretch;
+}
+
+.service-block {
+  border: 2px solid #3e8ed0;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.33);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 180px;
+}
+
+.service-header {
+  background: linear-gradient(90deg, #3e8ed0 60%, #1a4d80 100%);
+  color: #fff;
+  padding: 12px 12px;
+  font-size: 1em;
+  font-weight: bold;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.service-body {
+  padding: 12px 12px;
+  color: #fff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 10px;
+  color: #3e8ed0;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s, background 0.2s;
+}
+
+.read-more:hover {
+  color: #fff;
+  background: #3e8ed0;
+  padding: 2px 8px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* Responsive: stack columns on smaller screens */
+@media (max-width: 1200px) {
+  .service-blocks-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 800px) {
+  .service-blocks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  .service-blocks-grid {
+    grid-template-columns: 1fr;
+  }
 }
