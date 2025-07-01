@@ -69,6 +69,8 @@ function loadContent(page) {
         `;
         break;
 
+// System Implementation Section here
+
         case "system-implementation":
           content.innerHTML = `
             <div class="service-blocks-grid">
@@ -76,27 +78,145 @@ function loadContent(page) {
                 <div class="service-header">Quality Management System<br>(QMS)</div>
                 <div class="service-body">
                   <p>Description for QMS.</p>
-                  <a href="#" class="book" data-service="Quality Management System (QMS)">BOOK</a>
+                  <a href="#" class="ENQUIRE" data-service="Quality Management System (QMS)">ENQUIRE</a>
                 </div>
               </div>
               <div class="service-block">
                 <div class="service-header">Environment Management System<br>(EMS)</div>
                 <div class="service-body">
                   <p>Description for QMS.</p>
-                  <a href="#" class="book" data-service="Environment Management System (EMS)">BOOK</a>
+                  <a href="#" class="ENQUIRE" data-service="Environment Management System (EMS)">ENQUIRE</a>
                 </div>
               </div>
               <div class="service-block">
                 <div class="service-header">Occupational Health and Safety Management Systems<br>(OHSMS)</div>
                 <div class="service-body">
                   <p>Description for QMS.</p>
-                  <a href="#" class="book" data-service="Occupational Health and Safety Management Systems (OHSMS)">BOOK</a>
+                  <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (OHSMS)">ENQUIRE</a>
                 </div>
               </div>
               <!-- Add more blocks as needed -->
             </div>
           `;
-          setupWhatsAppBooking();
+          setupWhatsAppENQUIREing();
+          break;
+
+// Management Training Section here
+
+        case "management-training":
+          content.innerHTML = `
+            <div class="service-blocks-grid">
+              <div class="service-block">
+                <div class="service-header">Kaizen</div>
+                <div class="service-body">
+                  <p>Description for Kaizen.</p>
+                  <a href="#" class="ENQUIRE" data-service="Kaizen">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">5S</div>
+                <div class="service-body">
+                  <p>Description for 5S.</p>
+                  <a href="#" class="ENQUIRE" data-service="5S">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Cost of Quality</div>
+                <div class="service-body">
+                  <p>Description for Cost of Quality.</p>
+                  <a href="#" class="ENQUIRE" data-service="Cost of Quality">ENQUIRE</a>
+                </div>
+              </div>
+
+              <div class="service-block">
+                <div class="service-header">Personnel Effectiveness</div>
+                <div class="service-body">
+                  <p>Description for Personnel Effectiveness.</p>
+                  <a href="#" class="ENQUIRE" data-service="Personnel Effectiveness">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Communication Skills</div>
+                <div class="service-body">
+                  <p>Description for Communication Skills.</p>
+                  <a href="#" class="ENQUIRE" data-service="Communication Skills">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Business Excellence</div>
+                <div class="service-body">
+                  <p>Description for Business Excellence.</p>
+                  <a href="#" class="ENQUIRE" data-service="Business Excellence">ENQUIRE</a>
+                </div>
+              </div>
+
+              <!-- Add more blocks as needed -->
+            </div>
+          `;
+          setupWhatsAppENQUIREing();
+          break;
+
+// Inspection and Testing Section here
+
+        case "inspection-testing":
+          content.innerHTML = `
+            <div class="service-blocks-grid">
+              <div class="service-block">
+                <div class="service-header">Third Party Inspection</div>
+                <div class="service-body">
+                  <p>Description for Third Party Inspection.</p>
+                  <a href="#" class="ENQUIRE" data-service="Third Party Inspection">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Visual Inspection</div>
+                <div class="service-body">
+                  <p>Description for Visual Inspection.</p>
+                  <a href="#" class="ENQUIRE" data-service="Visual Inspection">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Dimensional Inspection</div>
+                <div class="service-body">
+                  <p>Description for Dimensional Inspection.</p>
+                  <a href="#" class="ENQUIRE" data-service="Dimensional Inspection">ENQUIRE</a>
+                </div>
+              </div>
+
+              <div class="service-block">
+                <div class="service-header">Third Party Testing</div>
+                <div class="service-body">
+                  <p>Description for Third Party Testing.</p>
+                  <a href="#" class="ENQUIRE" data-service="Third Party Testing">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Ultrasonic Testing</div>
+                <div class="service-body">
+                  <p>Description for Ultrasonic Testing.</p>
+                  <a href="#" class="ENQUIRE" data-service="Ultrasonic Testing">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Dye Penetrant Testing</div>
+                <div class="service-body">
+                  <p>Description for Dye Penetrant Testing.</p>
+                  <a href="#" class="ENQUIRE" data-service="Dye Penetrant Testing">ENQUIRE</a>
+                </div>
+              </div>
+
+              <div class="service-block">
+                <div class="service-header">Magnetic Particle Testing</div>
+                <div class="service-body">
+                  <p>Description for Third Party Testing.</p>
+                  <a href="#" class="ENQUIRE" data-service="Third Party Testing">ENQUIRE</a>
+                </div>
+              </div>
+
+              <!-- Add more blocks as needed -->
+            </div>
+          `;
+          setupWhatsAppENQUIREing();
           break;
 
       default:
@@ -114,59 +234,142 @@ window.addEventListener('DOMContentLoaded', function () {
   loadContent('home');
 });
 
-function setupWhatsAppBooking() {
-  const buttons = document.querySelectorAll('.book');
+function setupWhatsAppENQUIREing() {
+  const buttons = document.querySelectorAll('.ENQUIRE');
   buttons.forEach(button => {
     button.addEventListener('click', function(event) {
       event.preventDefault();
       const serviceName = this.getAttribute('data-service');
-      const phoneNumber = '917624947307'; // <-- Replace with your WhatsApp number, no '+'
-      const message = `Hello! I would like to book the service: ${serviceName}. Please provide more details.`;
+      const phoneNumber = '917624947307';
+      const message = `Hello! I would like to enquire about the service: ${serviceName}. Please provide more details.`;
 
-      // Get current time in IST
       const now = new Date();
-      // IST is UTC+5:30
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const istOffset = 5.5 * 60 * 60000; // 5.5 hours in ms
+      const istOffset = 5.5 * 60 * 60000;
       const istTime = new Date(utc + istOffset);
 
       const hours = istTime.getHours();
       const minutes = istTime.getMinutes();
 
-      // Booking window: 6:00 AM <= time < 10:00 PM (22:00)
-      if (hours >= 6 && hours < 22) {
-        // Allowed, open WhatsApp
+      // ENQUIREing time allowed: 6 AM – 10 PM
+      const isAllowed = hours >= 6 && hours < 22;
+
+      const confirmAction = () => {
         const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        fetch('http://localhost:5000/send-ENQUIREing', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service: serviceName,
+            timestamp: new Date().toISOString()
+          })
+        })
+        .then(res => res.text())
+        .then(response => console.log('Admin notified:', response))
+        .catch(err => console.error('Email notification failed:', err));
         window.open(whatsappURL, '_blank');
+      };
+
+      if (isAllowed) {
+        const msg = `Service Name : <b>${serviceName}</b><br><br>Choose how you would like to contact :`;
+        showCustomModal(msg, confirmAction);
       } else {
-        // Not allowed, calculate hours until 6 AM
         let hoursTo6am;
         if (hours < 6) {
           hoursTo6am = 6 - hours - (minutes > 0 ? 1 : 0);
-          const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
-          const boldTime = `<b>${hoursTo6am} hour(s)${minsToNextHour ? ' and ' + minsToNextHour + ' minute(s)' : ''}</b>`;
-          const msg = `It’s lights out in India! 🌙 <br><br>
-          Bookings resume in ${boldTime}.<br><br>
-          Hang tight and catch some Z’s too!`;
-          showCustomModal(msg);
         } else {
-          // After 10 PM, so calculate hours to next day's 6 AM
           hoursTo6am = (24 - hours) + 6 - (minutes > 0 ? 1 : 0);
-          const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
-          const boldTime = `<b>${hoursTo6am} hour(s)${minsToNextHour ? ' and ' + minsToNextHour + ' minute(s)' : ''}</b>`;
-          const msg = `It’s lights out in India! 🌙 <br><br>
-          Bookings resume in ${boldTime}.<br><br>
-          Hang tight and catch some Z’s too!`;
-          showCustomModal(msg);
-
         }
+        const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
+        const boldTime = `<b>${hoursTo6am} hour(s)${minsToNextHour ? ' and ' + minsToNextHour + ' minute(s)' : ''}</b>`;
+        const msg = `It’s lights out in India! 🌙 <br><br>
+        ENQUIREings resume in ${boldTime}.<br><br>
+        Would you like to pre-ENQUIRE <b>${serviceName}</b>?`;
+
+        showCustomModal(msg, confirmAction);
       }
     });
   });
 }
 
-function showCustomModal(message) {
-  document.getElementById('modal-message').innerHTML = message;
-  document.getElementById('custom-modal').style.display = 'flex';
-}
+function showCustomModal(message, onConfirm = null) {
+  const modal = document.getElementById('custom-modal');
+  const modalMessage = document.getElementById('modal-message');
 
+  // Reset modal content
+  modalMessage.innerHTML = `
+    <span id="modal-close-btn" style="position:absolute; top:8px; right:12px; cursor:pointer; font-size:1.2em;">✖</span>
+    <div style="margin-top: 20px;">${message}</div>
+    <br><br>
+    <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Call</button>
+    <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Book (Calendly)</button>
+    <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Text (WhatsApp)</button>
+    <button id="email-btn" style="padding:8px 24px; border:none; background:gray; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
+  `;
+
+  modal.style.display = 'flex';
+
+  // Close modal (top-right ✖)
+  document.getElementById('modal-close-btn').onclick = () => {
+    modal.style.display = 'none';
+  };
+
+  // WhatsApp ENQUIREing
+  if (onConfirm) {
+    document.getElementById('whatsapp-btn').onclick = () => {
+      modal.style.display = 'none';
+      onConfirm();
+    };
+  } else {
+    document.getElementById('whatsapp-btn').style.display = 'none';
+  }
+
+  // Call popup
+  document.getElementById('call-btn').onclick = () => {
+    modal.style.display = 'none';
+
+    const callingPopup = document.createElement('div');
+    callingPopup.id = 'calling-popup';
+    callingPopup.innerText = '📞 Calling: +91-7624947307...';
+    callingPopup.className = 'glow-popup';
+    ;
+
+    // Add close (✖) button
+    const closeBtn = document.createElement('span');
+    closeBtn.innerText = '✖';
+    closeBtn.style.cssText = `
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 1.2em;
+      color: white;
+    `;
+    closeBtn.onclick = () => callingPopup.remove();
+    callingPopup.appendChild(closeBtn);
+
+    document.body.appendChild(callingPopup);
+
+    // Auto-remove after 15 seconds if user doesn't close
+    setTimeout(() => {
+      if (document.body.contains(callingPopup)) {
+        callingPopup.remove();
+      }
+    }, 15000);
+
+    // Call after slight delay
+    setTimeout(() => {
+      window.location.href = 'tel:+917624947307';
+    }, 1000);
+  };
+
+  document.getElementById('calend-btn').onclick = () => {
+    window.open('https://calendly.com/vnk-arjun-brinda/new-meeting', '_blank');
+    modal.style.display = 'none';
+  };
+
+  document.getElementById('email-btn').onclick = () => {
+    window.location.href = 'mailto:stmconsult@yahoo.com?subject=Service ENQUIREing Request&body=Hello, I would like to ENQUIRE a service.';
+    modal.style.display = 'none';
+  };
+}

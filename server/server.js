@@ -1,6 +1,12 @@
-// server/server.js
+require('dotenv').config();
 
-require('dotenv').config(); // <-- Make sure this is at the very top
+// In your transporter config:
+auth: {
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS
+}
+
+// server/server.js
 
 const express = require('express');
 const nodemailer = require('nodemailer');
@@ -11,22 +17,22 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/send-booking', (req, res) => {
+app.post('/send-ENQUIREing', (req, res) => {
   const { service, timestamp } = req.body;
 
   const transporter = nodemailer.createTransport({
     service: 'yahoo',
     auth: {
-      user: process.env.EMAIL_USER, // <-- Use env variable
-      pass: process.env.EMAIL_PASS  // <-- Use env variable
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
     }
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,      // <-- Use env variable
-    to: process.env.EMAIL_USER,        // <-- Use env variable
-    subject: 'New Service Booking Request',
-    text: `A user booked a service: ${service}\n\nTime: ${timestamp}`
+    from: 'stmconsult@yahoo.com',
+    to: 'stmconsult@yahoo.com', // Admin or recipient email
+    subject: 'New Service ENQUIREing Request',
+    text: `A user ENQUIREed a service: ${service}\n\nTime: ${timestamp}`
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

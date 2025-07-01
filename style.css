@@ -12,7 +12,7 @@ body, html {
 
 .background-overlay {
   background: url('https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/0415c0b5-c30b-4d42-aca5-ee550cfd21c0.png') no-repeat center center/cover;
-  min-height: 100vh;
+  min-height: 100%;
   color: white;
   padding: 20px;
 }
@@ -279,7 +279,7 @@ footer {
   margin: 0 0 10px 0;
 }
 
-.book {
+.ENQUIRE {
   display: inline-block;
   margin-top: 10px;
   color: #fff;
@@ -297,7 +297,7 @@ footer {
   text-decoration: none;
 }
 
-.book:hover {
+.ENQUIRE:hover {
   display: inline-block;
   margin-top: 10px;
   color: #fff;
@@ -330,4 +330,30 @@ footer {
   .service-blocks-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.glow-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #283E7B;
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-size: 1.2em;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(40, 62, 123, 0.8);
+  z-index: 9999;
+  text-align: center;
+  animation: glow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px #fff; }
+  100% { box-shadow: 0 0 25px #00ffff; }
+}
+
+.glow-popup {
+  animation: glow 1.5s infinite alternate;
 }
