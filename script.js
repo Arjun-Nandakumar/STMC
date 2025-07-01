@@ -221,7 +221,7 @@ function loadContent(page) {
 
 // Inspection and Testing here
 
-        case "general-testing":
+        case "general-training":
           content.innerHTML = `
             <div class="service-blocks-grid">
               <div class="service-block">
