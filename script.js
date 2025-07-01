@@ -75,26 +75,58 @@ function loadContent(page) {
           content.innerHTML = `
             <div class="service-blocks-grid">
               <div class="service-block">
-                <div class="service-header">Quality Management System<br>(QMS)</div>
+                <div class="service-header">Quality Management System<br>(ISO 9001:2015)</div>
                 <div class="service-body">
                   <p>Description for QMS.</p>
-                  <a href="#" class="ENQUIRE" data-service="Quality Management System (QMS)">ENQUIRE</a>
+                  <a href="#" class="ENQUIRE" data-service="Quality Management System (ISO:9001:2015)">ENQUIRE</a>
                 </div>
               </div>
               <div class="service-block">
-                <div class="service-header">Environment Management System<br>(EMS)</div>
+                <div class="service-header">Environment Management System<br>(ISO 14001:2015)</div>
                 <div class="service-body">
-                  <p>Description for QMS.</p>
-                  <a href="#" class="ENQUIRE" data-service="Environment Management System (EMS)">ENQUIRE</a>
+                  <p>Description for EMS.</p>
+                  <a href="#" class="ENQUIRE" data-service="Environment Management System (ISO 14001:2015)">ENQUIRE</a>
                 </div>
               </div>
               <div class="service-block">
-                <div class="service-header">Occupational Health and Safety Management Systems<br>(OHSMS)</div>
+                <div class="service-header">Occupational Health and Safety Management Systems<br>(ISO 45001:2018)</div>
+                <div class="service-body">
+                  <p>Description for OHSMS.</p>
+                  <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (ISO 45001:2018)">ENQUIRE</a>
+                </div>
+
+              </div>
+              <div class="service-block">
+                <div class="service-header">Good Manufacturing Practices<br>(ISO 22716:2007)</div>
                 <div class="service-body">
                   <p>Description for QMS.</p>
-                  <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (OHSMS)">ENQUIRE</a>
+                  <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (ISO 45001:2018)">ENQUIRE</a>
                 </div>
               </div>
+              <div class="service-block">
+                <div class="service-header">Medical Devices<br>(ISO 13485:2021)</div>
+                <div class="service-body">
+                  <p>Description for MD.</p>
+                  <a href="#" class="ENQUIRE" data-service="Medical Devices (ISO:13485:2021)">ENQUIRE</a>
+                </div>
+              </div>  
+              </div>
+              <div class="service-block">
+                <div class="service-header">Food Safety Management Systems<br>(ISO 22000:2018)</div>
+                <div class="service-body">
+                  <p>Description for FSMS.</p>
+                  <a href="#" class="ENQUIRE" data-service="Food Safety Management Systems (ISO 22000:2018)">ENQUIRE</a>
+                </div>
+              </div>
+              
+              <div class="service-block">
+                <div class="service-header">Information Security Management Systems<br>(ISO 27001:2022)</div>
+                <div class="service-body">
+                  <p>Description for QMS.</p>
+                  <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (ISO 45001:2018)">ENQUIRE</a>
+                </div>
+              </div>
+
               <!-- Add more blocks as needed -->
             </div>
           `;
