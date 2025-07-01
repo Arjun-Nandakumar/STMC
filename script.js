@@ -219,6 +219,125 @@ function loadContent(page) {
           setupWhatsAppENQUIREing();
           break;
 
+// Inspection and Testing here
+
+        case "general-testing":
+          content.innerHTML = `
+            <div class="service-blocks-grid">
+              <div class="service-block">
+                <div class="service-header">Customer Relationship Management Training<br>(CRM)</div>
+                <div class="service-body">
+                  <p>Description for Customer Relationship Management Training.</p>
+                  <a href="#" class="ENQUIRE" data-service="Customer Relationship Management Training">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Leadership Skills</div>
+                <div class="service-body">
+                  <p>Description for Leadership Skills.</p>
+                  <a href="#" class="ENQUIRE" data-service="Leadership Skills">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Supervisory Skills</div>
+                <div class="service-body">
+                  <p>Description for Supervisory Skills.</p>
+                  <a href="#" class="ENQUIRE" data-service="Supervisory Skills">ENQUIRE</a>
+                </div>
+
+              </div>
+              <div class="service-block">
+                <div class="service-header">Communication Skills</div>
+                <div class="service-body">
+                  <p>Description for Communication Skills.</p>
+                  <a href="#" class="ENQUIRE" data-service="Communication Skills">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Public Speaking</div>
+                <div class="service-body">
+                  <p>Description for Public Speaking.</p>
+                  <a href="#" class="ENQUIRE" data-service="Public Speaking">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Office Etiquette</div>
+                <div class="service-body">
+                  <p>Description for Office Etiquette.</p>
+                  <a href="#" class="ENQUIRE" data-service="Office Etiquette">ENQUIRE</a>
+                </div>
+              </div>
+
+              <!-- Add more blocks as needed -->
+            </div>
+          `;
+          setupWhatsAppENQUIREing();
+          break;
+
+// Academic Support here
+
+        case "academic-support":
+          content.innerHTML = `
+            <div class="service-blocks-grid">
+              <div class="service-block">
+                <div class="service-header">Spoken French</div>
+                <div class="service-body">
+                  <p>Description for Spoken French.</p>
+                  <a href="#" class="ENQUIRE" data-service="Spoken French">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Spoken English</div>
+                <div class="service-body">
+                  <p>Description for Spoken English.</p>
+                  <a href="#" class="ENQUIRE" data-service="Spoken English">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Spoken Hindi</div>
+                <div class="service-body">
+                  <p>Description for Spoken Hindi.</p>
+                  <a href="#" class="ENQUIRE" data-service="Spoken Hindi">ENQUIRE</a>
+                </div>
+
+              </div>
+              <div class="service-block">
+                <div class="service-header">STEM (Science, Technology, Engineering and Mathematics) Tutoring</div>
+                <div class="service-body">
+                  <p>Description for Communication Skills.</p>
+                  <a href="#" class="ENQUIRE" data-service="STEM Tutoring">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Exam Confidence Skills</div>
+                <div class="service-body">
+                  <p>Description for Exam Confidence Skills.</p>
+                  <a href="#" class="ENQUIRE" data-service="Exam Confidence Skills">ENQUIRE</a>
+                </div>
+              </div>
+              <div class="service-block">
+                <div class="service-header">Stress Management</div>
+                <div class="service-body">
+                  <p>Description for Stress Management.</p>
+                  <a href="#" class="ENQUIRE" data-service="Stress Management">ENQUIRE</a>
+                </div>
+              </div>
+
+              </div>
+              <div class="service-block">
+                <div class="service-header">Behavioral Science</div>
+                <div class="service-body">
+                  <p>Description for Behavioral Science.</p>
+                  <a href="#" class="ENQUIRE" data-service="Behavioral Science">ENQUIRE</a>
+                </div>
+              </div>
+
+              <!-- Add more blocks as needed -->
+            </div>
+          `;
+          setupWhatsAppENQUIREing();
+          break;
+
       default:
         content.innerHTML = "<p>Page not found.</p>";
     }
@@ -256,7 +375,7 @@ function setupWhatsAppENQUIREing() {
 
       const confirmAction = () => {
         const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        fetch('http://localhost:5000/send-ENQUIREing', {
+        fetch('http://localhost:5000/enquiry', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

@@ -1,25 +1,22 @@
-require('dotenv').config();
-
-// In your transporter config:
-auth: {
-  user: process.env.EMAIL_USER,
-  pass: process.env.EMAIL_PASS
-}
-
 // server/server.js
 
+require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/send-ENQUIREing', (req, res) => {
+// Route to handle booking/enquiry
+app.post('/enquiry', (req, res) => {
   const { service, timestamp } = req.body;
 
+  // Create transporter using Yahoo SMTP
   const transporter = nodemailer.createTransport({
     service: 'yahoo',
     auth: {
@@ -29,10 +26,10 @@ app.post('/send-ENQUIREing', (req, res) => {
   });
 
   const mailOptions = {
-    from: 'stmconsult@yahoo.com',
-    to: 'stmconsult@yahoo.com', // Admin or recipient email
-    subject: 'New Service ENQUIREing Request',
-    text: `A user ENQUIREed a service: ${service}\n\nTime: ${timestamp}`
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER, // Send to same admin
+    subject: 'New Service Enquiry',
+    text: `A user is enquiring more information for the service: ${service}\n\nTime: ${timestamp}`
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -46,4 +43,8 @@ app.post('/send-ENQUIREing', (req, res) => {
   });
 });
 
-app.listen(5000, () => console.log('Server running on port 5000'));
+// Start the server
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
