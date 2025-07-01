@@ -43,10 +43,14 @@ function loadContent(page) {
 
       case "contact":
         content.innerHTML = `
-          <h3>Contact Us</h3>
-          <p>Email: <a href="mailto:info@stmc.com">info@stmc.com</a></p>
-          <p>Phone: +123-456-7890</p>
-          <p>Address: 123 Sigma Street, Business City</p>
+          <div class="contact-block">
+            <div class="contact-font">
+              <h3>Contact Us</h3>
+              <p>Email: <a href="mailto:stmconsult@yahoo.com">stmconsult@yahoo.com</a></p>
+              <p>Phone: +91-7624947307</p>
+              <p>Address: 570, 1st Main, 1st Block, R.T. Nagar, Bangalore-560032, Karnataka, India</p>
+            </div>
+          </div>
         `;
         break;
 

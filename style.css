@@ -180,6 +180,32 @@ footer {
   color: #ffffff;
 }
 
+.contact-font {
+  text-align: center;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: white;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-font p {
+  text-align: left;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: white;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-font h3 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
 .service-blocks-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -200,6 +226,26 @@ footer {
   flex-direction: column;
   min-width: 0;
   min-height: 180px;
+}
+
+.contact-block {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.33);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 200px;
+  width: 900px;              /* Set your fixed width */
+  margin-left: auto;
+  margin-right: auto;        /* This centers the box horizontally */
+}
+
+.contact-block a {
+  color: #517CF6;
+  text-decoration: none;
 }
 
 .service-header {
