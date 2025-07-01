@@ -261,6 +261,7 @@ footer {
   justify-content: center;
   text-align: center;
   letter-spacing: 0.02em;
+  line-height: 1.8; /* or a pixel value like 32px */
 }
 
 .service-body {

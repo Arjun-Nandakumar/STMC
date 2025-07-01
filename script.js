@@ -257,10 +257,10 @@ function loadContent(page) {
           content.innerHTML = `
             <div class="service-blocks-grid">
               <div class="service-block">
-                <div class="service-header">Customer Relationship Management Training<br>(CRM)</div>
+                <div class="service-header">Customer Relationship Management<br>(CRM)</div>
                 <div class="service-body">
-                  <p>Description for Customer Relationship Management Training.</p>
-                  <a href="#" class="ENQUIRE" data-service="Customer Relationship Management Training">ENQUIRE</a>
+                  <p>Description for Customer Relationship Management.</p>
+                  <a href="#" class="ENQUIRE" data-service="Customer Relationship Management">ENQUIRE</a>
                 </div>
               </div>
               <div class="service-block">
@@ -353,8 +353,6 @@ function loadContent(page) {
                   <p>Description for Stress Management.</p>
                   <a href="#" class="ENQUIRE" data-service="Stress Management">ENQUIRE</a>
                 </div>
-              </div>
-
               </div>
               <div class="service-block">
                 <div class="service-header">Behavioral Science</div>
