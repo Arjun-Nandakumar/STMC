@@ -180,18 +180,18 @@ footer {
   color: #ffffff;
 }
 
-/* ===== SERVICE BLOCKS GRID ===== */
 .service-blocks-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-  margin: 24px auto;
-  max-width: 100%;
-  justify-items: stretch;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 100px;
+  max-width: 1800px;           /* Set your desired max width */
+  margin: 40px auto;            /* Top/bottom 24px, left/right auto (centers the grid) */
+  justify-items: stretch;       /* Makes items fill the column width */
+  justify-content: center;      /* Center the grid itself if it doesn't fill the container */
 }
 
 .service-block {
-  border: 2px solid #3e8ed0;
+  border: 2px solid black;
   border-radius: 10px;
   background-color: rgba(0,0,0,0.33);
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
@@ -203,16 +203,18 @@ footer {
 }
 
 .service-header {
-  background: linear-gradient(90deg, #3e8ed0 60%, #1a4d80 100%);
+  font-family: 'Inter', 'Roboto', 'Open Sans', Arial, sans-serif;
+  background: linear-gradient(90deg, #282E3A 60%, #282E3A 100%);
   color: #fff;
   padding: 12px 12px;
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 700;
   min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  letter-spacing: 0.02em;
 }
 
 .service-body {
@@ -222,22 +224,48 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center; /* This will center the button horizontally */
 }
 
-.read-more {
+.service-body p {
+  text-align: left;
+  width: 100%; /* make sure paragraph takes full width */
+  margin: 0 0 10px 0;
+}
+
+.book {
   display: inline-block;
   margin-top: 10px;
-  color: #3e8ed0;
-  text-decoration: underline;
+  color: #fff;
+  background: #283E7B;
+  text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s, background 0.2s;
+  font-size: 1.1em;           /* Slightly larger text */
+  max-width: 150px;    /* or width: 120px; */
+  padding: 12px 28px;         /* Top/bottom 12px, left/right 28px */
+  border-radius: 6px;         /* Rounded corners */
+  transition: color 0.3s, background 1.0s;
+  box-shadow: 0 4px 16px rgba(40,62,123,0.12); /* Optional: subtle shadow */
+  letter-spacing: 0.02em;     /* Optional: slight spacing for clarity */
+  cursor: pointer;            /* Pointer cursor on hover */
+  text-decoration: none;
 }
 
-.read-more:hover {
+.book:hover {
+  display: inline-block;
+  margin-top: 10px;
   color: #fff;
-  background: #3e8ed0;
-  padding: 2px 8px;
-  border-radius: 5px;
+  background: #141F3D;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;           /* Slightly larger text */
+  max-width: 150px;    /* or width: 120px; */
+  padding: 12px 28px;
+  border-radius: 6px;
+  transition: color 0.3s, background 1.0s;
+  box-shadow: 0 4px 16px rgba(20,31,61,0.18); /* Slightly stronger shadow on hover */
+  letter-spacing: 0.02em;     /* Optional: slight spacing for clarity */
+  cursor: pointer;            /* Pointer cursor on hover */
   text-decoration: none;
 }
 

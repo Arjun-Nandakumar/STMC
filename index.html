@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Add this inside <head> -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <div class="background-overlay">
@@ -55,6 +57,15 @@
   </div>
 
   <script src="script.js"></script>
+
+<div id="custom-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; color:#222; padding:32px 24px; border-radius:10px; max-width:90vw; max-height:90vh; text-align:center; font-size:1.2em; position:relative;">
+    <span id="modal-message"></span>
+    <br><br>
+    <button onclick="document.getElementById('custom-modal').style.display='none';" style="padding:8px 24px; border:none; background:#283E7B; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">OK</button>
+  </div>
+</div>
+
 </body>
 </html>
   

@@ -4,9 +4,11 @@ function loadContent(page) {
   // Remove or add overlay based on page
   if (page === "home") {
     content.classList.remove("overlay");
+    content.style.display = 'none';
     content.innerHTML = ""; // no additional content for home
     return;
   } else {
+    content.style.display = 'block'; // Show content-area
     content.classList.add("overlay");
   }
 
@@ -67,43 +69,30 @@ function loadContent(page) {
           content.innerHTML = `
             <div class="service-blocks-grid">
               <div class="service-block">
-                <div class="service-header">Quality Management System (QMS)</div>
+                <div class="service-header">Quality Management System<br>(QMS)</div>
                 <div class="service-body">
                   <p>Description for QMS.</p>
-                  <a href="#" class="read-more">Read More...</a>
+                  <a href="#" class="book" data-service="Quality Management System (QMS)">BOOK</a>
                 </div>
               </div>
               <div class="service-block">
-                <div class="service-header">Environmental Management System (EMS)</div>
+                <div class="service-header">Environment Management System<br>(EMS)</div>
                 <div class="service-body">
-                  <p>Description for EMS.</p>
-                  <a href="#" class="read-more">Read More...</a>
+                  <p>Description for QMS.</p>
+                  <a href="#" class="book" data-service="Environment Management System (EMS)">BOOK</a>
                 </div>
               </div>
               <div class="service-block">
-                <div class="service-header">Occupational Health and Safety Management System (OHSMS)</div>
+                <div class="service-header">Occupational Health and Safety Management Systems<br>(OHSMS)</div>
                 <div class="service-body">
-                  <p>Description for OHSMS.</p>
-                  <a href="#" class="read-more">Read More...</a>
-                </div>
-              </div>
-              <div class="service-block">
-                <div class="service-header">Food Safety Management System (FSMS)</div>
-                <div class="service-body">
-                  <p>Description for FSMS.</p>
-                  <a href="#" class="read-more">Read More...</a>
-                </div>
-              </div>
-              <div class="service-block">
-                <div class="service-header">Information Security Management System (ISMS)</div>
-                <div class="service-body">
-                  <p>Description for ISMS.</p>
-                  <a href="#" class="read-more">Read More...</a>
+                  <p>Description for QMS.</p>
+                  <a href="#" class="book" data-service="Occupational Health and Safety Management Systems (OHSMS)">BOOK</a>
                 </div>
               </div>
               <!-- Add more blocks as needed -->
             </div>
           `;
+          setupWhatsAppBooking();
           break;
 
       default:
@@ -120,4 +109,60 @@ document.addEventListener('contextmenu', function (e) {
 window.addEventListener('DOMContentLoaded', function () {
   loadContent('home');
 });
+
+function setupWhatsAppBooking() {
+  const buttons = document.querySelectorAll('.book');
+  buttons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      const serviceName = this.getAttribute('data-service');
+      const phoneNumber = '917624947307'; // <-- Replace with your WhatsApp number, no '+'
+      const message = `Hello! I would like to book the service: ${serviceName}. Please provide more details.`;
+
+      // Get current time in IST
+      const now = new Date();
+      // IST is UTC+5:30
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const istOffset = 5.5 * 60 * 60000; // 5.5 hours in ms
+      const istTime = new Date(utc + istOffset);
+
+      const hours = istTime.getHours();
+      const minutes = istTime.getMinutes();
+
+      // Booking window: 6:00 AM <= time < 10:00 PM (22:00)
+      if (hours >= 6 && hours < 22) {
+        // Allowed, open WhatsApp
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappURL, '_blank');
+      } else {
+        // Not allowed, calculate hours until 6 AM
+        let hoursTo6am;
+        if (hours < 6) {
+          hoursTo6am = 6 - hours - (minutes > 0 ? 1 : 0);
+          const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
+          const boldTime = `<b>${hoursTo6am} hour(s)${minsToNextHour ? ' and ' + minsToNextHour + ' minute(s)' : ''}</b>`;
+          const msg = `It’s lights out in India! 🌙 <br><br>
+          Bookings resume in ${boldTime}.<br><br>
+          Hang tight and catch some Z’s too!`;
+          showCustomModal(msg);
+        } else {
+          // After 10 PM, so calculate hours to next day's 6 AM
+          hoursTo6am = (24 - hours) + 6 - (minutes > 0 ? 1 : 0);
+          const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
+          const boldTime = `<b>${hoursTo6am} hour(s)${minsToNextHour ? ' and ' + minsToNextHour + ' minute(s)' : ''}</b>`;
+          const msg = `It’s lights out in India! 🌙 <br><br>
+          Bookings resume in ${boldTime}.<br><br>
+          Hang tight and catch some Z’s too!`;
+          showCustomModal(msg);
+
+        }
+      }
+    });
+  });
+}
+
+function showCustomModal(message) {
+  document.getElementById('modal-message').innerHTML = message;
+  document.getElementById('custom-modal').style.display = 'flex';
+}
 
