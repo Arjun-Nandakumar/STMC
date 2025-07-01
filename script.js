@@ -55,10 +55,10 @@ function loadContent(page) {
           <h3>Login</h3>
           <form onsubmit="event.preventDefault(); alert('Login functionality not implemented.');">
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br><br>
+            <input type="text" id="Admin" name="Admin"><br><br>
 
             <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password"><br><br>
+            <input type="password" id="Admin" name="Admin"><br><br>
 
             <button type="submit">Login</button>
           </form>
