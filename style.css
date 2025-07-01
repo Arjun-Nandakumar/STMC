@@ -316,6 +316,16 @@ footer {
   text-decoration: none;
 }
 
+.brochure {
+        background-color: #4F61C5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+}
+
 /* Responsive: stack columns on smaller screens */
 @media (max-width: 1200px) {
   .service-blocks-grid {

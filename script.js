@@ -22,8 +22,15 @@ function loadContent(page) {
               
               STMC specializes in identifying and supplying the necessary tools for industries facing challenges, deploying quality improvement techniques, and guiding organizations to achieve certification from third-party certifying bodies. Our approach to corporate management is systematic and responsible, aiming to prevent accidents caused by human error through improved training and administration of the workforce, thereby ensuring the highest standards in Quality, Health, Safety, and Environment (QHSE).<br><br>
               
-              As a data-driven organization, STMC is committed to offering viable solutions to make organizations more profitable and efficient, which is essential for future success. We specialize in providing sustainable solutions to empower and educate the workforce about the significance of QHSE and standards, underpinning our commitment to excellence and innovation.
+              As a data-driven organization, STMC is committed to offering viable solutions to make organizations more profitable and efficient, which is essential for future success. We specialize in providing sustainable solutions to empower and educate the workforce about the significance of QHSE and standards, underpinning our commitment to excellence and innovation.<br><br>
+
+              Click the link below to view our brochure!
+
             </p>
+
+            <div style="text-align: center; margin-top: 20px;">
+              <button class="brochure" onclick="openBrochureModal()">View Brochure</button>
+            </div>
           </div>
         `;
         break;
@@ -54,20 +61,47 @@ function loadContent(page) {
         `;
         break;
 
-      case "login":
-        content.innerHTML = `
-          <h3>Login</h3>
-          <form onsubmit="event.preventDefault(); alert('Login functionality not implemented.');">
-            <label for="username">Username:</label><br>
-            <input type="text" id="Admin" name="Admin"><br><br>
+        case "login":
+          content.innerHTML = `
+            <h3>Login</h3>
+            <form id="login-form">
+              <label for="username">Username:</label><br>
+              <input type="text" id="username" name="username"><br><br>
 
-            <label for="password">Password:</label><br>
-            <input type="password" id="Admin" name="Admin"><br><br>
+              <label for="password">Password:</label><br>
+              <input type="password" id="password" name="password"><br><br>
 
-            <button type="submit">Login</button>
-          </form>
-        `;
-        break;
+              <button type="submit">Login</button>
+            </form>
+            <div id="login-message" style="margin-top: 15px; font-weight: bold;"></div>
+          `;
+
+          // Add login functionality
+          const form = document.getElementById("login-form");
+          form.onsubmit = async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            const res = await fetch("http://localhost:5000/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, password })
+            });
+
+            const data = await res.json();
+            const msg = document.getElementById("login-message");
+
+            if (data.success) {
+              msg.innerHTML = `✅ Welcome, <b>${username}</b>!`;
+              localStorage.setItem("loggedInUser", username); // ✅ Save login
+              showLoggedInHeader(username);
+            } else {
+              msg.innerHTML = `❌ ${data.message}`;
+            }
+          };
+          break;
 
 // System Implementation Section here
 
@@ -99,8 +133,8 @@ function loadContent(page) {
               <div class="service-block">
                 <div class="service-header">Good Manufacturing Practices<br>(ISO 22716:2007)</div>
                 <div class="service-body">
-                  <p>Description for QMS.</p>
-                  <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (ISO 45001:2018)">ENQUIRE</a>
+                  <p>Description for Good Manufacturing Practices.</p>
+                  <a href="#" class="ENQUIRE" data-service="Good Manufacturing Practices (ISO 22716:2007)">ENQUIRE</a>
                 </div>
               </div>
               <div class="service-block">
@@ -122,7 +156,7 @@ function loadContent(page) {
               <div class="service-block">
                 <div class="service-header">Information Security Management Systems<br>(ISO 27001:2022)</div>
                 <div class="service-body">
-                  <p>Description for QMS.</p>
+                  <p>Description for Information Security Management Systems.</p>
                   <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (ISO 45001:2018)">ENQUIRE</a>
                 </div>
               </div>
@@ -240,8 +274,8 @@ function loadContent(page) {
               <div class="service-block">
                 <div class="service-header">Magnetic Particle Testing</div>
                 <div class="service-body">
-                  <p>Description for Third Party Testing.</p>
-                  <a href="#" class="ENQUIRE" data-service="Third Party Testing">ENQUIRE</a>
+                  <p>Description for Magnetic Particle Testing.</p>
+                  <a href="#" class="ENQUIRE" data-service="Magnetic Particle Testing">ENQUIRE</a>
                 </div>
               </div>
 
@@ -336,7 +370,7 @@ function loadContent(page) {
               <div class="service-block">
                 <div class="service-header">STEM (Science, Technology, Engineering and Mathematics) Tutoring</div>
                 <div class="service-body">
-                  <p>Description for Communication Skills.</p>
+                  <p>Description for STEM Tutoring.</p>
                   <a href="#" class="ENQUIRE" data-service="STEM Tutoring">ENQUIRE</a>
                 </div>
               </div>
@@ -418,7 +452,6 @@ function setupWhatsAppENQUIREing() {
         .catch(err => console.error('Email notification failed:', err));
         window.open(whatsappURL, '_blank');
       };
-
       if (isAllowed) {
         const msg = `Service Name : <b>${serviceName}</b><br><br>Choose how you would like to contact :`;
         showCustomModal(msg, confirmAction);
@@ -431,17 +464,16 @@ function setupWhatsAppENQUIREing() {
         }
         const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
         const boldTime = `<b>${hoursTo6am} hour(s)${minsToNextHour ? ' and ' + minsToNextHour + ' minute(s)' : ''}</b>`;
-        const msg = `It’s lights out in India! 🌙 <br><br>
-        ENQUIREings resume in ${boldTime}.<br><br>
-        Would you like to pre-ENQUIRE <b>${serviceName}</b>?`;
-
-        showCustomModal(msg, confirmAction);
+        const msg = `The lights may be out in India 🌙 — but I’ll circle back once they’re on.<br><br>
+        Enquiries resume in ${boldTime}.<br><br>
+        Thanks for your patience!`;
+        showCustomModal(msg, null, true);
       }
     });
   });
 }
 
-function showCustomModal(message, onConfirm = null) {
+function showCustomModal(message, onConfirm = null, lightsOut = false) {
   const modal = document.getElementById('custom-modal');
   const modalMessage = document.getElementById('modal-message');
 
@@ -449,76 +481,155 @@ function showCustomModal(message, onConfirm = null) {
   modalMessage.innerHTML = `
     <span id="modal-close-btn" style="position:absolute; top:8px; right:12px; cursor:pointer; font-size:1.2em;">✖</span>
     <div style="margin-top: 20px;">${message}</div>
-    <br><br>
-    <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Call</button>
-    <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Book (Calendly)</button>
-    <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Text (WhatsApp)</button>
-    <button id="email-btn" style="padding:8px 24px; border:none; background:gray; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
   `;
+
+  // Add contact buttons only if NOT lights out
+  if (!lightsOut) {
+    modalMessage.innerHTML += `
+      <br><br>
+      <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Call</button>
+      <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Book (Calendly)</button>
+      <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Text (WhatsApp)</button>
+      <button id="email-btn" style="padding:8px 24px; border:none; background:gray; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
+    `;
+  }
 
   modal.style.display = 'flex';
 
-  // Close modal (top-right ✖)
   document.getElementById('modal-close-btn').onclick = () => {
     modal.style.display = 'none';
   };
 
-  // WhatsApp ENQUIREing
-  if (onConfirm) {
+  if (!lightsOut && onConfirm) {
     document.getElementById('whatsapp-btn').onclick = () => {
       modal.style.display = 'none';
       onConfirm();
     };
-  } else {
-    document.getElementById('whatsapp-btn').style.display = 'none';
+
+    document.getElementById('call-btn').onclick = () => {
+      modal.style.display = 'none';
+
+      const callingPopup = document.createElement('div');
+      callingPopup.id = 'calling-popup';
+      callingPopup.innerText = '📞 Calling: +91-7624947307...';
+      callingPopup.className = 'glow-popup';
+
+      const closeBtn = document.createElement('span');
+      closeBtn.innerText = '✖';
+      closeBtn.style.cssText = `
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 1.2em;
+        color: white;
+      `;
+      closeBtn.onclick = () => callingPopup.remove();
+      callingPopup.appendChild(closeBtn);
+
+      document.body.appendChild(callingPopup);
+      setTimeout(() => {
+        if (document.body.contains(callingPopup)) callingPopup.remove();
+      }, 15000);
+      setTimeout(() => {
+        window.location.href = 'tel:+917624947307';
+      }, 1000);
+    };
+
+    document.getElementById('calend-btn').onclick = () => {
+      window.open('https://calendly.com/vnk-arjun-brinda/new-meeting', '_blank');
+      modal.style.display = 'none';
+    };
+
+    document.getElementById('email-btn').onclick = () => {
+      window.location.href = 'mailto:stmconsult@yahoo.com?subject=Service ENQUIREing Request&body=Hello, I would like to ENQUIRE a service.';
+      modal.style.display = 'none';
+    };
   }
+}
 
-  // Call popup
-  document.getElementById('call-btn').onclick = () => {
-    modal.style.display = 'none';
+// Login Functionality
 
-    const callingPopup = document.createElement('div');
-    callingPopup.id = 'calling-popup';
-    callingPopup.innerText = '📞 Calling: +91-7624947307...';
-    callingPopup.className = 'glow-popup';
-    ;
+document.addEventListener('submit', function (e) {
+  if (e.target && e.target.id === 'login-form') {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
 
-    // Add close (✖) button
-    const closeBtn = document.createElement('span');
-    closeBtn.innerText = '✖';
-    closeBtn.style.cssText = `
-      position: absolute;
-      top: 5px;
-      right: 10px;
-      cursor: pointer;
-      font-size: 1.2em;
-      color: white;
-    `;
-    closeBtn.onclick = () => callingPopup.remove();
-    callingPopup.appendChild(closeBtn);
-
-    document.body.appendChild(callingPopup);
-
-    // Auto-remove after 15 seconds if user doesn't close
-    setTimeout(() => {
-      if (document.body.contains(callingPopup)) {
-        callingPopup.remove();
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+      const msg = document.getElementById('login-message');
+      if (data.success) {
+        msg.style.color = 'green';
+        msg.innerText = 'Login successful!';
+        // Redirect or update UI as needed
+      } else {
+        msg.style.color = 'red';
+        msg.innerText = 'Login failed: ' + data.message;
       }
-    }, 15000);
+    })
+    .catch(err => {
+      document.getElementById('login-message').innerText = 'Server error.';
+      console.error(err);
+    });
+  }
+});
 
-    // Call after slight delay
-    setTimeout(() => {
-      window.location.href = 'tel:+917624947307';
-    }, 1000);
-  };
+function showLoggedInHeader(username) {
+  const header = document.getElementById("header-bar") || document.createElement("div");
+  header.id = "header-bar";
+  header.style.cssText = `
+    background: #0D0F14;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;  /* all content pushed to the right */
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+  `;
 
-  document.getElementById('calend-btn').onclick = () => {
-    window.open('https://calendly.com/vnk-arjun-brinda/new-meeting', '_blank');
-    modal.style.display = 'none';
-  };
+  header.innerHTML = `
+    <div style="color: white; margin-right: 15px;">👤 Logged in as <b>${username}</b></div>
+    <button id="logout-btn" style="padding:6px 12px; background:maroon; color:white; border:none; border-radius:5px; cursor:pointer;">Sign Out</button>
+  `;
 
-  document.getElementById('email-btn').onclick = () => {
-    window.location.href = 'mailto:stmconsult@yahoo.com?subject=Service ENQUIREing Request&body=Hello, I would like to ENQUIRE a service.';
-    modal.style.display = 'none';
+  const nav = document.querySelector('nav');
+  nav.insertAdjacentElement('afterend', header);
+
+  document.getElementById("logout-btn").onclick = () => {
+    localStorage.removeItem("loggedInUser");
+    header.remove();
+    loadContent("home");
   };
 }
+
+// Brochure Popup model
+
+function openBrochureModal() {
+  const modal = document.getElementById("brochure-modal");
+  const iframe = document.getElementById("brochure-frame");
+  iframe.src = "brochure.pdf"; // Set PDF file source
+  modal.style.display = "flex"; // Show modal
+}
+
+document.getElementById("brochure-close-btn").onclick = function () {
+  const modal = document.getElementById("brochure-modal");
+  const iframe = document.getElementById("brochure-frame");
+  iframe.src = ""; // Clear iframe to stop PDF render
+  modal.style.display = "none";
+};
+
+// Very Bottom of the Page
+
+window.addEventListener('DOMContentLoaded', function () {
+  const user = localStorage.getItem("loggedInUser");
+  if (user) showLoggedInHeader(user);
+  loadContent('home');
+});
+
