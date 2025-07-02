@@ -5,23 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sigma Training and Management Consultants</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Add this inside <head> -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="background-overlay">
     <header>
       <div class="header-container">
-          <h1 class="company-title"><img src="https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/STMC.png" alt="Company Logo" width="100%" height="170px"></h1>
+        <h1 class="company-title"><img src="https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/STMC.png" alt="Company Logo" width="100%" height="170px"></h1>
       </div>
       <nav>
         <ul class="nav-tabs">
           <li><a href="#" onclick="loadContent('home')">Home</a></li>
           <li><a href="#" onclick="loadContent('about')">About Us</a></li>
           <li class="dropdown">
-            <a href="#" class="dropbtn" onclick="return false;">Services Offered &#9662;</a>
+            <a href="#" class="dropbtn" onclick="return false;">Services Offered ▾</a>
             <div class="dropdown-content">
               <a href="#" onclick="loadContent('system-implementation')">System Implementation</a>
               <a href="#" onclick="loadContent('management-training')">Management Training</a>
@@ -34,44 +32,77 @@
           <li><a href="#" onclick="loadContent('login')">Login</a></li>
         </ul>
       </nav>
-
     </header>
 
     <main>
-      <!-- Static Welcome Message (always visible) -->
       <section id="welcome-message">
         <center><h2>Welcome to STMC!</h2></center>
         <p class="motto">Your trusted partner in training and management consulting.</p>
       </section>
-
-      <!-- Dynamic content section (changes on click) -->
       <section id="content-area"></section>
     </main>
 
+    <footer class="footer">
+      <div class="social-footer">
+        <div class="social-heading">Social Media :</div><br>
+        <hr class="social-divider"><br>
+        <div class="social-icons">
+          <a href="https://in.linkedin.com/company/sigma-training-management-consultants" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+            <div>@sigma-training-management-consultants</div>
+          </a>
+          <a href="https://business.google.com" target="_blank">
+            <img src="hhttps://maps.app.goo.gl/RRw83E5bQyVGwsDJ7" alt="Google">
+            <div>@Sigma Training & Management Consultants</div>
+          </a>
+          <a href="#" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174883.png" alt="YouTube">
+            <div>@sigmatraining</div>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61578010948757m" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            <div>@Sigma Training & Management Consultants</div>
+          </a>
+          <a href="#" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+            <div>@stmconsult</div>
+          </a>
+          <a href="https://medium.com" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968885.png" alt="Medium">
+            <div>@sigmatraining</div>
+          </a>
+          <a href="https://substack.com" target="_blank">
+            <img src="https://seeklogo.com/images/S/substack-logo-D5B5D77B99-seeklogo.com.png" alt="Substack">
+            <div>@sigmatraining</div>
+          </a>
+          <a href="https://wa.me/917624947307" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+            <div>@sigmatraining</div>
+          </a>
+        </div>
+      </div>
 
+    <div><br>
+      <hr><br>
+        <p class="copyright">© 2025 Sigma Training and Management Consultants. All rights reserved.</p>
+    </div>
 
-    <footer>
-      <p>&copy; 2025 Sigma Training and Management Consultants. All rights reserved.</p>
     </footer>
-  </div>
 
   <script src="script.js"></script>
 
-<div id="custom-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; color:#222; padding:32px 24px; border-radius:10px; max-width:90vw; max-height:90vh; text-align:center; font-size:1.2em; position:relative;">
-    <span id="modal-message"></span>
-    <br><br>
+  <div id="custom-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#fff; color:#222; padding:32px 24px; border-radius:10px; max-width:90vw; max-height:90vh; text-align:center; font-size:1.2em; position:relative;">
+      <span id="modal-message"></span>
+      <br><br>
+    </div>
   </div>
-</div>
 
-<!-- Brochure Modal -->
-<div id="brochure-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
-  <div style="background:white; width:80%; height:90%; position:relative; border-radius:10px; overflow:hidden;">
-    <span id="brochure-close-btn" style="position:absolute; top:10px; right:20px; font-size:1.5em; cursor:pointer;">✖</span>
-    <iframe id="brochure-frame" src="" style="width:100%; height:100%; border:none;"></iframe>
+  <div id="brochure-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+    <div style="background:white; width:80%; height:90%; position:relative; border-radius:10px; overflow:hidden;">
+      <span id="brochure-close-btn" style="position:absolute; top:10px; right:20px; font-size:1.5em; cursor:pointer;">✖</span>
+      <iframe id="brochure-frame" src="" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
   </div>
-</div>
-
 </body>
 </html>
-  

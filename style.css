@@ -15,9 +15,10 @@ body, html {
   min-height: 100%;
   color: white;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Header and logo */
 header {
   display: flex;
   flex-direction: column;
@@ -36,11 +37,6 @@ header {
   padding-bottom: 10px;
 }
 
-.logo {
-  height: 50px;
-  width: auto;
-}
-
 .company-title {
   font-size: 28px;
   font-weight: 600;
@@ -50,7 +46,6 @@ header {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* Navigation bar styled as tabs */
 nav {
   width: 100%;
   max-width: 1200px;
@@ -79,7 +74,6 @@ nav {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Dropdown container */
 .nav-tabs .dropdown {
   position: relative;
   display: inline-block;
@@ -89,51 +83,42 @@ nav {
   cursor: pointer;
 }
 
-/* Dropdown content (hidden by default) */
 .nav-tabs .dropdown-content {
   display: none;
   position: absolute;
-  background-color: rgba(20,27,46,0.95); /* Black with slight transparency */
+  background-color: rgba(20,27,46,0.95);
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
   z-index: 1;
   margin-top: 10px;
 }
 
-/* Dropdown links */
 .nav-tabs .dropdown-content a {
-  color: #fff; /* White text */
+  color: #fff;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-/* Show the dropdown on hover */
 .nav-tabs .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Optional: Highlight dropdown links on hover */
 .nav-tabs .dropdown-content a:hover {
-  background-color: rgba(81,106,154,1.0); /* Subtle highlight */
+  background-color: rgba(81,106,154,1.0);
   color: #fff;
 }
 
-/* Main content */
+main {
+  flex: 1 0 auto;
+  margin-bottom: 20px;
+}
+
 main section {
   margin-top: 50px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 60px;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
 }
 
 .motto {
@@ -152,9 +137,9 @@ footer {
   border-radius: 10px;
   color: white;
   text-align: center;
+  min-height: 100vh; /* Ensure content area is tall enough to push footer down */
 }
 
-/* Assuming this is your current overlay style */
 #content-area.overlay {
   margin-top: 30px;
   padding: 20px;
@@ -210,10 +195,10 @@ footer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 100px;
-  max-width: 1800px;           /* Set your desired max width */
-  margin: 40px auto;            /* Top/bottom 24px, left/right auto (centers the grid) */
-  justify-items: stretch;       /* Makes items fill the column width */
-  justify-content: center;      /* Center the grid itself if it doesn't fill the container */
+  max-width: 1800px;
+  margin: 40px auto;
+  justify-items: stretch;
+  justify-content: center;
 }
 
 .service-block {
@@ -238,9 +223,9 @@ footer {
   flex-direction: column;
   min-width: 0;
   min-height: 200px;
-  width: 900px;              /* Set your fixed width */
+  width: 900px;
   margin-left: auto;
-  margin-right: auto;        /* This centers the box horizontally */
+  margin-right: auto;
 }
 
 .contact-block a {
@@ -249,7 +234,7 @@ footer {
 }
 
 .service-header {
-  font-family: 'Inter', 'Roboto', 'Open Sans', Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   background: linear-gradient(90deg, #282E3A 60%, #282E3A 100%);
   color: #fff;
   padding: 12px 12px;
@@ -261,7 +246,7 @@ footer {
   justify-content: center;
   text-align: center;
   letter-spacing: 0.02em;
-  line-height: 1.8; /* or a pixel value like 32px */
+  line-height: 1.8;
 }
 
 .service-body {
@@ -271,12 +256,12 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* This will center the button horizontally */
+  align-items: center;
 }
 
 .service-body p {
   text-align: left;
-  width: 100%; /* make sure paragraph takes full width */
+  width: 100%;
   margin: 0 0 10px 0;
 }
 
@@ -287,94 +272,134 @@ footer {
   background: #283E7B;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.1em;           /* Slightly larger text */
-  max-width: 150px;    /* or width: 120px; */
-  padding: 12px 28px;         /* Top/bottom 12px, left/right 28px */
-  border-radius: 6px;         /* Rounded corners */
+  font-size: 1.1em;
+  max-width: 150px;
+  padding: 12px 28px;
+  border-radius: 6px;
   transition: color 0.3s, background 1.0s;
-  box-shadow: 0 4px 16px rgba(40,62,123,0.12); /* Optional: subtle shadow */
-  letter-spacing: 0.02em;     /* Optional: slight spacing for clarity */
-  cursor: pointer;            /* Pointer cursor on hover */
+  box-shadow: 0 4px 16px rgba(40,62,123,0.12);
+  letter-spacing: 0.02em;
+  cursor: pointer;
   text-decoration: none;
 }
 
 .ENQUIRE:hover {
-  display: inline-block;
-  margin-top: 10px;
-  color: #fff;
   background: #141F3D;
+  box-shadow: 0 4px 16px rgba(20,31,61,0.18);
+}
+
+.footer {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.footer.fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.social-footer {
+  padding: 5px 0;
+}
+
+.social-heading {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
+
+.social-divider {
+  width: 50px;
+  border: 1px solid white;
+  margin: 4px auto 8px auto;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.social-icons a {
+  text-align: center;
+  color: white;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1em;           /* Slightly larger text */
-  max-width: 150px;    /* or width: 120px; */
-  padding: 12px 28px;
-  border-radius: 6px;
-  transition: color 0.3s, background 1.0s;
-  box-shadow: 0 4px 16px rgba(20,31,61,0.18); /* Slightly stronger shadow on hover */
-  letter-spacing: 0.02em;     /* Optional: slight spacing for clarity */
-  cursor: pointer;            /* Pointer cursor on hover */
-  text-decoration: none;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  margin: 0 auto 4px auto;
+}
+
+.social-icons div {
+  font-size: 16px;
+  font-weight: 200;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
+
+.copyright {
+  font-size: 12px;
+  padding-top: 10px;
 }
 
 .brochure {
-      background-color: #4F61C5;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-}
-
-#brochure-modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-#brochure-frame {
-  width: 80vw;
-  height: 80vh;
+  background-color: #4F61C5;
+  color: white;
   border: none;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  border-radius: 8px;
-  position: relative;
-  background: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 #brochure-close-btn {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 20px;
   font-size: 1.5em;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
   cursor: pointer;
-  z-index: 1010; /* above iframe */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: white;
+  z-index: 10000;
+  font-family: Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background for contrast */
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-/* Responsive: stack columns on smaller screens */
+#brochure-modal > div {
+  background: white;
+  width: 80%;
+  height: 90%;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px; /* Add padding to avoid edge overlap */
+}
+
 @media (max-width: 1200px) {
   .service-blocks-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media (max-width: 800px) {
   .service-blocks-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 500px) {
   .service-blocks-grid {
     grid-template-columns: 1fr;
@@ -401,8 +426,4 @@ footer {
 @keyframes glow {
   0% { box-shadow: 0 0 10px #fff; }
   100% { box-shadow: 0 0 25px #00ffff; }
-}
-
-.glow-popup {
-  animation: glow 1.5s infinite alternate;
 }
