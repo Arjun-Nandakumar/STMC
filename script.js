@@ -152,7 +152,7 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Information Security Management Systems<br>(ISO 27001:2022)</div>
             <div class="service-body">
-              <p><a href="#" class="read-more" data-modal="service-popup-isms">Read More...</a></p>
+              <p>We help you boost your confidence with robust security measures to safeguard against data breaches. <a href="#" class="read-more" data-modal="service-popup-isms">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Information Security Management Systems (ISO 27001:2022)">ENQUIRE</a>
             </div>
           </div>
