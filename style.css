@@ -137,7 +137,7 @@ main section {
   border-radius: 10px;
   color: white;
   text-align: center;
-  min-height: 100vh; /* Ensure content area is tall enough to push footer down */
+  min-height: 100%; /* Ensure content area is tall enough to push footer down */
 }
 
 #content-area.overlay {
