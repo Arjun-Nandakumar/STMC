@@ -8,22 +8,23 @@
 body, html {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure full viewport height */
+  display: flex; /* Ensure body is flex to push footer down */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Full viewport height */
 }
 
 .background-overlay {
-  background: url('https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/0415c0b5-c30b-4d42-aca5-ee550cfd21c0.png') no-repeat center center/contain;
-  min-height: 100vh; /* Full viewport height */
+  background: url('background.png') no-repeat center center;
+  background-size: auto auto;
+  background-color: black;
+  min-height: 100vh; /* Ensure it takes up full vertical space */
   color: white;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  flex: 1; /* Take available space */
-  background-size: contain; /* Ensure entire image is visible */
-  background-attachment: fixed; /* Prevent scrolling issues */
+  flex: 1;
 }
+
 
 header {
   display: flex;
@@ -277,29 +278,29 @@ main section {
 
 /* Style for Read More links in service-body */
 .service-body a.read-more {
-  color: #66B2FF;
+  color: #66B2FF; /* Light blue for Read More links */
   text-decoration: none;
 }
 
 .service-body a.read-more:hover {
-  color: #99CCFF;
-  text-decoration: underline;
+  color: #99CCFF; /* Slightly brighter light blue for hover */
+  text-decoration: underline; /* Underline on hover for clarity */
 }
 
 /* Style for ENQUIRE links (buttons) in service-body */
 .service-body a.ENQUIRE {
-  color: #FFFFFF;
+  color: #FFFFFF; /* White text for ENQUIRE buttons */
   text-decoration: none;
   display: inline-block;
   padding: 8px 16px;
-  background-color: #4F61C5;
+  background-color: #4F61C5; /* Example button background */
   border-radius: 5px;
   font-weight: bold;
 }
 
 .service-body a.ENQUIRE:hover {
-  color: #FFFFFF;
-  background-color: #3A4A9F;
+  color: #FFFFFF; /* Keep white text on hover */
+  background-color: #3A4A9F; /* Slightly darker background on hover */
 }
 
 /* Style for short horizontal divider in service-body */
@@ -318,9 +319,9 @@ main section {
   text-align: center;
   padding: 20px 0;
   width: 100%;
-  position: relative;
-  z-index: 1;
-  margin-top: auto;
+  position: relative; /* Default to relative to stay in document flow */
+  z-index: 1; /* Low z-index to stay below modals and content */
+  margin-top: auto; /* Push footer to bottom with flex body */
 }
 
 .footer.fixed {
@@ -328,13 +329,13 @@ main section {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 1; /* Adjusted to avoid overlap with modals */
 }
 
 .social-footer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 20px;
+  max-width: 100%; /* Constrain width for desktop */
+  margin: 0 auto; /* Center content */
+  padding: 10px 20px; /* Adjusted padding for mobile */
 }
 
 .social-heading {
@@ -346,18 +347,18 @@ main section {
 }
 
 .social-divider {
-  width: 100px;
-  margin: 8px auto;
+  width: 100px; /* Short divider to match service-body */
+  margin: 8px auto; /* Center with vertical spacing */
   border: 0;
-  border-top: 1px solid #FFFFFF;
+  border-top: 1px solid #FFFFFF; /* White line */
 }
 
 .social-icons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
-  padding: 10px 0;
+  gap: 30px; /* Reduced gap for better mobile fit */
+  padding: 10px 0; /* Add padding to avoid clipping */
 }
 
 .social-icons a {
@@ -366,7 +367,7 @@ main section {
   align-items: center;
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 14px; /* Slightly smaller font */
   font-weight: 200;
   font-family: 'Inter', sans-serif;
   transition: color 0.3s ease;
@@ -379,7 +380,7 @@ main section {
 }
 
 .social-icons a:hover {
-  color: #66B2FF;
+  color: #66B2FF; /* Light blue on hover to match link theme */
 }
 
 .copyright {
@@ -389,72 +390,44 @@ main section {
 
 /* Responsive adjustments for mobile */
 @media (max-width: 768px) {
-  .background-overlay {
-    background-size: contain; /* Ensure image fits within viewport */
-    min-height: 100vh; /* Full viewport height */
-    padding: 15px; /* Slightly less padding */
-  }
-
-  .header-container {
-    flex-direction: column; /* Stack header elements vertically */
-    gap: 10px;
-  }
-
-  .company-title {
-    font-size: 24px; /* Smaller title on mobile */
-  }
-
-  .nav-tabs {
-    gap: 10px; /* Tighter navigation tabs */
-  }
-
-  .nav-tabs li a {
-    padding: 8px 15px; /* Smaller nav buttons */
-    font-size: 0.9em;
-  }
-
   .footer {
-    padding: 15px 0;
+    padding: 15px 0; /* Reduce padding for mobile */
   }
 
   .social-footer {
-    padding: 10px 15px;
+    padding: 10px 15px; /* Tighter padding for mobile */
   }
 
   .social-heading {
-    font-size: 16px;
+    font-size: 16px; /* Smaller heading on mobile */
   }
 
   .social-divider {
-    width: 80px;
+    width: 80px; /* Slightly shorter divider for mobile */
   }
 
   .social-icons {
-    gap: 20px;
-    padding: 5px 0;
+    gap: 20px; /* Tighter gap for mobile */
+    padding: 5px 0; /* Reduced padding */
   }
 
   .social-icons a {
-    font-size: 12px;
+    font-size: 12px; /* Smaller text on mobile */
   }
 
   .social-icons img {
-    width: 20px;
+    width: 20px; /* Smaller icons on mobile */
     height: 20px;
   }
 }
 
 @media (max-width: 500px) {
   .social-icons {
-    gap: 15px;
+    gap: 15px; /* Even tighter gap for very small screens */
   }
 
   .social-footer {
-    padding: 10px;
-  }
-
-  .service-blocks-grid {
-    grid-template-columns: 1fr;
+    padding: 10px; /* Minimal padding for small screens */
   }
 }
 
