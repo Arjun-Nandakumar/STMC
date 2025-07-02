@@ -265,27 +265,32 @@ main section {
   margin: 0 0 10px 0;
 }
 
-.ENQUIRE {
-  display: inline-block;
-  margin-top: 10px;
-  color: #fff;
-  background: #283E7B;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1em;
-  max-width: 150px;
-  padding: 12px 28px;
-  border-radius: 6px;
-  transition: color 0.3s, background 1.0s;
-  box-shadow: 0 4px 16px rgba(40,62,123,0.12);
-  letter-spacing: 0.02em;
-  cursor: pointer;
+/* Style for Read More links in service-body */
+.service-body a.read-more {
+  color: #66B2FF; /* Light blue for Read More links */
   text-decoration: none;
 }
 
-.ENQUIRE:hover {
-  background: #141F3D;
-  box-shadow: 0 4px 16px rgba(20,31,61,0.18);
+.service-body a.read-more:hover {
+  color: #99CCFF; /* Slightly brighter light blue for hover */
+  text-decoration: underline; /* Underline on hover for clarity */
+}
+
+/* Style for ENQUIRE links (buttons) in service-body */
+.service-body a.ENQUIRE {
+  color: #FFFFFF; /* White text for ENQUIRE buttons */
+  text-decoration: none;
+  /* Assuming existing button styles; adjust as needed */
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4F61C5; /* Example button background; adjust to match your design */
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.service-body a.ENQUIRE:hover {
+  color: #FFFFFF; /* Keep white text on hover */
+  background-color: #3A4A9F; /* Slightly darker background on hover; adjust as needed */
 }
 
 .footer {
@@ -367,7 +372,7 @@ main section {
   cursor: pointer;
 }
 
-#brochure-close-btn {
+#close-btn {
   position: absolute;
   top: 30px; /* Adjust this value to move it lower */
   right: 20px;
@@ -379,6 +384,73 @@ main section {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 5px 10px;
   border-radius: 5px;
+}
+
+/* Close button for vertical model */
+.custom-vertical-modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 10000;
+}
+
+/* QMS Read More Modal Styles */
+.custom-vertical-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black background */
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #00FFFF; /* Cyan border */
+  box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; /* Enhanced initial glow */
+  animation: glow 1.5s ease-in-out infinite alternate; /* Slightly slower animation for visibility */
+  -webkit-animation: glow 1.5s ease-in-out infinite alternate; /* Vendor prefix for compatibility */
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; /* Initial glow */
+  }
+  100% {
+    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF; /* Stronger glow for noticeable effect */
+  }
+}
+
+@-webkit-keyframes glow {
+  0% {
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+  }
+  100% {
+    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+  }
+}
+
+.custom-vertical-modal .modal-content {
+  background-color: #000000; /* Explicit black background */
+  color: #FFFFFF; /* Explicit white text */
+  margin: auto;
+  padding: 20px;
+  width: 60%;
+  max-width: 600px;
+  height: auto;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+  position: relative;
+  border: 1px solid #00FFFF; /* Additional cyan border for modal content */
 }
 
 
@@ -425,9 +497,4 @@ main section {
   z-index: 9999;
   text-align: center;
   animation: glow 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  0% { box-shadow: 0 0 10px #fff; }
-  100% { box-shadow: 0 0 25px #00ffff; }
 }

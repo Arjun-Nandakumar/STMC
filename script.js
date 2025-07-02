@@ -110,49 +110,49 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Quality Management System<br>(ISO 9001:2015)</div>
             <div class="service-body">
-              <p>Description for QMS.</p>
+              <p>QMS focuses on improvements and reduces quality. STMC ensures reduction in quality cost and improvements. <a href="#" class="read-more" data-modal="service-popup-qms">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Quality Management System (ISO 9001:2015)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Environment Management System<br>(ISO 14001:2015)</div>
             <div class="service-body">
-              <p>Description for EMS.</p>
+              <p>STMC helps you address regulatory requirements systematically and cost-effectively, reducing the risk of non-compliance. <a href="#" class="read-more" data-modal="service-popup-ems">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Environment Management System (ISO 14001:2015)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Occupational Health and Safety Management Systems<br>(ISO 45001:2018)</div>
             <div class="service-body">
-              <p>Description for OHSMS.</p>
+              <p>We help you assess workplace hazards and establish controls to minimize risks. <a href="#" class="read-more" data-modal="service-popup-ohsms">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Occupational Health and Safety Management Systems (ISO 45001:2018)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Good Manufacturing Practices<br>(ISO 22716:2007)</div>
             <div class="service-body">
-              <p>Description for Good Manufacturing Practices.</p>
+              <p><a href="#" class="read-more" data-modal="service-popup-gmp">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Good Manufacturing Practices (ISO 22716:2007)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Medical Devices<br>(ISO 13485:2021)</div>
             <div class="service-body">
-              <p>Description for MD.</p>
+              <p><a href="#" class="read-more" data-modal="service-popup-md">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Medical Devices (ISO 13485:2021)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Food Safety Management Systems<br>(ISO 22000:2018)</div>
             <div class="service-body">
-              <p>Description for FSMS.</p>
+              <p><a href="#" class="read-more" data-modal="service-popup-fsms">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Food Safety Management Systems (ISO 22000:2018)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Information Security Management Systems<br>(ISO 27001:2022)</div>
             <div class="service-body">
-              <p>Description for Information Security Management Systems.</p>
+              <p><a href="#" class="read-more" data-modal="service-popup-isms">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Information Security Management Systems (ISO 27001:2022)">ENQUIRE</a>
             </div>
           </div>
@@ -302,7 +302,7 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Public Speaking</div>
             <div class="service-body">
-              <p Description for Public Speaking.</p>
+              <p>Description for Public Speaking.</p>
               <a href="#" class="ENQUIRE" data-service="Public Speaking">ENQUIRE</a>
             </div>
           </div>
@@ -583,7 +583,7 @@ function openBrochureModal() {
 // Initialize page and setup event listeners
 window.addEventListener("DOMContentLoaded", () => {
   loadContent("home");
-  const closeBtn = document.getElementById("brochure-close-btn");
+  const closeBtn = document.getElementById("close-btn"); // Updated to match the correct ID
   if (closeBtn) {
     closeBtn.onclick = () => {
       const modal = document.getElementById("brochure-modal");
@@ -593,5 +593,20 @@ window.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
       }
     };
+  }
+});
+
+// Generic modal setup for "Read More..."
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("read-more")) {
+    event.preventDefault();
+    const modalId = event.target.getAttribute("data-modal");
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = "flex";
+  }
+
+  if (event.target.classList.contains("close-btn")) {
+    const modal = event.target.closest(".custom-vertical-modal");
+    if (modal) modal.style.display = "none";
   }
 });
