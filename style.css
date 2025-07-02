@@ -8,21 +8,15 @@
 body, html {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
-  display: flex; /* Ensure body is flex to push footer down */
-  flex-direction: column; /* Stack children vertically */
-  min-height: 100vh; /* Full viewport height */
 }
 
 .background-overlay {
-  background: url('background.png') no-repeat center center;
-  background-size: auto auto;
-  background-color: black;
-  min-height: 100vh; /* Ensure it takes up full vertical space */
+  background: url('background.png') no-repeat center center/cover;
+  min-height: 100%;
   color: white;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
 
