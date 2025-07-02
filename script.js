@@ -131,21 +131,21 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Good Manufacturing Practices<br>(ISO 22716:2007)</div>
             <div class="service-body">
-              <p><a href="#" class="read-more" data-modal="service-popup-gmp">Read More...</a></p>
+              <p>We help you document and regulate the production, control, storage and shipment of cosmetic products. <a href="#" class="read-more" data-modal="service-popup-gmp">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Good Manufacturing Practices (ISO 22716:2007)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Medical Devices<br>(ISO 13485:2021)</div>
             <div class="service-body">
-              <p><a href="#" class="read-more" data-modal="service-popup-md">Read More...</a></p>
+              <p>We help you maintain and monitor regulatory and safety requirements of the medical devices used by you. <a href="#" class="read-more" data-modal="service-popup-md">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Medical Devices (ISO 13485:2021)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Food Safety Management Systems<br>(ISO 22000:2018)</div>
             <div class="service-body">
-              <p><a href="#" class="read-more" data-modal="service-popup-fsms">Read More...</a></p>
+              <p>STMC provides robust food safety management system enhancing your ability to consistently deliver products and services that meet customer as well as statutory and regulatory demands. <a href="#" class="read-more" data-modal="service-popup-fsms">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Food Safety Management Systems (ISO 22000:2018)">ENQUIRE</a>
             </div>
           </div>
@@ -167,35 +167,35 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Kaizen</div>
             <div class="service-body">
-              <p>Description for Kaizen.</p>
+              <p>STMC helps you implement and maintain Kaizen (a japanese concept) and helps foster a culture of continuous improvement within your company. <a href="#" class="read-more" data-modal="service-popup-kaizen">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Kaizen">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">5S</div>
             <div class="service-body">
-              <p>Description for 5S.</p>
+              <p>We help you implement and maintain 5S to remove clutter and organize the workplace in an ergonomic way thereby increasing performance efficiency and execute tasks effectively. <a href="#" class="read-more" data-modal="service-popup-5s">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="5S">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Cost of Quality</div>
             <div class="service-body">
-              <p>Description for Cost of Quality.</p>
+              <p>We help you reduce cost by mimizing defects, rework and customer complaint resulting in cost-saving in the long run. <a href="#" class="read-more" data-modal="service-popup-coq">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Cost of Quality">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Personnel Effectiveness</div>
             <div class="service-body">
-              <p>Description for Personnel Effectiveness.</p>
+              <p>It is a self-help movement dealing with success, goals and related concepts including the power of positive thinking. <a href="#" class="read-more" data-modal="service-popup-personnel">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Personnel Effectiveness">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Communication Skills</div>
             <div class="service-body">
-              <p>Description for Communication Skills.</p>
+              <p>We help you increase your ability to convey information effectively without misinterpretation or misleading others. <a href="#" class="read-more" data-modal="service-popup-commskills">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Communication Skills">ENQUIRE</a>
             </div>
           </div>

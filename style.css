@@ -185,6 +185,10 @@ main section {
   margin: 0 auto;
 }
 
+.contact-font p a {
+  color: #66B2FF;
+}
+
 .contact-font h3 {
   font-size: 1.8em;
   margin-bottom: 20px;
