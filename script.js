@@ -202,7 +202,7 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Business Excellence</div>
             <div class="service-body">
-              <p>We help you achieve outstanding stakeholder-results through having outstanding organizational practices. <a href="#" class="read-more" data-modal="service-popup-busexc">Read More...</a></p>
+              <p>We help you achieve exceptional stakeholder-results through having outstanding organizational practices. <a href="#" class="read-more" data-modal="service-popup-busexc">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Business Excellence">ENQUIRE</a>
             </div>
           </div>

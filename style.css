@@ -8,6 +8,9 @@
 body, html {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
+  display: flex; /* Ensure body is flex to push footer down */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Full viewport height */
 }
 
 .background-overlay {
@@ -17,6 +20,7 @@ body, html {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  flex: 1; /* Ensure background takes available space */
 }
 
 header {
@@ -284,19 +288,27 @@ main section {
 .service-body a.ENQUIRE {
   color: #FFFFFF; /* White text for ENQUIRE buttons */
   text-decoration: none;
-  /* Assuming existing button styles; adjust as needed */
   display: inline-block;
   padding: 8px 16px;
-  background-color: #4F61C5; /* Example button background; adjust to match your design */
+  background-color: #4F61C5; /* Example button background */
   border-radius: 5px;
   font-weight: bold;
 }
 
 .service-body a.ENQUIRE:hover {
   color: #FFFFFF; /* Keep white text on hover */
-  background-color: #3A4A9F; /* Slightly darker background on hover; adjust as needed */
+  background-color: #3A4A9F; /* Slightly darker background on hover */
 }
 
+/* Style for short horizontal divider in service-body */
+.service-body hr.short-divider {
+  width: 100px;
+  margin: 10px auto;
+  border: 0;
+  border-top: 1px solid #FFFFFF;
+}
+
+/* Footer Styles */
 .footer {
   background: rgba(0, 0, 0, 0.6);
   color: white;
@@ -304,6 +316,9 @@ main section {
   text-align: center;
   padding: 20px 0;
   width: 100%;
+  position: relative; /* Default to relative to stay in document flow */
+  z-index: 1; /* Low z-index to stay below modals and content */
+  margin-top: auto; /* Push footer to bottom with flex body */
 }
 
 .footer.fixed {
@@ -311,11 +326,13 @@ main section {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 1; /* Adjusted to avoid overlap with modals */
 }
 
 .social-footer {
-  padding: 5px 0;
+  max-width: 100%; /* Constrain width for desktop */
+  margin: 0 auto; /* Center content */
+  padding: 10px 20px; /* Adjusted padding for mobile */
 }
 
 .social-heading {
@@ -323,48 +340,93 @@ main section {
   font-weight: bold;
   font-family: 'Inter', sans-serif;
   color: white;
+  margin-bottom: 8px;
 }
 
 .social-divider {
-    width: 50px;
-    border: 1px solid white;
-    margin: 4px auto 8px auto;
+  width: 100px; /* Short divider to match service-body */
+  margin: 8px auto; /* Center with vertical spacing */
+  border: 0;
+  border-top: 1px solid #FFFFFF; /* White line */
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px; /* Reduced gap for better mobile fit */
+  padding: 10px 0; /* Add padding to avoid clipping */
+}
+
+.social-icons a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 14px; /* Slightly smaller font */
+  font-weight: 200;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.social-icons a:hover {
+  color: #66B2FF; /* Light blue on hover to match link theme */
+}
+
+.copyright {
+  font-size: 12px;
+  padding-top: 10px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .footer {
+    padding: 15px 0; /* Reduce padding for mobile */
+  }
+
+  .social-footer {
+    padding: 10px 15px; /* Tighter padding for mobile */
+  }
+
+  .social-heading {
+    font-size: 16px; /* Smaller heading on mobile */
+  }
+
+  .social-divider {
+    width: 80px; /* Slightly shorter divider for mobile */
   }
 
   .social-icons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
-    width: 100%;
-    height: 25 px;
+    gap: 20px; /* Tighter gap for mobile */
+    padding: 5px 0; /* Reduced padding */
   }
 
   .social-icons a {
-    text-align: center;
-    color: white;
-    text-decoration: none;
-
+    font-size: 12px; /* Smaller text on mobile */
   }
 
   .social-icons img {
-    width: 24px;
-    height: 24px;
-    display: block;
-    margin: 0 auto 4px auto;
+    width: 20px; /* Smaller icons on mobile */
+    height: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .social-icons {
+    gap: 15px; /* Even tighter gap for very small screens */
   }
 
-  .social-icons div {
-    font-size: 16px;
-    font-weight: 200;
-    font-family: 'Inter', sans-serif;
-    color: white;
+  .social-footer {
+    padding: 10px; /* Minimal padding for small screens */
   }
-
-  .copyright {
-    font-size: 12px;
-    padding-top: 10px;
-  }
+}
 
 .brochure {
   background-color: #4F61C5;
@@ -378,7 +440,7 @@ main section {
 
 #close-btn {
   position: absolute;
-  top: 30px; /* Adjust this value to move it lower */
+  top: 30px;
   right: 20px;
   font-size: 1.5em;
   cursor: pointer;
@@ -390,7 +452,7 @@ main section {
   border-radius: 5px;
 }
 
-/* Close button for vertical model */
+/* Close button for vertical modal */
 .custom-vertical-modal .close-btn {
   position: absolute;
   top: 10px;
@@ -414,21 +476,21 @@ main section {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black background */
+  background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
-  border: 2px solid #00FFFF; /* Cyan border */
-  box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; /* Enhanced initial glow */
-  animation: glow 1.5s ease-in-out infinite alternate; /* Slightly slower animation for visibility */
-  -webkit-animation: glow 1.5s ease-in-out infinite alternate; /* Vendor prefix for compatibility */
+  border: 2px solid #00FFFF;
+  box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+  animation: glow 1.5s ease-in-out infinite alternate;
+  -webkit-animation: glow 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
   0% {
-    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; /* Initial glow */
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
   }
   100% {
-    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF; /* Stronger glow for noticeable effect */
+    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
   }
 }
 
@@ -442,8 +504,8 @@ main section {
 }
 
 .custom-vertical-modal .modal-content {
-  background-color: #000000; /* Explicit black background */
-  color: #FFFFFF; /* Explicit white text */
+  background-color: #000000;
+  color: #FFFFFF;
   margin: auto;
   padding: 20px;
   width: 60%;
@@ -452,11 +514,10 @@ main section {
   max-height: 80vh;
   overflow-y: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: relative;
-  border: 1px solid #00FFFF; /* Additional cyan border for modal content */
+  border: 1px solid #00FFFF;
 }
-
 
 #brochure-modal > div {
   background: white;
@@ -465,7 +526,7 @@ main section {
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  padding: 10px; /* Add padding to avoid edge overlap */
+  padding: 10px;
 }
 
 @media (max-width: 1200px) {
