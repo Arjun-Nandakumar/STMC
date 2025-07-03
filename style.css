@@ -12,7 +12,7 @@ body, html {
 
 .background-overlay {
   background: url('background.png') no-repeat center center/cover;
-  background-color: #1a1a1a; /* Fallback color if image fails */
+  background-color: #1a1a1a;
   min-height: 100%;
   color: white;
   padding: 20px;
@@ -49,7 +49,6 @@ header {
 
 nav {
   width: 100%;
-  max periodical
   max-width: 1200px;
   margin: 10px auto 20px;
 }
@@ -273,7 +272,7 @@ main section {
   align-items: center;
 }
 
-.service-body p43 {
+.service-body p {
   text-align: left;
   width: 100%;
   margin: 0 0 10px 0;
@@ -395,9 +394,9 @@ main section {
 
 @media (max-width: 768px) {
   .background-overlay {
-    background: url('background.png') no-repeat center center/cover;
-    background-color: #1a1a1a; /* Fallback color */
-    background-attachment: scroll; /* Ensure image doesn't fix to viewport */
+    background: url('background.png') no-repeat center top/auto 100%;
+    background-color: #1a1a1a;
+    background-attachment: scroll;
     padding: 20px 0;
   }
 
@@ -408,8 +407,9 @@ main section {
   }
 
   .nav-tabs {
-    flex-wrap: nowrap;
-    justify-content: stretch;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
     width: 100%;
     gap: 0;
     margin: 0;
@@ -417,7 +417,9 @@ main section {
   }
 
   .nav-tabs li {
-    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
   }
 
@@ -428,20 +430,75 @@ main section {
     width: 100%;
     margin: 0;
     white-space: nowrap;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: background 0.3s;
+    display: block;
+  }
+
+  .nav-tabs li:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .nav-tabs li:nth-child(2) {
+    grid-row: 1;
+    grid-column: 3;
+  }
+
+  .nav-tabs li:nth-child(3) {
+    grid-row: 1 / 3;
+    grid-column: 2;
+  }
+
+  .nav-tabs li:nth-child(4) {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .nav-tabs li:nth-child(5) {
+    grid-row: 2;
+    grid-column: 3;
   }
 
   .nav-tabs .dropdown {
-    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-tabs .dropbtn {
     width: 100%;
+    cursor: pointer;
   }
 
   .nav-tabs .dropdown-content {
     min-width: 100%;
     top: 100%;
     left: 0;
+    background-color: rgba(20, 27, 46, 0.95);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    border-radius: 5px;
+    display: none;
+    position: absolute;
+  }
+
+  .nav-tabs .dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .nav-tabs .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .nav-tabs .dropdown-content a:hover {
+    background-color: rgba(81, 106, 154, 1.0);
+    color: #fff;
   }
 
   .footer {
