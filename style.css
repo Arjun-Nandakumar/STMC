@@ -432,7 +432,7 @@ main section {
 
   .nav-tabs li a {
     padding: 8px 0;
-    font-size: 10px;
+    font-size: 14px; /* Size of navigation items */
     border-radius: 2px;
     border: 0.1px solid black;
     width: 100%;
@@ -460,7 +460,7 @@ main section {
   .nav-tabs .dropbtn {
     width: 100%;
     padding: 8px 0;
-    font-size: 10px;
+    font-size: 14px; /* Size of navigation drpdown items */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -573,6 +573,15 @@ main section {
   .footer {
     order: 3;
   }
+
+  .company-title {
+    font-size: 20px; /* Reduced from 28px */
+  }
+
+  .contact-font p {
+    font-size: 0.9em; /* Reduced from 1.1em (approx. 14.4px assuming base 16px) */
+  }
+
 }
 
 @media (max-width: 500px) {
