@@ -49,7 +49,7 @@ header {
 
 nav {
   width: 100%;
-  max-width: 1200px;
+  max-width: 50%;
   margin: 10px auto 20px;
 }
 
@@ -407,24 +407,28 @@ main section {
   }
 
   nav {
-    max-width: none;
+    max-width: 100%;
     margin: 10px 0;
     padding: 0;
   }
 
   .nav-tabs {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0; /* or a small value */
+    flex-wrap: nowrap;        /* No wrapping, all tabs in one row */
+    justify-content: center;  /* Center the tabs horizontally */
+    width: 100%;              /* Full width */
+    padding: 0;
+    margin: 0;
+    list-style-type: none;    /* Remove bullets */
   }
 
   .nav-tabs li {
+    flex: 0 0 20%;            /* Each tab is exactly 20% of the nav width */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    grid-row: 1 / 3;
+    /* Remove grid-row, it's not needed for flexbox */
   }
 
   .nav-tabs li a {
@@ -480,6 +484,7 @@ main section {
     background-color: rgba(81, 106, 154, 1.0);
     color: #fff;
   }
+
 
   .service-body .custom-br {
     display: block;
@@ -699,4 +704,11 @@ main section {
   z-index: 9999;
   text-align: center;
   animation: glow 1.2s ease-in-out infinite alternate;
+}
+
+
+ul.nav-tabs, ul.nav-tabs li {
+  list-style-type: none; /* removes bullets/dots */
+  margin: 0;
+  padding: 0;
 }

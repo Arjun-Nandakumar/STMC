@@ -608,7 +608,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Generic modal setup for "Read More..."
+// Generic modal setup for "Read More"
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("read-more")) {
     event.preventDefault();
