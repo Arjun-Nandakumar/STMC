@@ -92,13 +92,13 @@ nav {
 .nav-tabs .dropdown-content {
   display: none;
   position: absolute;
-  top: 100%; /* Position directly below the dropbtn */
+  top: 100%;
   left: 0;
   background-color: rgba(20, 27, 46, 0.95);
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
   z-index: 1;
-  border-radius: 5px; /* Maintain consistent border-radius */
+  border-radius: 5px;
 }
 
 .nav-tabs .dropdown-content a {
@@ -382,17 +382,29 @@ main section {
   color: #66B2FF;
 }
 
+.social-icons a span {
+  display: inline; /* Ensure text is visible on desktop */
+}
+
 .copyright {
   font-size: 12px;
   padding-top: 10px;
 }
 
 @media (max-width: 768px) {
+  nav {
+    max-width: none;
+    margin: 10px 0;
+    padding: 0;
+  }
+
   .nav-tabs {
     flex-wrap: nowrap;
     justify-content: stretch;
     width: 100%;
     gap: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .nav-tabs li {
@@ -405,6 +417,7 @@ main section {
     font-size: 14px;
     border-radius: 0;
     width: 100%;
+    margin: 0;
   }
 
   .nav-tabs .dropdown {
@@ -417,7 +430,7 @@ main section {
 
   .nav-tabs .dropdown-content {
     min-width: 100%;
-    top: 100%; /* Ensure no gap on mobile */
+    top: 100%;
     left: 0;
   }
 
@@ -429,21 +442,28 @@ main section {
   .social-icons {
     justify-content: space-between;
     flex-wrap: nowrap;
-    gap: 15px;
-    padding: 5px 10px;
+    gap: 0;
+    padding: 5px 0;
     width: 100%;
   }
 
   .social-icons a {
-    flex: 1;
-    font-size: 12px;
+    flex: 0 0 12.5%; /* Each icon takes exactly 12.5% of the width */
+    font-size: 0; /* Hide text by setting font-size to 0 */
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .social-icons a span {
+    display: none; /* Explicitly hide text (hashtags) on mobile */
   }
 
   .social-icons img {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 4px;
+    width: 24px; /* Keep icon size the same as desktop */
+    height: 24px;
+    margin-bottom: 0; /* Remove margin since text is hidden */
   }
 
   .social-heading {
@@ -457,11 +477,11 @@ main section {
 
 @media (max-width: 500px) {
   .social-icons {
-    gap: 10px;
+    gap: 0;
   }
 
   .social-footer {
-    padding: 10px;
+    padding: 10px 0;
   }
 }
 
