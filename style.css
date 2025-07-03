@@ -53,16 +53,15 @@ nav {
   margin: 10px auto 20px;
 }
 
-.nav-tabs {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  grid-template-columns: repeat(5, 20.00%);
-  grid-template-rows: repeat(2, auto);
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 0;
-}
+  .nav-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, 20.00%);
+    grid-template-rows: repeat(2, auto);
+    width: 100%;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+  }
 
 .nav-tabs li {
   text-align: center;
