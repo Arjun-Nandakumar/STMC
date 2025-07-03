@@ -215,51 +215,44 @@ function loadContent(page) {
       content.innerHTML = `
         <div class="service-blocks-grid">
           <div class="service-block">
-            <div class="service-header">Third Party Inspection</div>
+            <div class="service-header">Third Party Inspection & Testing</div>
             <div class="service-body">
-              <p>Description for Third Party Inspection.</p>
+              <p>INSPECTIONTESTING. <a href="#" class="read-more" data-modal="service-popup-tpi">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Third Party Inspection">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Visual Inspection</div>
             <div class="service-body">
-              <p>Description for Visual Inspection.</p>
-              <a href="#" class="ENQUIRE" data-service="Visual Inspection">ENQUIRE</a>
+              <p>VISUALINSPECTION. <a href="#" class="read-more" data-modal="service-popup-visinsp">Read More...</a></p>
+              <a href="#" class="ENQUIRE" data-service="Dimensional Inspection">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Dimensional Inspection</div>
             <div class="service-body">
-              <p>Description for Dimensional Inspection.</p>
+              <p>DIMENSIONALINSPECTION. <a href="#" class="read-more" data-modal="service-popup-diminsp">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Dimensional Inspection">ENQUIRE</a>
-            </div>
-          </div>
-          <div class="service-block">
-            <div class="service-header">Third Party Testing</div>
-            <div class="service-body">
-              <p>Description for Third Party Testing.</p>
-              <a href="#" class="ENQUIRE" data-service="Third Party Testing">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Ultrasonic Testing</div>
             <div class="service-body">
-              <p>Description for Ultrasonic Testing.</p>
+              <p>ULTRASONICTESTING. <a href="#" class="read-more" data-modal="service-popup-ut">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Ultrasonic Testing">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Dye Penetrant Testing</div>
             <div class="service-body">
-              <p>Description for Dye Penetrant Testing.</p>
+              <p>DYEPENETRANTTESTING. <a href="#" class="read-more" data-modal="service-popup-dpt">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Dye Penetrant Testing">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Magnetic Particle Testing</div>
             <div class="service-body">
-              <p>Description for Magnetic Particle Testing.</p>
+              <p>MAGPARTTEST. <a href="#" class="read-more" data-modal="service-popup-mpt">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Magnetic Particle Testing">ENQUIRE</a>
             </div>
           </div>

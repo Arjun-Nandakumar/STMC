@@ -19,7 +19,6 @@ body, html {
   flex-direction: column;
 }
 
-
 header {
   display: flex;
   flex-direction: column;
@@ -62,6 +61,10 @@ nav {
   padding: 0;
 }
 
+.nav-tabs li {
+  text-align: center;
+}
+
 .nav-tabs li a {
   text-decoration: none;
   padding: 10px 20px;
@@ -69,6 +72,7 @@ nav {
   color: white;
   border-radius: 5px;
   transition: background 0.3s;
+  display: block;
 }
 
 .nav-tabs li a:hover {
@@ -82,16 +86,19 @@ nav {
 
 .nav-tabs .dropbtn {
   cursor: pointer;
+  display: block;
 }
 
 .nav-tabs .dropdown-content {
   display: none;
   position: absolute;
-  background-color: rgba(20,27,46,0.95);
+  top: 100%; /* Position directly below the dropbtn */
+  left: 0;
+  background-color: rgba(20, 27, 46, 0.95);
   min-width: 200px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
   z-index: 1;
-  margin-top: 10px;
+  border-radius: 5px; /* Maintain consistent border-radius */
 }
 
 .nav-tabs .dropdown-content a {
@@ -106,7 +113,7 @@ nav {
 }
 
 .nav-tabs .dropdown-content a:hover {
-  background-color: rgba(81,106,154,1.0);
+  background-color: rgba(81, 106, 154, 1.0);
   color: #fff;
 }
 
@@ -138,7 +145,7 @@ main section {
   border-radius: 10px;
   color: white;
   text-align: center;
-  min-height: 100%; /* Ensure content area is tall enough to push footer down */
+  min-height: 100%;
 }
 
 #content-area.overlay {
@@ -209,8 +216,8 @@ main section {
 .service-block {
   border: 2px solid black;
   border-radius: 10px;
-  background-color: rgba(0,0,0,0.33);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  background-color: rgba(0, 0, 0, 0.33);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -221,8 +228,8 @@ main section {
 .contact-block {
   border: 2px solid black;
   border-radius: 10px;
-  background-color: rgba(0,0,0,0.33);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  background-color: rgba(0, 0, 0, 0.33);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -270,34 +277,31 @@ main section {
   margin: 0 0 10px 0;
 }
 
-/* Style for Read More links in service-body */
 .service-body a.read-more {
-  color: #66B2FF; /* Light blue for Read More links */
+  color: #66B2FF;
   text-decoration: none;
 }
 
 .service-body a.read-more:hover {
-  color: #99CCFF; /* Slightly brighter light blue for hover */
-  text-decoration: underline; /* Underline on hover for clarity */
+  color: #99CCFF;
+  text-decoration: underline;
 }
 
-/* Style for ENQUIRE links (buttons) in service-body */
 .service-body a.ENQUIRE {
-  color: #FFFFFF; /* White text for ENQUIRE buttons */
+  color: #FFFFFF;
   text-decoration: none;
   display: inline-block;
   padding: 8px 16px;
-  background-color: #4F61C5; /* Example button background */
+  background-color: #4F61C5;
   border-radius: 5px;
   font-weight: bold;
 }
 
 .service-body a.ENQUIRE:hover {
-  color: #FFFFFF; /* Keep white text on hover */
-  background-color: #3A4A9F; /* Slightly darker background on hover */
+  color: #FFFFFF;
+  background-color: #3A4A9F;
 }
 
-/* Style for short horizontal divider in service-body */
 .service-body hr.short-divider {
   width: 100px;
   margin: 10px auto;
@@ -305,7 +309,6 @@ main section {
   border-top: 1px solid #FFFFFF;
 }
 
-/* Footer Styles */
 .footer {
   background: rgba(0, 0, 0, 0.6);
   color: white;
@@ -313,9 +316,9 @@ main section {
   text-align: center;
   padding: 20px 0;
   width: 100%;
-  position: relative; /* Default to relative to stay in document flow */
-  z-index: 1; /* Low z-index to stay below modals and content */
-  margin-top: auto; /* Push footer to bottom with flex body */
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
 }
 
 .footer.fixed {
@@ -323,13 +326,13 @@ main section {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1; /* Adjusted to avoid overlap with modals */
+  z-index: 1;
 }
 
 .social-footer {
-  max-width: 100%; /* Constrain width for desktop */
-  margin: 0 auto; /* Center content */
-  padding: 10px 20px; /* Adjusted padding for mobile */
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 0;
 }
 
 .social-heading {
@@ -341,27 +344,29 @@ main section {
 }
 
 .social-divider {
-  width: 100px; /* Short divider to match service-body */
-  margin: 8px auto; /* Center with vertical spacing */
+  width: 100px;
+  margin: 8px auto;
   border: 0;
-  border-top: 1px solid #FFFFFF; /* White line */
+  border-top: 1px solid #FFFFFF;
 }
 
 .social-icons {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px; /* Reduced gap for better mobile fit */
-  padding: 10px 0; /* Add padding to avoid clipping */
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 30px;
+  padding: 10px 20px;
+  width: 100%;
 }
 
 .social-icons a {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
   text-decoration: none;
-  font-size: 14px; /* Slightly smaller font */
+  font-size: 14px;
   font-weight: 200;
   font-family: 'Inter', sans-serif;
   transition: color 0.3s ease;
@@ -374,7 +379,7 @@ main section {
 }
 
 .social-icons a:hover {
-  color: #66B2FF; /* Light blue on hover to match link theme */
+  color: #66B2FF;
 }
 
 .copyright {
@@ -382,46 +387,99 @@ main section {
   padding-top: 10px;
 }
 
-/* Responsive adjustments for mobile */
 @media (max-width: 768px) {
-  .footer {
-    padding: 15px 0; /* Reduce padding for mobile */
+  .nav-tabs {
+    flex-wrap: nowrap;
+    justify-content: stretch;
+    width: 100%;
+    gap: 0;
+  }
+
+  .nav-tabs li {
+    flex: 1;
+    text-align: center;
+  }
+
+  .nav-tabs li a {
+    padding: 8px 0;
+    font-size: 14px;
+    border-radius: 0;
+    width: 100%;
+  }
+
+  .nav-tabs .dropdown {
+    flex: 1;
+  }
+
+  .nav-tabs .dropbtn {
+    width: 100%;
+  }
+
+  .nav-tabs .dropdown-content {
+    min-width: 100%;
+    top: 100%; /* Ensure no gap on mobile */
+    left: 0;
   }
 
   .social-footer {
-    padding: 10px 15px; /* Tighter padding for mobile */
-  }
-
-  .social-heading {
-    font-size: 16px; /* Smaller heading on mobile */
-  }
-
-  .social-divider {
-    width: 80px; /* Slightly shorter divider for mobile */
+    padding: 10px 0;
+    width: 100%;
   }
 
   .social-icons {
-    gap: 20px; /* Tighter gap for mobile */
-    padding: 5px 0; /* Reduced padding */
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 15px;
+    padding: 5px 10px;
+    width: 100%;
   }
 
   .social-icons a {
-    font-size: 12px; /* Smaller text on mobile */
+    flex: 1;
+    font-size: 12px;
+    text-align: center;
   }
 
   .social-icons img {
-    width: 20px; /* Smaller icons on mobile */
+    width: 20px;
     height: 20px;
+    margin-bottom: 4px;
+  }
+
+  .social-heading {
+    font-size: 16px;
+  }
+
+  .social-divider {
+    width: 80px;
   }
 }
 
 @media (max-width: 500px) {
   .social-icons {
-    gap: 15px; /* Even tighter gap for very small screens */
+    gap: 10px;
   }
 
   .social-footer {
-    padding: 10px; /* Minimal padding for small screens */
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .service-blocks-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .service-blocks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .service-blocks-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -449,7 +507,6 @@ main section {
   border-radius: 5px;
 }
 
-/* Close button for vertical modal */
 .custom-vertical-modal .close-btn {
   position: absolute;
   top: 10px;
@@ -463,7 +520,6 @@ main section {
   z-index: 10000;
 }
 
-/* QMS Read More Modal Styles */
 .custom-vertical-modal {
   display: none;
   position: fixed;
@@ -524,24 +580,6 @@ main section {
   border-radius: 10px;
   overflow: hidden;
   padding: 10px;
-}
-
-@media (max-width: 1200px) {
-  .service-blocks-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 800px) {
-  .service-blocks-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 500px) {
-  .service-blocks-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .glow-popup {
