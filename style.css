@@ -53,29 +53,29 @@ nav {
   margin: 10px auto 20px;
 }
 
-  .nav-tabs {
-    display: grid;
-    grid-template-columns: repeat(5, 20.00%);
-    grid-template-rows: repeat(2, auto);
-    width: 100%;
-    gap: 0;
-    margin: 0;
-    padding: 0;
+    .nav-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 20.00%);
+      grid-template-rows: repeat(2, auto);
+      width: 100%;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+  .nav-tabs li {
+    text-align: center;
   }
 
-.nav-tabs li {
-  text-align: center;
-}
-
-.nav-tabs li a {
-  text-decoration: none;
-  padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  border-radius: 5px;
-  transition: background 0.3s;
-  display: block;
-}
+  .nav-tabs li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 5px;
+    transition: background 0.3s;
+    display: block;
+  }
 
 .nav-tabs li a:hover {
   background-color: rgba(255, 255, 255, 0.25);
@@ -413,49 +413,61 @@ main section {
   }
 
   .nav-tabs {
-    display: flex;
-    flex-wrap: nowrap;        /* No wrapping, all tabs in one row */
-    justify-content: center;  /* Center the tabs horizontally */
-    width: 100%;              /* Full width */
-    padding: 0;
-    margin: 0;
-    list-style-type: none;    /* Remove bullets */
-  }
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+    }
 
   .nav-tabs li {
-    flex: 0 0 20%;            /* Each tab is exactly 20% of the nav width */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    /* Remove grid-row, it's not needed for flexbox */
-  }
+      flex: 0 0 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
   .nav-tabs li a {
-    padding: 8px 0;
-    font-size: 10px;
-    border-radius: 2px;
-    border: 0.1px solid black;
-    width: 100%;
-    margin: 0;
-    text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
-    transition: background 0.3s;
-    display: block;
-  }
+      padding: 8px 0;
+      font-size: 10px;
+      border-radius: 2px;
+      border: 0.1px solid black;
+      width: 100%;
+      margin: 0;
+      text-decoration: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 48px; /* Fixed height to match two lines of text */
+      line-height: 16px; /* Adjusted for two-line text */
+      overflow-wrap: break-word; /* Ensures text wraps */
+      box-sizing: border-box; /* Ensures padding is included in height */
+    }
 
   .nav-tabs .dropdown {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
   .nav-tabs .dropbtn {
-    width: 100%;
-    cursor: pointer;
-  }
+      width: 100%;
+      height: 48px; /* Match the height of other buttons */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px 0;
+      font-size: 10px;
+    }
 
   .nav-tabs .dropdown-content {
     min-width: 100%;
