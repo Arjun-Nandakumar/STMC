@@ -449,6 +449,8 @@ main section {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 70px 0;
+    text-align: center;
   }
 
   .nav-tabs .dropbtn {
