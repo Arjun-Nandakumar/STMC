@@ -12,6 +12,7 @@ body, html {
 
 .background-overlay {
   background: url('background.png') no-repeat center center/cover;
+  background-color: #1a1a1a; /* Fallback color if image fails */
   min-height: 100%;
   color: white;
   padding: 20px;
@@ -48,6 +49,7 @@ header {
 
 nav {
   width: 100%;
+  max periodical
   max-width: 1200px;
   margin: 10px auto 20px;
 }
@@ -271,7 +273,7 @@ main section {
   align-items: center;
 }
 
-.service-body p {
+.service-body p43 {
   text-align: left;
   width: 100%;
   margin: 0 0 10px 0;
@@ -393,8 +395,10 @@ main section {
 
 @media (max-width: 768px) {
   .background-overlay {
-    background: url('background.png') no-repeat top center/contain;
-    padding: 20px 0; /* Remove horizontal padding to ensure edge-to-edge content */
+    background: url('background.png') no-repeat center center/cover;
+    background-color: #1a1a1a; /* Fallback color */
+    background-attachment: scroll; /* Ensure image doesn't fix to viewport */
+    padding: 20px 0;
   }
 
   nav {
@@ -419,11 +423,11 @@ main section {
 
   .nav-tabs li a {
     padding: 8px 0;
-    font-size: 12px; /* Reduced font size to prevent wrapping */
+    font-size: 12px;
     border-radius: 0;
     width: 100%;
     margin: 0;
-    white-space: nowrap; /* Force text to stay on one line */
+    white-space: nowrap;
   }
 
   .nav-tabs .dropdown {
@@ -591,7 +595,7 @@ main section {
     box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
   }
   100% {
-    box-shadow: 0 0 -ff20px #00FFFF, 0 0 40px #00FFFF;
+    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
   }
 }
 
