@@ -383,7 +383,7 @@ main section {
 }
 
 .social-icons a span {
-  display: inline; /* Ensure text is visible on desktop */
+  display: inline;
 }
 
 .copyright {
@@ -392,6 +392,11 @@ main section {
 }
 
 @media (max-width: 768px) {
+  .background-overlay {
+    background: url('background.png') no-repeat top center/contain;
+    padding: 20px 0; /* Remove horizontal padding to ensure edge-to-edge content */
+  }
+
   nav {
     max-width: none;
     margin: 10px 0;
@@ -414,10 +419,11 @@ main section {
 
   .nav-tabs li a {
     padding: 8px 0;
-    font-size: 14px;
+    font-size: 12px; /* Reduced font size to prevent wrapping */
     border-radius: 0;
     width: 100%;
     margin: 0;
+    white-space: nowrap; /* Force text to stay on one line */
   }
 
   .nav-tabs .dropdown {
@@ -434,6 +440,15 @@ main section {
     left: 0;
   }
 
+  .footer {
+    position: relative;
+    margin-top: 20px;
+  }
+
+  .footer.fixed {
+    position: relative;
+  }
+
   .social-footer {
     padding: 10px 0;
     width: 100%;
@@ -448,8 +463,8 @@ main section {
   }
 
   .social-icons a {
-    flex: 0 0 12.5%; /* Each icon takes exactly 12.5% of the width */
-    font-size: 0; /* Hide text by setting font-size to 0 */
+    flex: 0 0 12.5%;
+    font-size: 0;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -457,13 +472,13 @@ main section {
   }
 
   .social-icons a span {
-    display: none; /* Explicitly hide text (hashtags) on mobile */
+    display: none;
   }
 
   .social-icons img {
-    width: 24px; /* Keep icon size the same as desktop */
+    width: 24px;
     height: 24px;
-    margin-bottom: 0; /* Remove margin since text is hidden */
+    margin-bottom: 0;
   }
 
   .social-heading {
@@ -472,6 +487,19 @@ main section {
 
   .social-divider {
     width: 80px;
+  }
+
+  .motto {
+    order: 1;
+  }
+
+  .custom-vertical-modal {
+    order: 2;
+    position: fixed;
+  }
+
+  .footer {
+    order: 3;
   }
 }
 
@@ -563,7 +591,7 @@ main section {
     box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
   }
   100% {
-    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+    box-shadow: 0 0 -ff20px #00FFFF, 0 0 40px #00FFFF;
   }
 }
 
