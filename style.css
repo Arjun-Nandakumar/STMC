@@ -412,6 +412,7 @@ main section {
     justify-content: center;
     gap: 10px;                   /* Space between logo and title */
     padding-bottom: 0;
+    
   }
 
   nav {
