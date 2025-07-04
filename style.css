@@ -596,7 +596,7 @@ main section {
     font-size: 20px;
     padding: 12px 0 12px 0;      /* Add vertical padding */
     height: auto;                /* Let it grow with content */
-    width: 90vw;                 /* Responsive width */
+    width: 100%;                 /* Responsive width */
     text-align: center;
     margin-bottom: 10px;         /* Space below title */
     border-radius: 8px;
