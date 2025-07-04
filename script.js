@@ -1,3 +1,12 @@
+// Ensure PDF.js worker is loaded
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+// PDF.js variables
+let pdfDoc = null,
+    pageNum = 1,
+    pageRendering = false,
+    pageNumPending = null;
+
 function loadContent(page) {
   const content = document.getElementById("content-area");
   const footer = document.querySelector(".footer");
@@ -32,10 +41,15 @@ function loadContent(page) {
             Click the link below to view our brochure!
           </p>
           <div style="text-align: center; margin-top: 20px;">
-            <button class="brochure" onclick="openBrochureModal()">View Brochure</button>
+            <button class="brochure">View Brochure</button>
           </div>
         </div>
       `;
+      // Setup brochure button listener after content is loaded
+      const brochureBtn = document.querySelector(".brochure");
+      if (brochureBtn) {
+        brochureBtn.addEventListener("click", openBrochureModal);
+      }
       break;
 
     case "services":
@@ -444,7 +458,7 @@ function setupWhatsAppEnquiring() {
 
       if (isAllowed) {
         const msg = `Service Name: <b>${serviceName}</b><br><br>Choose how you would like to contact:`;
-              showCustomModal(msg, confirmAction);
+        showCustomModal(msg, confirmAction);
       } else {
         let hoursTo6am =
           hours < 6
@@ -580,45 +594,126 @@ function showLoggedInHeader(username) {
   }
 }
 
-// Open brochure modal
+// Open brochure modal with PDF.js
 function openBrochureModal() {
   const modal = document.getElementById("brochure-modal");
-  const iframe = document.getElementById("brochure-frame");
-  if (modal && iframe) {
-    iframe.src = "brochure.pdf";
-    modal.style.display = "flex";
+  const canvas = document.getElementById("pdf-canvas");
+  const pageNumDisplay = document.getElementById("page-num");
+  const pageCountDisplay = document.getElementById("page-count");
+
+  if (modal && canvas && pageNumDisplay && pageCountDisplay) {
+    const pdfUrl = "brochure.pdf"; // Update this path if needed, e.g., "assets/brochure.pdf"
+    // For testing: const pdfUrl = "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey.pdf";
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+      pdfDoc = pdf;
+      pageCountDisplay.textContent = pdfDoc.numPages;
+      pageNum = 1;
+      renderPage(pageNum);
+      modal.style.display = "flex";
+    }).catch(error => {
+      console.error("Error loading PDF:", error);
+      const modalMessage = document.getElementById("modal-message");
+      if (modalMessage) {
+        modalMessage.innerHTML = "Failed to load the brochure. Please try again later.";
+        document.getElementById("custom-modal").style.display = "flex";
+      }
+    });
   } else {
-    console.error("Brochure modal or iframe not found");
+    console.error("Brochure modal or required elements not found");
+    const modalMessage = document.getElementById("modal-message");
+    if (modalMessage) {
+      modalMessage.innerHTML = "Brochure modal elements are missing.";
+      document.getElementById("custom-modal").style.display = "flex";
+    }
+  }
+}
+
+// Render a specific PDF page
+function renderPage(num) {
+  const canvas = document.getElementById("pdf-canvas");
+  const ctx = canvas.getContext("2d");
+  const prevPageBtn = document.getElementById("prev-page");
+  const nextPageBtn = document.getElementById("next-page");
+  const pageNumDisplay = document.getElementById("page-num");
+
+  pageRendering = true;
+  pdfDoc.getPage(num).then(page => {
+    const viewport = page.getViewport({ scale: 1 });
+    const scale = Math.min(canvas.parentElement.clientWidth / viewport.width, canvas.parentElement.clientHeight / viewport.height);
+    const scaledViewport = page.getViewport({ scale });
+
+    canvas.height = scaledViewport.height;
+    canvas.width = scaledViewport.width;
+
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: scaledViewport
+    };
+    page.render(renderContext).promise.then(() => {
+      pageRendering = false;
+      pageNumDisplay.textContent = num;
+      if (pageNumPending !== null) {
+        renderPage(pageNumPending);
+        pageNumPending = null;
+      }
+    });
+    prevPageBtn.disabled = num <= 1;
+    nextPageBtn.disabled = num >= pdfDoc.numPages;
+  });
+}
+
+// Queue page rendering if another render is in progress
+function queueRenderPage(num) {
+  if (pageRendering) {
+    pageNumPending = num;
+  } else {
+    renderPage(num);
   }
 }
 
 // Initialize page and setup event listeners
 window.addEventListener("DOMContentLoaded", () => {
   loadContent("home");
-  const closeBtn = document.getElementById("close-btn"); // Updated to match the correct ID
+
+  // Setup brochure modal close button
+  const closeBtn = document.getElementById("close-btn");
   if (closeBtn) {
     closeBtn.onclick = () => {
       const modal = document.getElementById("brochure-modal");
-      const iframe = document.getElementById("brochure-frame");
-      if (modal && iframe) {
-        iframe.src = "";
+      if (modal) {
         modal.style.display = "none";
       }
     };
   }
-});
 
-// Generic modal setup for "Read More"
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("read-more")) {
-    event.preventDefault();
-    const modalId = event.target.getAttribute("data-modal");
-    const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = "flex";
+  // Setup brochure navigation buttons
+  const prevPageBtn = document.getElementById("prev-page");
+  const nextPageBtn = document.getElementById("next-page");
+  if (prevPageBtn && nextPageBtn) {
+    prevPageBtn.addEventListener("click", () => {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPage(pageNum);
+    });
+    nextPageBtn.addEventListener("click", () => {
+      if (pageNum >= pdfDoc.numPages) return;
+      pageNum++;
+      queueRenderPage(pageNum);
+    });
   }
 
-  if (event.target.classList.contains("close-btn")) {
-    const modal = event.target.closest(".custom-vertical-modal");
-    if (modal) modal.style.display = "none";
-  }
+  // Generic modal setup for "Read More"
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("read-more")) {
+      event.preventDefault();
+      const modalId = event.target.getAttribute("data-modal");
+      const modal = document.getElementById(modalId);
+      if (modal) modal.style.display = "flex";
+    }
+
+    if (event.target.classList.contains("close-btn")) {
+      const modal = event.target.closest(".custom-vertical-modal");
+      if (modal) modal.style.display = "none";
+    }
+  });
 });

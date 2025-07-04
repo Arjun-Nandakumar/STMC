@@ -10,11 +10,11 @@
   <link rel="icon" href="favicon.png" type="image/x-icon">
 </head>
 <body>
-    <div class="background-overlay">
-      <header>
-        <div class="header-container">
-          <h1 class="company-title"><img src="https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/STMC.png" alt="Company Logo" width="100%" height="180px"></h1>
-        </div>
+  <div class="background-overlay">
+    <header>
+      <div class="header-container">
+        <h1 class="company-title"><img src="https://raw.githubusercontent.com/Arjun-Nandakumar/testpage/refs/heads/main/STMC.png" alt="Company Logo" width="100%" height="180px"></h1>
+      </div>
       <nav>
         <ul class="nav-tabs">
           <li><a href="#" onclick="loadContent('home')">Home</a></li>
@@ -403,7 +403,6 @@
       </div>
     </div>
 
-
     <footer class="footer">
       <div class="social-footer">
         <div class="social-heading">Social Media :</div><br>
@@ -450,8 +449,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
-
     <div id="custom-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
       <div style="background:#fff; color:#222; padding:32px 24px; border-radius:10px; max-width:90vw; max-height:90vh; text-align:center; font-size:1.2em; position:relative;">
         <span id="modal-message"></span>
@@ -459,12 +456,20 @@
       </div>
     </div>
 
-    <div id="brochure-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
-      <div style="background:white; width:80%; height:90%; position:relative; border-radius:10px; overflow:hidden;">
-        <span id="close-btn" style="position:absolute; top:10px; right:20px; font-size:1.5em; cursor:pointer;">✖</span>
-        <iframe id="brochure-frame" src="" style="width:100%; height:100%; border:none;"></iframe>
+    <div id="brochure-modal" class="custom-vertical-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+      <div style="background:white; width:90%; max-width:90vw; height:90%; max-height:90vh; position:relative; border-radius:10px; overflow-y:auto; -webkit-overflow-scrolling:touch;">
+        <span id="close-btn" class="close-btn" style="position:absolute; top:10px; right:20px; font-size:1.5em; cursor:pointer; z-index:10000;">✖</span>
+        <div id="pdf-controls" style="position:sticky; top:0; background:white; padding:10px; text-align:center; z-index:9999;">
+          <button id="prev-page" style="padding:8px 16px; font-size:1em; background-color:#4F61C5; color:white; border:none; border-radius:5px; margin-right:10px;">Previous</button>
+          <span id="page-num"></span> / <span id="page-count"></span>
+          <button id="next-page" style="padding:8px 16px; font-size:1em; background-color:#4F61C5; color:white; border:none; border-radius:5px; margin-left:10px;">Next</button>
+        </div>
+        <canvas id="pdf-canvas" style="width:100%; height:auto;"></canvas>
       </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="script.js"></script>
   </div>
 </body>
 </html>
