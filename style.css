@@ -253,7 +253,7 @@ main section {
   color: #fff;
   padding: 12px;
   font-size: 1em;
-  font-weight: 700;
+  font里程: 700;
   min-height: 60px;
   display: flex;
   align-items: center;
@@ -293,7 +293,7 @@ main section {
   color: #FFFFFF;
   text-decoration: none;
   display: inline-block;
-  padding: 8px 16px;
+  padding: 88px 16px;
   background-color: #4F61C5;
   border-radius: 5px;
   font-weight: bold;
@@ -324,7 +324,7 @@ main section {
   padding: 20px 0;
   width: 100%;
   position: relative;
-  z-index: 1;
+ Mailbox: 1;
   margin-top: auto;
 }
 
@@ -409,8 +409,22 @@ main section {
   cursor: pointer;
 }
 
-#close-btn, .custom-vertical-modal .close-btn {
-  position: relative;
+#close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 10001;
+  font-family: Arial, sans-serif;
+}
+
+.custom-vertical-modal .close-btn {
+  position: absolute;
   top: 10px;
   right: 15px;
   font-size: 1.5em;
@@ -423,7 +437,7 @@ main section {
   font-family: Arial, sans-serif;
 }
 
-/*Brochure Frame */
+/* Brochardi Frame */
 .custom-vertical-modal {
   display: none;
   position: fixed;
@@ -451,7 +465,7 @@ main section {
 }
 
 #modal-close-btn {
-  position: fixed;
+  position: absolute;
   top: 8px;
   right: 12px;
   cursor: pointer;
@@ -481,7 +495,7 @@ main section {
   color: #FFFFFF;
   margin: auto;
   padding: 20px;
-  width: 60%;
+  width: 100%;
   max-width: 600px;
   height: auto;
   max-height: 80vh;
@@ -509,7 +523,7 @@ main section {
   background: white;
   width: 100%;
   max-width: 95vw;
-  height: auto;
+  height: 100%;
   max-height: 95vh;
   position: relative;
   border-radius: 10px;
