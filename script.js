@@ -1,5 +1,5 @@
 document.getElementById('next-page').addEventListener('click', function() {
-  window.scrollTo({
+  openBrochureModal.scrollTo({
     top: 0,
     behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
   });
@@ -7,7 +7,7 @@ document.getElementById('next-page').addEventListener('click', function() {
 });
 
 document.getElementById('prev-page').addEventListener('click', function() {
-  window.scrollTo({
+  openBrochureModal.scrollTo({
     top: 0,
     behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
   });
