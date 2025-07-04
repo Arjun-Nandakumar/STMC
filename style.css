@@ -520,9 +520,9 @@ main section {
 
 #brochure-modal > div {
   background: white;
-  width: auto;
+  width: 100%;
   max-width: 95vw;
-  height: 100%;
+  height: auto;
   max-height: 95vh;
   position: relative;
   border-radius: 10px;
