@@ -580,12 +580,12 @@ ul.nav-tabs, ul.nav-tabs li {
 
 @media (min-width: 769px) {
   #brochure-modal > div {
-    height: 90vh;
+    height: 95vh;
   }
 
   #pdf-canvas {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
     max-width: 100%;
   }
 }

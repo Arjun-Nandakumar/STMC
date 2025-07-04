@@ -717,3 +717,19 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+document.getElementById('next-page').addEventListener('click', function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
+  });
+  // Add your page navigation logic here if needed
+});
+
+document.getElementById('prev-page').addEventListener('click', function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
+  });
+  // Add your page navigation logic here if needed
+});
