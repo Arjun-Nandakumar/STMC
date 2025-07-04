@@ -688,23 +688,36 @@ main section {
   z-index: 10000;
 }
 
+/*.custom-vertical-model-content*/
+
 .custom-vertical-modal {
-  display: none;
+  display: flex;                 /* Flex for centering */
+  justify-content: center;       /* Horizontal center */
+  align-items: center;           /* Vertical center */
   position: fixed;
   z-index: 9999;
   left: 0;
   top: 0;
-  width: auto;
-  vertical-align: middle;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #00FFFF;
-  box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
-  animation: glow 1.5s ease-in-out infinite alternate;
-  -webkit-animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/*Child .custom-vertical-model-content*/
+
+.custom-vertical-modal-content {
+  background: #fff;
+  height: 80vh;                  /* Fixed height: 80% of viewport */
+  width: 60vw;                   /* Adjust as needed, e.g. 60% of viewport */
+  max-width: 700px;              /* Optional: max width */
+  min-width: 300px;              /* Optional: min width */
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;              /* Scroll if content overflows */
 }
 
 @keyframes glow {
@@ -723,22 +736,6 @@ main section {
   100% {
     box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
   }
-}
-
-.custom-vertical-modal .modal-content {
-  background-color: #000000;
-  color: #FFFFFF;
-  margin: auto;
-  padding: 20px;
-  width: auto;
-  vertical-align: middle;
-  height: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-  border: 1px solid black;
 }
 
 #brochure-modal > div {
