@@ -594,7 +594,7 @@ main section {
   }
 
   .company-title {
-    font-size: 20px;
+    font-size: 30px;
     padding: 12px 0 12px 0;      /* Add vertical padding */
     height: auto;                /* Let it grow with content */
     width: 100%;                 /* Responsive width */
