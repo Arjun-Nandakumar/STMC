@@ -256,49 +256,25 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Third Party Inspection & Testing</div>
             <div class="service-body">
-              <p>INSPECTIONTESTING. <a href="#" class="read-more" data-modal="service-popup-tpi">Read More...</a></p>
+              <p>We carry out third party inspection on behalf of customers. <a href="#" class="read-more" data-modal="service-popup-tpi">Read More...</a></p>
               <span class="custom-br"></span>
               <a href="#" class="ENQUIRE" data-service="Third Party Inspection">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
-            <div class="service-header">Visual Inspection</div>
+            <div class="service-header">Visual and Dimensional Inspection</div>
             <div class="service-body">
-              <p>VISUALINSPECTION. <a href="#" class="read-more" data-modal="service-popup-visinsp">Read More...</a></p>
+              <p>We ensure that clients receive defect-free material. <a href="#" class="read-more" data-modal="service-popup-diminsp">Read More...</a></p>
               <span class="custom-br"></span>
               <a href="#" class="ENQUIRE" data-service="Dimensional Inspection">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
-            <div class="service-header">Dimensional Inspection</div>
+            <div class="service-header">Non-Destructive Testing</div>
             <div class="service-body">
-              <p>DIMENSIONALINSPECTION. <a href="#" class="read-more" data-modal="service-popup-diminsp">Read More...</a></p>
-              <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Dimensional Inspection">ENQUIRE</a>
-            </div>
-          </div>
-          <div class="service-block">
-            <div class="service-header">Ultrasonic Testing</div>
-            <div class="service-body">
-              <p>ULTRASONICTESTING. <a href="#" class="read-more" data-modal="service-popup-ut">Read More...</a></p>
-              <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Ultrasonic Testing">ENQUIRE</a>
-            </div>
-          </div>
-          <div class="service-block">
-            <div class="service-header">Dye Penetrant Testing</div>
-            <div class="service-body">
-              <p>DYEPENETRANTTESTING. <a href="#" class="read-more" data-modal="service-popup-dpt">Read More...</a></p>
+              <p>We conduct all types of non-destructive testing. <a href="#" class="read-more" data-modal="service-popup-ndt">Read More...</a></p>
               <span class="custom-br"></span>
               <a href="#" class="ENQUIRE" data-service="Dye Penetrant Testing">ENQUIRE</a>
-            </div>
-          </div>
-          <div class="service-block">
-            <div class="service-header">Magnetic Particle Testing</div>
-            <div class="service-body">
-              <p>MAGPARTTEST. <a href="#" class="read-more" data-modal="service-popup-mpt">Read More...</a></p>
-              <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Magnetic Particle Testing">ENQUIRE</a>
             </div>
           </div>
         </div>
@@ -312,42 +288,35 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Customer Relationship Management<br>(CRM)</div>
             <div class="service-body">
-              <p>Description for Customer Relationship Management.</p>
+              <p>We provide technique for dealing with customers. <a href="#" class="read-more" data-modal="service-popup-crm">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Customer Relationship Management">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Leadership Skills</div>
             <div class="service-body">
-              <p>Description for Leadership Skills.</p>
+              <p>This provides working together and accomplish shared goals. <a href="#" class="read-more" data-modal="service-popup-leadskills">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Leadership Skills">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Supervisory Skills</div>
             <div class="service-body">
-              <p>Description for Supervisory Skills.</p>
+              <p>Provide guidance, oversee employee performance, identify development needs and manage relationship among staff and employees. <a href="#" class="read-more" data-modal="service-popup-supskills">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Supervisory Skills">ENQUIRE</a>
-            </div>
-          </div>
-          <div class="service-block">
-            <div class="service-header">Communication Skills</div>
-            <div class="service-body">
-              <p>Description for Communication Skills.</p>
-              <a href="#" class="ENQUIRE" data-service="Communication Skills">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Public Speaking</div>
             <div class="service-body">
-              <p>Description for Public Speaking.</p>
+              <p>Boost self-confidence and self-esteem and help overcome stage fright and build self assurance. <a href="#" class="read-more" data-modal="service-popup-pubspeak">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Public Speaking">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Office Etiquette</div>
             <div class="service-body">
-              <p>Description for Office Etiquette.</p>
+              <p>Foster respect, build trust and ensure everyone performs their best. <a href="#" class="read-more" data-modal="service-popup-offettq">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Office Etiquette">ENQUIRE</a>
             </div>
           </div>
@@ -362,49 +331,48 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Spoken French</div>
             <div class="service-body">
-              <p>Description for Spoken French.</p>
+              <p>This course helps you to communicate fluently in French language proficiency. <a href="#" class="read-more" data-modal="service-popup-spokenfrench">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken French">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Spoken English</div>
             <div class="service-body">
-              <p>Description for Spoken English.</p>
+              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-spokenenglish">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken English">ENQUIRE</a>
             </div>
-          </div>
           <div class="service-block">
             <div class="service-header">Spoken Hindi</div>
             <div class="service-body">
-              <p>Description for Spoken Hindi.</p>
+              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-spokenhindi">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken Hindi">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">STEM (Science, Technology, Engineering and Mathematics) Tutoring</div>
             <div class="service-body">
-              <p>Description for STEM Tutoring.</p>
+              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-stem">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="STEM Tutoring">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Exam Confidence Skills</div>
             <div class="service-body">
-              <p>Description for Exam Confidence Skills.</p>
+              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-ecs">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Exam Confidence Skills">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Stress Management</div>
             <div class="service-body">
-              <p>Description for Stress Management.</p>
+              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-stressmgmt">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Stress Management">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Behavioral Science</div>
             <div class="service-body">
-              <p>Description for Behavioral Science.</p>
+              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-behscience">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Behavioral Science">ENQUIRE</a>
             </div>
           </div>
