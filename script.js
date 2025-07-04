@@ -1,25 +1,3 @@
-document.getElementById('next-page').addEventListener('click', function() {
-  const brochureModal = document.getElementById('brochure-modal');
-  if (brochureModal) {
-    brochureModal.scrollTo({
-      top: 0,
-      behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
-    });
-  }
-  // Add your page navigation logic here if needed
-});
-
-document.getElementById('prev-page').addEventListener('click', function() {
-  const brochureModal = document.getElementById('brochure-modal');
-  if (brochureModal) {
-    brochureModal.scrollTo({
-      top: 0,
-      behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
-    });
-  }
-  // Add your page navigation logic here if needed
-});
-
 // Ensure PDF.js worker is loaded
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
 
@@ -716,11 +694,26 @@ window.addEventListener("DOMContentLoaded", () => {
       if (pageNum <= 1) return;
       pageNum--;
       queueRenderPage(pageNum);
+      const brochureModalContent = document.querySelector("#brochure-modal > div");
+      if (brochureModalContent) {
+        brochureModalContent.scrollTo({
+          top: 0,
+          behavior: "smooth" // for smooth scrolling, remove if you want instant jump
+        });
+      }
     });
+
     nextPageBtn.addEventListener("click", () => {
       if (pageNum >= pdfDoc.numPages) return;
       pageNum++;
       queueRenderPage(pageNum);
+      const brochureModalContent = document.querySelector("#brochure-modal > div");
+      if (brochureModalContent) {
+        brochureModalContent.scrollTo({
+          top: 0,
+          behavior: "smooth" // for smooth scrolling, remove if you want instant jump
+        });
+      }
     });
   }
 
