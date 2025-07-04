@@ -407,16 +407,6 @@ main section {
     padding: 20px 0;
   }
 
-  .company-title {
-    font-size: 28px;
-    font-weight: 600;
-    color: #ffffff;
-    margin: 0;
-    white-space: nowrap;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-    height: 50px;
-  }
-
   nav {
     max-width: 100%;
     margin: 10px 0;
@@ -593,8 +583,15 @@ main section {
   }
 
   .company-title {
-    font-size: 20px; /* Reduced from 28px */
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    white-space: nowrap;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    height: 80px;
   }
+
 
   .contact-font p {
     font-size: 0.9em; /* Reduced from 1.1em (approx. 14.4px assuming base 16px) */
