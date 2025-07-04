@@ -45,7 +45,6 @@ header {
   margin: 0;
   white-space: nowrap;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-  height: 180px;
 }
 
 nav {
@@ -482,11 +481,6 @@ main section {
     position: absolute;
   }
 
-  .motto {
-    order: 1;
-    width: 100%;
-  } 
-
   .nav-tabs .dropdown-content a {
     color: #fff;
     padding: 12px 2px;
@@ -571,7 +565,6 @@ main section {
   .motto {
     order: 1;
     width: 100%;
-    font-size: 24px;
   }
 
   .custom-vertical-modal {
@@ -584,16 +577,8 @@ main section {
   }
 
   .company-title {
-    font-size: 14px;
-    font-weight: 400;
-    color: #ffffff;
-    margin: 0;
-    white-space: nowrap;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-    height: 140px;
-    padding-bottom: 100;
+    font-size: 20px; /* Reduced from 28px */
   }
-
 
   .contact-font p {
     font-size: 0.9em; /* Reduced from 1.1em (approx. 14.4px assuming base 16px) */
