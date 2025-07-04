@@ -1,16 +1,22 @@
 document.getElementById('next-page').addEventListener('click', function() {
-  openBrochureModal.scrollTo({
-    top: 0,
-    behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
-  });
+  const brochureModal = document.getElementById('brochure-modal');
+  if (brochureModal) {
+    brochureModal.scrollTo({
+      top: 0,
+      behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
+    });
+  }
   // Add your page navigation logic here if needed
 });
 
 document.getElementById('prev-page').addEventListener('click', function() {
-  openBrochureModal.scrollTo({
-    top: 0,
-    behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
-  });
+  const brochureModal = document.getElementById('brochure-modal');
+  if (brochureModal) {
+    brochureModal.scrollTo({
+      top: 0,
+      behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
+    });
+  }
   // Add your page navigation logic here if needed
 });
 
