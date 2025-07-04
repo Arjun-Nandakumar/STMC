@@ -593,7 +593,6 @@ main section {
     width: 90vw;                 /* Responsive width */
     text-align: center;
     margin-bottom: 10px;         /* Space below title */
-    background: url('background.png') no-repeat center center/contain;
     border-radius: 8px;
     word-break: break-word;      /* Allow breaking if text is long */
   }
