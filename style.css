@@ -33,7 +33,6 @@ header {
   justify-content: center;
   gap: 15px;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 10px;
 }
@@ -804,6 +803,7 @@ ul.nav-tabs, ul.nav-tabs li {
 
   .company-title {
     font-size: 100px;
+    font-weight: 600;
     padding: 0px 0;
     height: auto;
     width: 100%;
