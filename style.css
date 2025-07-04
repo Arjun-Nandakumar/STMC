@@ -398,6 +398,7 @@ main section {
   padding-top: 10px;
 }
 
+/* Brochure Button */
 .brochure {
   background-color: #4F61C5;
   color: white;
@@ -422,6 +423,7 @@ main section {
   font-family: Arial, sans-serif;
 }
 
+/*Brochure Frame */
 .custom-vertical-modal {
   display: none;
   position: fixed;
@@ -434,9 +436,6 @@ main section {
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
-  border: 2px solid #00FFFF;
-  box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
-  animation: glow 1.5s ease-in-out infinite alternate;
 }
 
 #custom-modal > div {
@@ -452,7 +451,7 @@ main section {
 }
 
 #modal-close-btn {
-  position: relative;
+  position: fixed;
   top: 8px;
   right: 12px;
   cursor: pointer;
@@ -509,9 +508,9 @@ main section {
 #brochure-modal > div {
   background: white;
   width: 90%;
-  max-width: 100%;
+  max-width: 90vw;
   height: fit-content;
-  max-height: 100%;
+  max-height: 90vh;
   position: relative;
   border-radius: 10px;
   overflow-y: auto;
