@@ -586,8 +586,8 @@ ul.nav-tabs, ul.nav-tabs li {
 
   #pdf-canvas {
     width: auto;
-    height: 90vh; /* Fill modal height */
-    max-height: calc(90vh - 40px); /* Account for controls */
+    height: 100%;
+    max-width: 100%;
   }
 }
 
@@ -803,10 +803,9 @@ ul.nav-tabs, ul.nav-tabs li {
   }
 
   #pdf-canvas {
-    width: 150%;
+    width: 100%;
     height: auto;
-    max-height: calc(85vh - 40px); /* Account for controls */
-    transform: translateX(-16.67%); /* Center the zoomed-in canvas */
+    max-height: calc(85vh - 40px); /* Account for controls height */
   }
 
   #pdf-controls {
