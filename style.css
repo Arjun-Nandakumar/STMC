@@ -49,33 +49,33 @@ header {
 
 nav {
   width: 100%;
-  max-width: 50%;
+  max-width: 75%;
   margin: 10px auto 20px;
 }
 
-    .nav-tabs {
-      display: grid;
-      grid-template-columns: repeat(5, 20.00%);
-      grid-template-rows: repeat(2, auto);
-      width: 100%;
-      gap: 0;
-      margin: 0;
-      padding: 0;
-    }
+.nav-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 20.00%);
+  grid-template-rows: repeat(2, auto);
+  width: 100%;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
 
-  .nav-tabs li {
-    text-align: center;
-  }
+.nav-tabs li {
+  text-align: center;
+}
 
-  .nav-tabs li a {
-    text-decoration: none;
-    padding: 10px 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-radius: 5px;
-    transition: background 0.3s;
-    display: block;
-  }
+.nav-tabs li a {
+  text-decoration: none;
+  padding: 10px 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 5px;
+  transition: background 0.3s;
+  display: block;
+}
 
 .nav-tabs li a:hover {
   background-color: rgba(255, 255, 255, 0.25);
@@ -97,7 +97,7 @@ nav {
   top: 100%;
   left: 0;
   background-color: rgba(20, 27, 46, 0.95);
-  min-width: 200px;
+  min-width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
   z-index: 1;
   border-radius: 5px;
