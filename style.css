@@ -439,6 +439,26 @@ main section {
   animation: glow 1.5s ease-in-out infinite alternate;
 }
 
+#custom-modal > div {
+  background: #fff;
+  color: #222;
+  padding: 32px 24px;
+  border-radius: 10px;
+  max-width: 90vw;
+  max-height: 90vh;
+  text-align: center;
+  font-size: 1.2em;
+  position: relative;
+}
+
+#modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
 @keyframes glow {
   0% {
     box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
@@ -490,7 +510,7 @@ main section {
   background: white;
   width: 90%;
   max-width: 90vw;
-  height: 90%;
+  height: fit-content;
   max-height: 90vh;
   position: relative;
   border-radius: 10px;
@@ -499,15 +519,17 @@ main section {
 }
 
 #pdf-canvas {
-  max-width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 #pdf-controls {
   position: sticky;
-  top: 0;
+  bottom: 0;
   background: white;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   z-index: 9999;
 }
@@ -554,6 +576,18 @@ ul.nav-tabs, ul.nav-tabs li {
 @media (max-width: 800px) {
   .service-blocks-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  #brochure-modal > div {
+    height: 90vh;
+  }
+
+  #pdf-canvas {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
   }
 }
 
@@ -766,6 +800,16 @@ ul.nav-tabs, ul.nav-tabs li {
     max-width: 95vw;
     height: 100%;
     max-height: 85vh;
+  }
+
+  #pdf-canvas {
+    width: 100%;
+    height: auto;
+    max-height: calc(85vh - 40px); /* Account for controls height */
+  }
+
+  #pdf-controls {
+    padding: 2px;
   }
 
   #pdf-controls button {
