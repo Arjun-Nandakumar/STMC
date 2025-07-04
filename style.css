@@ -402,8 +402,9 @@ main section {
   background-color: #4F61C5;
   color: white;
   border: none;
+  width: 200px;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 1em;
   cursor: pointer;
 }
@@ -592,7 +593,7 @@ ul.nav-tabs, ul.nav-tabs li {
 }
 
 @media (min-width: 769px) {
-  
+
 #brochure-modal > div {
   background: white;
   width: 100%;
