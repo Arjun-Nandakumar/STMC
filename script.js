@@ -639,7 +639,6 @@ function openBrochureModal() {
   }
 }
 
-// Render a specific PDF page
 function renderPage(num) {
   const canvas = document.getElementById("pdf-canvas");
   const ctx = canvas.getContext("2d");
@@ -647,29 +646,67 @@ function renderPage(num) {
   const nextPageBtn = document.getElementById("next-page");
   const pageNumDisplay = document.getElementById("page-num");
 
+  // Set a loading state (optional: display a loading indicator)
   pageRendering = true;
+  pageNumDisplay.textContent = "Loading...";
+
   pdfDoc.getPage(num).then(page => {
+    // Get the viewport at scale 1 to determine the original dimensions
     const viewport = page.getViewport({ scale: 1 });
-    const scale = Math.min(canvas.parentElement.clientWidth / viewport.width, canvas.parentElement.clientHeight / viewport.height);
+
+    // Increase scale for higher quality (e.g., 2x for better resolution)
+    const qualityScale = 2; // Adjust this value for desired quality (1.5, 2, 3, etc.)
+    const containerWidth = canvas.parentElement.clientWidth;
+    const containerHeight = canvas.parentElement.clientHeight;
+
+    // Calculate scale to fit the container while maintaining aspect ratio
+    const scale = Math.min(containerWidth / viewport.width, containerHeight / viewport.height) * qualityScale;
     const scaledViewport = page.getViewport({ scale });
 
-    canvas.height = scaledViewport.height;
-    canvas.width = scaledViewport.width;
+    // Adjust canvas dimensions for high-DPI displays
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    canvas.height = scaledViewport.height * devicePixelRatio;
+    canvas.width = scaledViewport.width * devicePixelRatio;
+
+    // Scale the canvas to account for devicePixelRatio
+    canvas.style.height = `${scaledViewport.height}px`;
+    canvas.style.width = `${scaledViewport.width}px`;
+
+    // Apply scaling to the context to match the high-resolution canvas
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+
+    // Enable high-quality rendering settings
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
 
     const renderContext = {
       canvasContext: ctx,
       viewport: scaledViewport
     };
+
+    // Render the page
     page.render(renderContext).promise.then(() => {
       pageRendering = false;
       pageNumDisplay.textContent = num;
+
+      // Handle pending page render
       if (pageNumPending !== null) {
         renderPage(pageNumPending);
         pageNumPending = null;
       }
+    }).catch(error => {
+      console.error("Error rendering PDF page:", error);
+      pageRendering = false;
+      pageNumDisplay.textContent = "Error";
     });
+
+    // Update button states
     prevPageBtn.disabled = num <= 1;
     nextPageBtn.disabled = num >= pdfDoc.numPages;
+  }).catch(error => {
+    console.error("Error loading PDF page:", error);
+    pageRendering = false;
+    pageNumDisplay.textContent = "Error";
   });
 }
 
