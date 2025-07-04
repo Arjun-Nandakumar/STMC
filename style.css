@@ -629,10 +629,10 @@ ul.nav-tabs, ul.nav-tabs li {
   }
 
   .header-container img {
-    max-height: 50px;
-    width: auto;
-    height: auto;
-  }
+      max-height: 1300px; /* Adjust this value to change logo height on mobile */
+      width: auto;
+      height: auto;
+    }
 
   nav {
     margin-top: 0;
@@ -801,6 +801,8 @@ ul.nav-tabs, ul.nav-tabs li {
     order: 3;
   }
 
+
+  /* Dummy */
   .company-title {
     font-size: 28px;
     font-weight: 600;
