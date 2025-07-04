@@ -1,23 +1,13 @@
 document.getElementById('next-page').addEventListener('click', function() {
-  const brochureModal = document.getElementById('brochure-modal');
-  if (brochureModal) {
-    brochureModal.scrollTo({
-      top: 0,
-      behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
-    });
-  }
-  // Add your page navigation logic here if needed
+  if (pageNum >= pdfDoc.numPages) return;
+  pageNum++;
+  queueRenderPage(pageNum);
 });
 
 document.getElementById('prev-page').addEventListener('click', function() {
-  const brochureModal = document.getElementById('brochure-modal');
-  if (brochureModal) {
-    brochureModal.scrollTo({
-      top: 0,
-      behavior: 'smooth' // for smooth scrolling, remove if you want instant jump
-    });
-  }
-  // Add your page navigation logic here if needed
+  if (pageNum <= 1) return;
+  pageNum--;
+  queueRenderPage(pageNum);
 });
 
 // Ensure PDF.js worker is loaded
@@ -625,7 +615,6 @@ function openBrochureModal() {
 
   if (modal && canvas && pageNumDisplay && pageCountDisplay) {
     const pdfUrl = "brochure.pdf"; // Update this path if needed, e.g., "assets/brochure.pdf"
-    // For testing: const pdfUrl = "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey.pdf";
     pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
       pdfDoc = pdf;
       pageCountDisplay.textContent = pdfDoc.numPages;
@@ -690,6 +679,13 @@ function queueRenderPage(num) {
     pageNumPending = num;
   } else {
     renderPage(num);
+    const brochureModalContent = document.getElementById("brochure-modal").querySelector("div");
+    if (brochureModalContent) {
+      brochureModalContent.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
   }
 }
 
@@ -706,37 +702,6 @@ window.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
       }
     };
-  }
-
-  // Setup brochure navigation buttons
-  const prevPageBtn = document.getElementById("prev-page");
-  const nextPageBtn = document.getElementById("next-page");
-  if (prevPageBtn && nextPageBtn) {
-    prevPageBtn.addEventListener("click", () => {
-      if (pageNum <= 1) return;
-      pageNum--;
-      queueRenderPage(pageNum);
-      const brochureModalContent = document.querySelector("#brochure-modal > div");
-      if (brochureModalContent) {
-        brochureModalContent.scrollTo({
-          top: 0,
-          behavior: "smooth" // for smooth scrolling, remove if you want instant jump
-        });
-      }
-    });
-
-    nextPageBtn.addEventListener("click", () => {
-      if (pageNum >= pdfDoc.numPages) return;
-      pageNum++;
-      queueRenderPage(pageNum);
-      const brochureModalContent = document.querySelector("#brochure-modal > div");
-      if (brochureModalContent) {
-        brochureModalContent.scrollTo({
-          top: 0,
-          behavior: "smooth" // for smooth scrolling, remove if you want instant jump
-        });
-      }
-    });
   }
 
   // Generic modal setup for "Read More"
