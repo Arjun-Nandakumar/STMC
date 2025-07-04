@@ -444,7 +444,7 @@ function setupWhatsAppEnquiring() {
 
       if (isAllowed) {
         const msg = `Service Name: <b>${serviceName}</b><br><br>Choose how you would like to contact:`;
-        showCustomModal(msg, confirmAction);
+              showCustomModal(msg, confirmAction);
       } else {
         let hoursTo6am =
           hours < 6
