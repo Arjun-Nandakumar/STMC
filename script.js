@@ -331,48 +331,49 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Spoken French</div>
             <div class="service-body">
-              <p>This course helps you to communicate fluently in French language proficiency. <a href="#" class="read-more" data-modal="service-popup-spokenfrench">Read More...</a></p>
+              <p>Learn to speak French with ease — open doors to new experiences. <a href="#" class="read-more" data-modal="service-popup-spokenfrench">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken French">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Spoken English</div>
             <div class="service-body">
-              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-spokenenglish">Read More...</a></p>
+              <p>At STMC, learn English with confidence — speak clearly, connect with the world. <a href="#" class="read-more" data-modal="service-popup-spokenenglish">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken English">ENQUIRE</a>
             </div>
+          </div>
           <div class="service-block">
             <div class="service-header">Spoken Hindi</div>
             <div class="service-body">
-              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-spokenhindi">Read More...</a></p>
+              <p>Learn to speak Hindi with clarity and confidence — only at STMC! <a href="#" class="read-more" data-modal="service-popup-spokenhindi">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken Hindi">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">STEM (Science, Technology, Engineering and Mathematics) Tutoring</div>
             <div class="service-body">
-              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-stem">Read More...</a></p>
+              <p>Fuel your brain. Engineer your edge. The future runs on STEM. <a href="#" class="read-more" data-modal="service-popup-stem">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="STEM Tutoring">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Exam Confidence Skills</div>
             <div class="service-body">
-              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-ecs">Read More...</a></p>
+              <p>We turn self-doubt into self-belief — one exam at a time. <a href="#" class="read-more" data-modal="service-popup-ecs">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Exam Confidence Skills">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Stress Management</div>
             <div class="service-body">
-              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-stressmgmt">Read More...</a></p>
+              <p>Beat stress before it beats you — STMC teaches calm, focus, and control. <a href="#" class="read-more" data-modal="service-popup-stressmgmt">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Stress Management">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
             <div class="service-header">Behavioral Science</div>
             <div class="service-body">
-              <p>To communicate in English language fluently. <a href="#" class="read-more" data-modal="service-popup-behscience">Read More...</a></p>
+              <p>Understand how people think, feel, and act — explore minds with Behavioral Science at STMC. <a href="#" class="read-more" data-modal="service-popup-behscience">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Behavioral Science">ENQUIRE</a>
             </div>
           </div>
