@@ -616,7 +616,7 @@ ul.nav-tabs, ul.nav-tabs li {
 @media (max-width: 768px) {
   .background-overlay {
     background: 
-      url('background.png') no-repeat center top/100% auto,
+      url('background-mobile.png') no-repeat center top/100% auto,
       linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%);
     background-color: #1a1a1a;
     background-attachment: fixed;
