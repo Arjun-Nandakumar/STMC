@@ -128,7 +128,7 @@ nav {
 
 main {
   flex: 1 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 60px; /* Increased to ensure footer clearance */
 }
 
 main section {
@@ -154,7 +154,8 @@ main section {
   border-radius: 10px;
   color: white;
   text-align: center;
-  min-height: 100%;
+  /* Remove min-height: 100% or set a specific value like: */
+  min-height: auto; /* Let content dictate height */
 }
 
 #content-area.overlay {
@@ -330,16 +331,8 @@ main section {
   text-align: center;
   padding: 20px 0;
   width: 100%;
-  position: relative;
+  position: relative; /* Ensure it stays in document flow */
   margin-top: auto;
-}
-
-.footer.fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
 }
 
 .social-footer {
@@ -875,6 +868,18 @@ ul.nav-tabs, ul.nav-tabs li {
   #pdf-controls button {
     padding: 6px 12px;
     font-size: 0.9em;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  main {
+    margin-bottom: 80px; /* More space for shorter screens */
+  }
+  .footer {
+    position: relative; /* Ensure footer stays in flow */
+  }
+  #content-area {
+    min-height: auto; /* Prevent content area from taking full height */
   }
 }
 
