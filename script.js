@@ -468,7 +468,7 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
   }
 
   modalMessage.innerHTML = `
-    <span id="modal-close-btn" style="position:absolute; top:8px; right:12px; cursor:pointer; font-size:1.2em;">✖</span>
+    <span id="modal-close-btn">✖</span>
     <div style="margin-top: 20px;">${message}</div>
   `;
 
