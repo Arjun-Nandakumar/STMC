@@ -503,14 +503,20 @@ main section {
   margin: auto;
   padding: 20px;
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   height: auto;
-  max-height: 80vh;
+  max-height: 77vh;
   overflow-y: auto;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: relative;
   border: 1px solid #00FFFF;
+}
+
+.modal-content ul {
+  padding-left: 0;
+  margin-left: 1.2em; /* Optional: gives a little space before bullets */
+  list-style-position: inside; /* Ensures bullets align with text block */
 }
 
 #brochure-modal {
@@ -629,6 +635,12 @@ ul.nav-tabs, ul.nav-tabs li {
     background-attachment: fixed;
     padding: 50px 0;
   }
+
+  .modal-content ul {
+  padding-left: 0;
+  list-style-position: inside;
+  margin: 0 0 1em 0;
+}
 
   .company-title {
     font-size: 28px;
