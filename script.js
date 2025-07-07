@@ -81,12 +81,95 @@ function loadContent(page) {
         <div class="contact-block">
           <div class="contact-font">
             <h3>Contact Us</h3>
-            <p><b>Email:</b> <a href="mailto:stmconsult@yahoo.com">stmconsult@yahoo.com</a></p><br>
-            <p><b>Phone:</b> +91-7624947307</p><br>
-            <p><b>Address:</b> 570, 1st Main, 1st Block, R.T. Nagar, Bangalore-560032, Karnataka, India</p>
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+              </div>
+              <div class="form-group">
+                <label for="mobile">Mobile No.:</label>
+                <input type="tel" id="mobile" name="mobile" required placeholder="Enter your mobile number">
+              </div>
+              <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required placeholder="Your message"></textarea>
+              </div>
+              <button type="submit">Submit</button>
+            </form>
+            <div id="success-message" style="display:none; color:green; margin-top:15px; font-weight:bold;">
+              ✅ Message sent successfully!
+            </div>
+            <div class="contact-divider">
+              <p><b>OR you can reach out to us at:</b></p>
+            </div>
+            <div class="contact-details">
+              <p><b>Email:</b> <a href="mailto:stmconsult@yahoo.com">stmconsult@yahoo.com</a></p><br>
+              <p><b>Phone:</b> +91-7624947307</p><br>
+              <p><b>Address:</b> 570, 1st Main, 1st Block, R.T. Nagar, Bangalore-560032, Karnataka, India</p>
+            </div>
           </div>
         </div>
       `;
+      // EmailJS initialization and form submission
+      emailjs.init("nNi_YlnaXzKkK2OKt"); // Initialize EmailJS with your Public Key
+      const contactForm = document.getElementById("contact-form");
+      const successMessage = document.getElementById("success-message");
+      if (contactForm && successMessage) {
+        contactForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Basic validation
+          const name = this.name.value.trim();
+          const email = this.email.value.trim();
+          const mobile = this.mobile.value.trim();
+          const message = this.message.value.trim();
+
+          if (!name || !email || !mobile || !message) {
+            showCustomModal("Please fill out all required fields.", null, true);
+            return;
+          }
+          if (!/^\S+@\S+\.\S+$/.test(email)) {
+            showCustomModal("Please enter a valid email address.", null, true);
+            return;
+          }
+
+          emailjs
+            .send("service_y78w5j2", "template_gs9b7k8", {
+              name,
+              email,
+              mobile,
+              message,
+            })
+            .then(
+              () => {
+                successMessage.style.display = "block";
+                setTimeout(() => {
+                  successMessage.style.display = "none";
+                  contactForm.reset();
+                }, 3000);
+              },
+              (error) => {
+                console.error("EmailJS error:", error);
+                showCustomModal(
+                  "Error sending message. Please try again or contact us directly at stmconsult@yahoo.com.",
+                  null,
+                  true
+                );
+              }
+            );
+        });
+      } else {
+        console.error("Contact form or success message element not found");
+        showCustomModal(
+          "Form submission error. Please try again later.",
+          null,
+          true
+        );
+      }
       break;
 
     case "login":
