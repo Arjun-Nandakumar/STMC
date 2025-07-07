@@ -100,8 +100,15 @@ function loadContent(page) {
               </div>
               <button type="submit">Submit</button>
             </form>
-            <div id="success-message" style="display:none; color:green; margin-top:15px; font-weight:bold;">
+            <div id="loading-message" style="display:none; margin-top:15px; text-align:center;">
+              <div class="loader"></div>
+              <span>Sending...</span>
+            </div>
+            <div id="success-message" style="display:none; color:green; margin-top:15px; font-weight:bold; text-align:center;">
               ✅ Message sent successfully!
+            </div>
+            <div id="error-message" style="display:none; color:red; margin-top:15px; font-weight:bold; text-align:center;">
+              ❌ Failed to send message. Please try again or contact us at <a href="mailto:stmconsult@yahoo.com">stmconsult@yahoo.com</a>.
             </div>
             <div class="contact-divider">
               <p><b>OR you can reach out to us at:</b></p>
@@ -114,62 +121,91 @@ function loadContent(page) {
           </div>
         </div>
       `;
-      // EmailJS initialization and form submission
-      emailjs.init("nNi_YlnaXzKkK2OKt"); // Initialize EmailJS with your Public Key
-      const contactForm = document.getElementById("contact-form");
-      const successMessage = document.getElementById("success-message");
-      if (contactForm && successMessage) {
-        contactForm.addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          // Basic validation
-          const name = this.name.value.trim();
-          const email = this.email.value.trim();
-          const mobile = this.mobile.value.trim();
-          const message = this.message.value.trim();
-
-          if (!name || !email || !mobile || !message) {
-            showCustomModal("Please fill out all required fields.", null, true);
-            return;
-          }
-          if (!/^\S+@\S+\.\S+$/.test(email)) {
-            showCustomModal("Please enter a valid email address.", null, true);
-            return;
-          }
-
-          emailjs
-            .send("service_y78w5j2", "template_gs9b7k8", {
-              name,
-              email,
-              mobile,
-              message,
-            })
-            .then(
-              () => {
-                successMessage.style.display = "block";
-                setTimeout(() => {
-                  successMessage.style.display = "none";
-                  contactForm.reset();
-                }, 3000);
-              },
-              (error) => {
-                console.error("EmailJS error:", error);
-                showCustomModal(
-                  "Error sending message. Please try again or contact us directly at stmconsult@yahoo.com.",
-                  null,
-                  true
-                );
-              }
-            );
-        });
+      // Initialize EmailJS with your public key
+      if (window.emailjs) {
+        emailjs.init("nNi_YlnaXzKkK2OKt");
       } else {
-        console.error("Contact form or success message element not found");
-        showCustomModal(
-          "Form submission error. Please try again later.",
-          null,
-          true
-        );
+        console.error("EmailJS is not loaded.");
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = "❌ Email service is unavailable. Please try again later.";
+        errorMessage.style.display = 'block';
+        setTimeout(() => {
+          errorMessage.style.display = 'none';
+        }, 5000);
+        return;
       }
+
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Extract form data
+        const form = this;
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const mobile = form.mobile.value.trim();
+        const message = form.message.value.trim();
+
+        // Get DOM elements
+        const loadingMessage = document.getElementById('loading-message');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        // Disable submit button to prevent multiple submissions
+        submitButton.disabled = true;
+
+        // Show loading animation
+        loadingMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
+
+        // Send both emails concurrently with a timeout
+        const emailPromise = Promise.all([
+          emailjs.send("service_y78w5j2", "template_gs9b7k8", { // Auto-reply to user
+            name,
+            email,
+            mobile,
+            message
+          }),
+          emailjs.send("service_r0ao5d9", "template_ocygj7k", { // Admin notification
+            name,
+            email,
+            mobile,
+            message
+          })
+        ]);
+
+        // Add a timeout to prevent infinite loading
+        const timeoutPromise = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject(new Error("Request timed out"));
+          }, 10000); // 10-second timeout
+        });
+
+        Promise.race([emailPromise, timeoutPromise])
+          .then(([autoReplyResponse, adminResponse]) => {
+            // Hide loading animation
+            loadingMessage.style.display = 'none';
+            // Show success message
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+              form.reset();
+              submitButton.disabled = false;
+            }, 3000); // 3 seconds for visibility
+          })
+          .catch((error) => {
+            // Hide loading animation
+            loadingMessage.style.display = 'none';
+            // Show error message
+            errorMessage.style.display = 'block';
+            console.error("EmailJS error:", error);
+            submitButton.disabled = false;
+            setTimeout(() => {
+              errorMessage.style.display = 'none';
+            }, 5000); // 5 seconds for visibility
+          });
+      });
       break;
 
     case "login":
@@ -299,7 +335,7 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Cost of Quality</div>
             <div class="service-body">
-              <p>We help you reduce cost by mimizing defects, rework and customer complaint resulting in cost-saving in the long run. <a href="#" class="read-more" data-modal="service-popup-coq">Read More...</a></p>
+              <p>We help you reduce cost by minimizing defects, rework and customer complaint resulting in cost-saving in the long run. <a href="#" class="read-more" data-modal="service-popup-coq">Read More...</a></p>
               <span class="custom-br"></span>
               <a href="#" class="ENQUIRE" data-service="Cost of Quality">ENQUIRE</a>
             </div>
