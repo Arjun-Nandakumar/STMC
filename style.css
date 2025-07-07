@@ -472,7 +472,7 @@ main section {
 }
 
 #modal-close-btn {
-  position: sticky;
+  position: absolute;
   top: 8px;
   right: 12px;
   cursor: pointer;
@@ -647,7 +647,7 @@ ul.nav-tabs, ul.nav-tabs li {
 }
 
 #modal-close-btn {
-  position: sticky;
+  position: absolute;
   top: 8px;
   right: 12px;
   cursor: pointer;
