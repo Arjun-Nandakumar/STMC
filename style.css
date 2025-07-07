@@ -479,7 +479,7 @@ main section {
   font-size: 1.2em;
   cursor: pointer;
   color: #FFFFFF;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 1);
   padding: 5px 10px;
 }
 
@@ -654,7 +654,7 @@ ul.nav-tabs, ul.nav-tabs li {
     font-size: 1.2em;
     cursor: pointer;
     color: #FFFFFF;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 1);
     padding: 5px 10px;
   }
 
