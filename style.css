@@ -644,19 +644,19 @@ ul.nav-tabs, ul.nav-tabs li {
   padding-left: 0;
   list-style-position: inside;
   margin: 0 0 1em 0;
-}
+  }
 
-.modal-close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  cursor: pointer;
-  font-size: 1.2em;
-  cursor: pointer;
-  color: #FFFFFF;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 5px 10px;
-}
+  .modal-close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    cursor: pointer;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+  }
 
   .company-title {
     font-size: 28px;
@@ -682,7 +682,7 @@ ul.nav-tabs, ul.nav-tabs li {
       max-height: 95px; /* Adjust this value to change logo height on mobile */
       width: auto;
       height: auto;
-    }
+  }
 
   nav {
     margin-top: 0;
