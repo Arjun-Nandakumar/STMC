@@ -1,3 +1,160 @@
+// Ensure PDF.js worker is loaded
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+// PDF.js variables
+let pdfDoc = null,
+    pageNum = 1,
+    pageRendering = false,
+    pageNumPending = null;
+
+/*
+
+// TO BE ADDED IN PRODUCTION Reviews pagination variables
+let currentReviewPage = 1;
+const reviewsPerPage = 2;
+const googleReviews = [
+  {
+    author_name: "John D.",
+    rating: 5,
+    text: "STMC provided excellent training on ISO 9001. Their expertise helped us achieve certification seamlessly!"
+  },
+  {
+    author_name: "Sarah M.",
+    rating: 4,
+    text: "The Kaizen workshop was insightful and practical. Highly recommend their services!"
+  },
+  {
+    author_name: "Amit P.",
+    rating: 5,
+    text: "Their communication skills training transformed our team’s performance. Fantastic experience!"
+  },
+  {
+    author_name: "Priya S.",
+    rating: 5,
+    text: "STMC’s consultation for ISO 14001 was thorough and effective. Great team to work with!"
+  },
+  {
+    author_name: "Rahul K.",
+    rating: 4,
+    text: "The 5S training was well-structured and improved our workplace efficiency significantly."
+  }
+];
+
+TO BE ADDED IN PRODUTION */
+
+function renderPage(num) {
+  const canvas = document.getElementById("pdf-canvas");
+  const ctx = canvas.getContext("2d");
+  const prevPageBtn = document.getElementById("prev-page");
+  const nextPageBtn = document.getElementById("next-page");
+  const pageNumDisplay = document.getElementById("page-num");
+
+  pageRendering = true;
+  pageNumDisplay.textContent = "Loading...";
+
+  pdfDoc.getPage(num).then(page => {
+    const viewport = page.getViewport({ scale: 1 });
+    const qualityScale = 2;
+    const containerWidth = canvas.parentElement.clientWidth;
+    const containerHeight = canvas.parentElement.clientHeight;
+    const scale = Math.min(containerWidth / viewport.width, containerHeight / viewport.height) * qualityScale;
+    const scaledViewport = page.getViewport({ scale });
+
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    canvas.height = scaledViewport.height * devicePixelRatio;
+    canvas.width = scaledViewport.width * devicePixelRatio;
+    canvas.style.height = `${scaledViewport.height}px`;
+    canvas.style.width = `${scaledViewport.width}px`;
+
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: scaledViewport
+    };
+
+    page.render(renderContext).promise.then(() => {
+      pageRendering = false;
+      pageNumDisplay.textContent = num;
+      if (pageNumPending !== null) {
+        renderPage(pageNumPending);
+        pageNumPending = null;
+      }
+    }).catch(error => {
+      console.error("Error rendering PDF page:", error);
+      pageRendering = false;
+      pageNumDisplay.textContent = "Error";
+    });
+
+    prevPageBtn.disabled = num <= 1;
+    nextPageBtn.disabled = num >= pdfDoc.numPages;
+  }).catch(error => {
+    console.error("Error loading PDF page:", error);
+    pageRendering = false;
+    pageNumDisplay.textContent = "Error";
+  });
+}
+
+function queueRenderPage(num) {
+  if (pageRendering) {
+    pageNumPending = num;
+  } else {
+    renderPage(num);
+    const brochureModalContent = document.getElementById("brochure-modal").querySelector("div");
+    if (brochureModalContent) {
+      brochureModalContent.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  }
+}
+
+// Open brochure modal with PDF.js
+function openBrochureModal() {
+  const modal = document.getElementById("brochure-modal");
+  const canvas = document.getElementById("pdf-canvas");
+  const pageNumDisplay = document.getElementById("page-num");
+  const pageCountDisplay = document.getElementById("page-count");
+  const errorDisplay = document.getElementById("brochure-error");
+
+  if (modal && canvas && pageNumDisplay && pageCountDisplay) {
+    // Clear any previous error message
+    if (errorDisplay) {
+      errorDisplay.style.display = "none";
+      errorDisplay.textContent = "";
+    }
+    const pdfUrl = "brochure.pdf";
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+      pdfDoc = pdf;
+      pageCountDisplay.textContent = pdfDoc.numPages;
+      pageNum = 1;
+      renderPage(pageNum);
+      modal.style.display = "flex";
+    }).catch(error => {
+      console.error("Error loading PDF:", error);
+      if (errorDisplay) {
+        errorDisplay.textContent = "Failed to load the brochure. Please try again later.";
+        errorDisplay.style.display = "block";
+      } else {
+        alert("Failed to load the brochure. Please try again later.");
+      }
+      modal.style.display = "none";
+    });
+  } else {
+    console.error("Brochure modal or required elements not found");
+    if (errorDisplay) {
+      errorDisplay.textContent = "Brochure modal elements are missing.";
+      errorDisplay.style.display = "block";
+    } else {
+      alert("Brochure modal elements are missing.");
+    }
+  }
+}
+
+// Setup PDF navigation buttons
 document.getElementById('next-page').addEventListener('click', function() {
   if (pageNum >= pdfDoc.numPages) return;
   pageNum++;
@@ -9,15 +166,6 @@ document.getElementById('prev-page').addEventListener('click', function() {
   pageNum--;
   queueRenderPage(pageNum);
 });
-
-// Ensure PDF.js worker is loaded
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
-
-// PDF.js variables
-let pdfDoc = null,
-    pageNum = 1,
-    pageRendering = false,
-    pageNumPending = null;
 
 function loadContent(page) {
   const content = document.getElementById("content-area");
@@ -50,18 +198,54 @@ function loadContent(page) {
             Sigma Training & Management Consultants (STMC) is a premier professional consulting group that prioritizes enhancing quality and assisting industries in effectively implementing management systems through a highly systematic approach. Led by a seasoned technocrat with over 40 years of experience in system implementation and training, STMC has been instrumental in aiding numerous companies to implement systems efficiently and achieve certification from third-party certification bodies across various standards.<br><br>
             STMC specializes in identifying and supplying the necessary tools for industries facing challenges, deploying quality improvement techniques, and guiding organizations to achieve certification from third-party certifying bodies. Our approach to corporate management is systematic and responsible, aiming to prevent accidents caused by human error through improved training and administration of the workforce, thereby ensuring the highest standards in Quality, Health, Safety, and Environment (QHSE).<br><br>
             As a data-driven organization, STMC is committed to offering viable solutions to make organizations more profitable and efficient, which is essential for future success. We specialize in providing sustainable solutions to empower and educate the workforce about the significance of QHSE and standards, underpinning our commitment to excellence and innovation.<br><br>
-            Click the link below to view our brochure!
           </p>
+        ` +
+        /* TO BE ADDED WHEN READY TO MOVE TO PRODUCTION
+        `
+          <h4>What our customers say about us :</h4>
+          <div class="reviews-section">
+            <div class="review-verification">
+              <a href="https://maps.app.goo.gl/AZqQpEVQL2V3jZcz7" target="_blank" class="google-reviews-link">See All Reviews on Google</a>
+            </div>
+            <div class="review-pagination">
+              <span class="prev-arrow" id="prev-review"></span>
+              <span id="review-page-num">1</span> / <span id="review-page-count">${Math.ceil(googleReviews.length / reviewsPerPage)}</span>
+              <span class="next-arrow" id="next-review"></span>
+            </div>
+          </div>
+        ` +
+        */
+        `
           <div style="text-align: center; margin-top: 20px;">
             <button class="brochure">View Brochure</button>
           </div>
         </div>
       `;
-      // Setup brochure button listener after content is loaded
-      const brochureBtn = document.querySelector(".brochure");
-      if (brochureBtn) {
-        brochureBtn.addEventListener("click", openBrochureModal);
+
+      /* TO BE ADDED IN PRODUCTION
+
+      // Render initial reviews page
+      renderReviewsPage(currentReviewPage);
+      // Setup pagination listeners
+      const prevReviewArrow = document.getElementById("prev-review");
+      const nextReviewArrow = document.getElementById("next-review");
+      if (prevReviewArrow && nextReviewArrow) {
+        prevReviewArrow.addEventListener("click", () => {
+          if (currentReviewPage > 1) {
+            currentReviewPage--;
+            renderReviewsPage(currentReviewPage);
+          }
+        });
+        nextReviewArrow.addEventListener("click", () => {
+          if (currentReviewPage < Math.ceil(googleReviews.length / reviewsPerPage)) {
+            currentReviewPage++;
+            renderReviewsPage(currentReviewPage);
+          }
+        });
       }
+
+      TO BE ADDED IN PRODUCTION */
+      
       break;
 
     case "services":
@@ -121,7 +305,6 @@ function loadContent(page) {
           </div>
         </div>
       `;
-      // Initialize EmailJS with your public key
       if (window.emailjs) {
         emailjs.init("nNi_YlnaXzKkK2OKt");
       } else {
@@ -137,92 +320,74 @@ function loadContent(page) {
 
       document.getElementById('contact-form').addEventListener('submit', function(event) {
         event.preventDefault();
-
-        // Extract form data
         const form = this;
         const name = form.name.value.trim();
         const email = form.email.value.trim();
         const mobile = form.mobile.value.trim();
         const message = form.message.value.trim();
-
-        // Get DOM elements
         const loadingMessage = document.getElementById('loading-message');
         const successMessage = document.getElementById('success-message');
         const errorMessage = document.getElementById('error-message');
         const submitButton = form.querySelector('button[type="submit"]');
-
-        // Disable submit button to prevent multiple submissions
         submitButton.disabled = true;
-
-        // Show loading animation
         loadingMessage.style.display = 'block';
         successMessage.style.display = 'none';
         errorMessage.style.display = 'none';
 
-        // Send both emails concurrently with a timeout
         const emailPromise = Promise.all([
-          emailjs.send("service_w0c9cag", "template_dtrl8bk", { // Admin notification *CHANGE SERVIE
-            name,
-            email,
-            mobile,
-            message
-          }),
-          emailjs.send("service_y78w5j2", "template_gs9b7k8", { // Autoreply
-            name,
-            email,
-            mobile,
-            message
-          })
+          emailjs.send("service_w0c9cag", "template_dtrl8bk", { name, email, mobile, message }),
+          emailjs.send("service_y78w5j2", "template_gs9b7k8", { name, email, mobile, message })
         ]);
 
-        // Add a timeout to prevent infinite loading
         const timeoutPromise = new Promise((resolve, reject) => {
-          setTimeout(() => {
-            reject(new Error("Request timed out"));
-          }, 10000); // 10-second timeout
+          setTimeout(() => reject(new Error("Request timed out")), 10000);
         });
 
         Promise.race([emailPromise, timeoutPromise])
-          .then(([autoReplyResponse, adminResponse]) => {
-            // Hide loading animation
+          .then(() => {
             loadingMessage.style.display = 'none';
-            // Show success message
             successMessage.style.display = 'block';
             setTimeout(() => {
               successMessage.style.display = 'none';
               form.reset();
               submitButton.disabled = false;
-            }, 3000); // 3 seconds for visibility
+            }, 3000);
           })
           .catch((error) => {
-            // Hide loading animation
             loadingMessage.style.display = 'none';
-            // Show error message
             errorMessage.style.display = 'block';
             console.error("EmailJS error:", error);
             submitButton.disabled = false;
             setTimeout(() => {
               errorMessage.style.display = 'none';
-            }, 5000); // 5 seconds for visibility
+            }, 5000);
           });
       });
       break;
 
-    case "login":
+    case "account":
       content.innerHTML = `
-        <h3>Login</h3>
-        <form id="login-form">
-          <label for="username">Username:</label><br>
-          <input type="text" id="username" name="username"><br><br>
-          <label for="password">Password:</label><br>
-          <input type="password" id="password" name="password"><br><br>
-          <button type="submit">Login</button>
-        </form>
-        <div id="login-message" style="margin-top: 15px; font-weight: bold;"></div>
+        <div class="account-container">
+          <h3>Sign In</h3>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username" required placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit">Sign In</button>
+          </form>
+          <p class="toggle-form">Don't have an account? <a href="#" id="show-register">Sign Up</a></p>
+          <div id="login-message"></div>
+        </div>
       `;
-      const form = document.getElementById("login-form");
-      if (form) {
-        form.onsubmit = async function (e) {
+      const loginForm = document.getElementById("login-form");
+      const showRegisterLink = document.getElementById("show-register");
+      if (loginForm) {
+        loginForm.onsubmit = async function (e) {
           e.preventDefault();
           const username = document.getElementById("username").value.trim();
           const password = document.getElementById("password").value.trim();
@@ -246,6 +411,71 @@ function loadContent(page) {
             console.error("Login error:", err);
           }
         };
+      }
+      if (showRegisterLink) {
+        showRegisterLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          content.innerHTML = `
+            <div class="account-container">
+              <h3>Sign Up</h3>
+              <form id="register-form">
+                <div class="form-group">
+                  <label for="reg-username">Username:</label>
+                  <input type="text" id="reg-username" name="username" required placeholder="Choose a username">
+                </div>
+                <div class="form-group">
+                  <label for="reg-password">Password:</label>
+                  <input type="password" id="reg-password" name="password" required placeholder="Choose a password">
+                </div>
+                <div class="form-group">
+                  <label for="confirm-password">Confirm Password:</label>
+                  <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your password">
+                </div>
+                <button type="submit">Sign Up</button>
+              </form>
+              <p class="toggle-form">Already have an account? <a href="#" id="show-login">Sign In</a></p>
+              <div id="register-message"></div>
+            </div>
+          `;
+          const registerForm = document.getElementById("register-form");
+          const showLoginLink = document.getElementById("show-login");
+          if (registerForm) {
+            registerForm.onsubmit = async function (e) {
+              e.preventDefault();
+              const username = document.getElementById("reg-username").value.trim();
+              const password = document.getElementById("reg-password").value.trim();
+              const confirmPassword = document.getElementById("confirm-password").value.trim();
+              const msg = document.getElementById("register-message");
+              if (password !== confirmPassword) {
+                msg.innerHTML = "❌ Passwords do not match.";
+                return;
+              }
+              try {
+                const res = await fetch("http://localhost:5000/register", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ username, password }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                  msg.innerHTML = `✅ Account created for <b>${username}</b>! Please sign in.`;
+                  setTimeout(() => loadContent("account"), 2000);
+                } else {
+                  msg.innerHTML = `❌ ${data.message}`;
+                }
+              } catch (err) {
+                msg.innerHTML = "Server error.";
+                console.error("Registration error:", err);
+              }
+            };
+          }
+          if (showLoginLink) {
+            showLoginLink.addEventListener("click", (e) => {
+              e.preventDefault();
+              loadContent("account");
+            });
+          }
+        });
       }
       break;
 
@@ -506,6 +736,86 @@ function loadContent(page) {
   }
 }
 
+// Setup brochure button listener
+const brochureBtn = document.querySelector(".brochure");
+if (brochureBtn) {
+  brochureBtn.addEventListener("click", openBrochureModal);
+}
+
+/* TO BE ADDED IN PRODUCTION
+
+function renderReviewsPage(pageNum) {
+  const reviewContainer = document.querySelector('.review-placeholder');
+  const prevReviewArrow = document.getElementById('prev-review');
+  const nextReviewArrow = document.getElementById('next-review');
+  const reviewPageNum = document.getElementById('review-page-num');
+  if (!reviewContainer || !prevReviewArrow || !nextReviewArrow || !reviewPageNum) return;
+
+  // Calculate the slice of reviews to display
+  const start = (pageNum - 1) * reviewsPerPage;
+  const end = start + reviewsPerPage;
+  const reviewsToShow = googleReviews.slice(start, end);
+
+  // Clear and populate reviews
+  reviewContainer.innerHTML = '';
+  reviewsToShow.forEach(review => {
+    const reviewElement = document.createElement('div');
+    reviewElement.classList.add('review-item');
+    reviewElement.innerHTML = `
+      <div class="review-author">${review.author_name}</div>
+      <div class="review-rating">Rating: ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+      <div class="review-text">${review.text.length > 100 ? review.text.substring(0, 100) + '...' : review.text}</div>
+    `;
+    reviewContainer.appendChild(reviewElement);
+  });
+
+  // Update pagination UI
+  reviewPageNum.textContent = pageNum;
+  prevReviewArrow.classList.toggle('disabled', pageNum === 1);
+  nextReviewArrow.classList.toggle('disabled', pageNum === Math.ceil(googleReviews.length / reviewsPerPage));
+
+  // Reapply animations
+  setupReviewAnimations();
+}
+
+function setupReviewAnimations() {
+  const reviewSections = document.querySelectorAll('.reviews-section');
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('flipInFromRight');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  reviewSections.forEach(section => {
+    observer.observe(section);
+  });
+}
+
+TO BE ADDED IN PRODUCTION */
+
+function setupReadMoreButtons() {
+  const contentArea = document.getElementById("content-area");
+  if (!contentArea) return;
+
+  contentArea.addEventListener("click", (event) => {
+    if (event.target.classList.contains("read-more")) {
+      event.preventDefault();
+      const modalId = event.target.getAttribute("data-modal");
+      const modal = document.getElementById(modalId);
+      if (modal) modal.style.display = "flex";
+    }
+  });
+}
+
 // Disable right-click
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 
@@ -577,22 +887,33 @@ function setupWhatsAppEnquiring() {
   }
 }
 
-// Show custom modal for enquiry options
-function showCustomModal(message, onConfirm = null, lightsOut = false) {
+  // Show custom modal for enquiry options
+  function showCustomModal(message, onConfirm = null, lightsOut = false) {
   const modal = document.getElementById("custom-modal");
-  const modalMessage = document.getElementById("modal-message");
+  const modalMessage = document.getElementById("modal-content");
   if (!modal || !modalMessage) {
     console.error("Modal elements not found");
     return;
   }
 
-  modalMessage.innerHTML = `
-    <span id="modal-close-btn">✖</span>
-    <div style="margin-top: 20px;">${message}</div>
-  `;
+  // Clear previous content to prevent residual buttons
+  modalMessage.innerHTML = '';
 
-  if (!lightsOut) {
-    modalMessage.innerHTML += `
+  // Debugging to confirm lightsOut state
+  console.log(`showCustomModal called with lightsOut: ${lightsOut}, message: ${message}`);
+
+  // Set the modal content based on lightsOut status
+  if (lightsOut) {
+    modalMessage.innerHTML = `
+      <span id="modal-close-btn">✖</span>
+      <div class="modal-content-text">
+        ${message}
+      </div>
+    `;
+  } else {
+    modalMessage.innerHTML = `
+      <span id="modal-close-btn">✖</span>
+      <div class="modal-content-text">${message}</div>
       <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Call</button>
       <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Book (Calendly)</button>
       <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Text (WhatsApp)</button>
@@ -604,7 +925,11 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
 
   const closeBtn = document.getElementById("modal-close-btn");
   if (closeBtn) {
-    closeBtn.onclick = () => (modal.style.display = "none");
+    closeBtn.onclick = () => {
+      modal.style.display = "none";
+      // Clear modal content on close to prevent residual content
+      modalMessage.innerHTML = '';
+    };
   }
 
   if (!lightsOut && onConfirm) {
@@ -627,15 +952,9 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
         callingPopup.innerText = "📞 Calling: +91-7624947307...";
         callingPopup.className = "glow-popup";
         const closeBtn = document.createElement("span");
+        closeBtn.id = "calling-popup-close-btn";
         closeBtn.innerText = "✖";
-        closeBtn.style.cssText = `
-          position: absolute;
-          top: 5px;
-          right: 10px;
-          cursor: pointer;
-          font-size: 1.2em;
-          color: white;
-        `;
+        closeBtn.className = "calling-popup-close";
         closeBtn.onclick = () => callingPopup.remove();
         callingPopup.appendChild(closeBtn);
         document.body.appendChild(callingPopup);
@@ -667,18 +986,9 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
 function showLoggedInHeader(username) {
   const header = document.getElementById("header-bar") || document.createElement("div");
   header.id = "header-bar";
-  header.style.cssText = `
-    background: #0D0F14;
-    width: 100%;
-    padding: 10px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-  `;
   header.innerHTML = `
-    <div style="color: white; margin-right: 15px;">👤 Logged in as <b>${username}</b></div>
-    <button id="logout-btn" style="padding:6px 12px; background:maroon; color:white; border:none; border-radius:5px; cursor:pointer;">Sign Out</button>
+    <div class="logged-in-text">👤 Logged in as <b>${username}</b></div>
+    <button id="logout-btn">Sign Out</button>
   `;
   const nav = document.querySelector("nav");
   if (nav) {
@@ -694,131 +1004,10 @@ function showLoggedInHeader(username) {
   }
 }
 
-// Open brochure modal with PDF.js
-function openBrochureModal() {
-  const modal = document.getElementById("brochure-modal");
-  const canvas = document.getElementById("pdf-canvas");
-  const pageNumDisplay = document.getElementById("page-num");
-  const pageCountDisplay = document.getElementById("page-count");
-
-  if (modal && canvas && pageNumDisplay && pageCountDisplay) {
-    const pdfUrl = "brochure.pdf"; // Update this path if needed, e.g., "assets/brochure.pdf"
-    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-      pdfDoc = pdf;
-      pageCountDisplay.textContent = pdfDoc.numPages;
-      pageNum = 1;
-      renderPage(pageNum);
-      modal.style.display = "flex";
-    }).catch(error => {
-      console.error("Error loading PDF:", error);
-      const modalMessage = document.getElementById("modal-message");
-      if (modalMessage) {
-        modalMessage.innerHTML = "Failed to load the brochure. Please try again later.";
-        document.getElementById("custom-modal").style.display = "flex";
-      }
-    });
-  } else {
-    console.error("Brochure modal or required elements not found");
-    const modalMessage = document.getElementById("modal-message");
-    if (modalMessage) {
-      modalMessage.innerHTML = "Brochure modal elements are missing.";
-      document.getElementById("custom-modal").style.display = "flex";
-    }
-  }
-}
-
-function renderPage(num) {
-  const canvas = document.getElementById("pdf-canvas");
-  const ctx = canvas.getContext("2d");
-  const prevPageBtn = document.getElementById("prev-page");
-  const nextPageBtn = document.getElementById("next-page");
-  const pageNumDisplay = document.getElementById("page-num");
-
-  // Set a loading state (optional: display a loading indicator)
-  pageRendering = true;
-  pageNumDisplay.textContent = "Loading...";
-
-  pdfDoc.getPage(num).then(page => {
-    // Get the viewport at scale 1 to determine the original dimensions
-    const viewport = page.getViewport({ scale: 1 });
-
-    // Increase scale for higher quality (e.g., 2x for better resolution)
-    const qualityScale = 2; // Adjust this value for desired quality (1.5, 2, 3, etc.)
-    const containerWidth = canvas.parentElement.clientWidth;
-    const containerHeight = canvas.parentElement.clientHeight;
-
-    // Calculate scale to fit the container while maintaining aspect ratio
-    const scale = Math.min(containerWidth / viewport.width, containerHeight / viewport.height) * qualityScale;
-    const scaledViewport = page.getViewport({ scale });
-
-    // Adjust canvas dimensions for high-DPI displays
-    const devicePixelRatio = window.devicePixelRatio || 1;
-    canvas.height = scaledViewport.height * devicePixelRatio;
-    canvas.width = scaledViewport.width * devicePixelRatio;
-
-    // Scale the canvas to account for devicePixelRatio
-    canvas.style.height = `${scaledViewport.height}px`;
-    canvas.style.width = `${scaledViewport.width}px`;
-
-    // Apply scaling to the context to match the high-resolution canvas
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-
-    // Enable high-quality rendering settings
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
-
-    const renderContext = {
-      canvasContext: ctx,
-      viewport: scaledViewport
-    };
-
-    // Render the page
-    page.render(renderContext).promise.then(() => {
-      pageRendering = false;
-      pageNumDisplay.textContent = num;
-
-      // Handle pending page render
-      if (pageNumPending !== null) {
-        renderPage(pageNumPending);
-        pageNumPending = null;
-      }
-    }).catch(error => {
-      console.error("Error rendering PDF page:", error);
-      pageRendering = false;
-      pageNumDisplay.textContent = "Error";
-    });
-
-    // Update button states
-    prevPageBtn.disabled = num <= 1;
-    nextPageBtn.disabled = num >= pdfDoc.numPages;
-  }).catch(error => {
-    console.error("Error loading PDF page:", error);
-    pageRendering = false;
-    pageNumDisplay.textContent = "Error";
-  });
-}
-
-// Queue page rendering if another render is in progress
-function queueRenderPage(num) {
-  if (pageRendering) {
-    pageNumPending = num;
-  } else {
-    renderPage(num);
-    const brochureModalContent = document.getElementById("brochure-modal").querySelector("div");
-    if (brochureModalContent) {
-      brochureModalContent.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-  }
-}
-
 // Initialize page and setup event listeners
 window.addEventListener("DOMContentLoaded", () => {
   loadContent("home");
 
-  // Setup brochure modal close button
   const closeBtn = document.getElementById("close-btn");
   if (closeBtn) {
     closeBtn.onclick = () => {
@@ -829,7 +1018,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // Generic modal setup for "Read More"
+// Generic modal setup for "Read More"
   document.addEventListener("click", (event) => {
     if (event.target.classList.contains("read-more")) {
       event.preventDefault();

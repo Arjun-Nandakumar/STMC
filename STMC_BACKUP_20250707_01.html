@@ -8,12 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="/STMC logo small.png">
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 </head>
 <body>
   <div class="background-overlay">
     <header>
       <div class="header-container">
-        <h1 class="company-title"><img src="STMC.png" alt="Company Logo" style="max-width: 100%; height: auto; max-height: 180px;"></h1>
+        <h1 class="company-title"><img src="STMC.png" alt="Company Logo" width="100%" height="180px"></h1>
       </div>
       <nav>
         <ul class="nav-tabs">
@@ -30,14 +31,14 @@
             </div>
           </li>
           <li><a href="#" onclick="loadContent('contact')">Contact Us</a></li>
-          <li><a href="#" onclick="loadContent('account')">Account</a></li>
+          <li><a href="#" onclick="loadContent('login')">Login</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <section id="welcome-message" style="text-align: center;">
-        <h2>Welcome to STMC!</h2>
+      <section id="welcome-message">
+        <center><h2>Welcome to STMC!</h2></center>
         <p class="motto">Your trusted partner in training and management consulting.</p>
       </section>
       <section id="content-area"></section>
@@ -193,7 +194,7 @@
       </div>
     </div>
 
-    <!-- MD Popup (BALANCE)-->
+    <!-- MD Popup -->
     <div id="service-popup-md" class="custom-vertical-modal">
       <div class="modal-content">
         <span id="service-popup-close-md" class="close-btn">✖</span>
@@ -513,7 +514,7 @@
       </div>
     </div>
 
-    <!-- Customer Relationship Management -->
+    <!-- Leadership Skills -->
     <div id="service-popup-leadskills" class="custom-vertical-modal">
       <div class="modal-content">
         <span id="service-popup-close-leadskills" class="close-btn">✖</span>
@@ -715,8 +716,8 @@
 
     <footer class="footer">
       <div class="social-footer">
-        <div class="social-heading">Social Media:</div>
-        <hr class="social-divider">
+        <div class="social-heading">Social Media :</div><br>
+        <hr class="social-divider"><br>
         <div class="social-icons">
           <a href="https://in.linkedin.com/company/sigma-training-management-consultants" target="_blank">
             <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
@@ -752,24 +753,30 @@
           </a>
         </div>
       </div>
-      <hr>
-      <p class="copyright">© 2025 Sigma Training & Management Consultants. All rights reserved.</p>
+
+      <div><br>
+        <hr><br>
+        <p class="copyright">© 2025 Sigma Training & Management Consultants. All rights reserved.</p>
+      </div>
     </footer>
 
-    <div id="custom-modal" class="custom-vertical-modal">
-      <div class="modal-content" id="modal-content">
+    <div id="custom-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+      <div style="background:#fff; color:#222; padding:32px 24px; border-radius:10px; max-width:90vw; max-height:90vh; text-align:center; font-size:1.2em; position:relative;">
+        <span id="modal-message"></span>
+        <br><br>
       </div>
     </div>
 
-    <div id="brochure-modal" class="custom-vertical-modal">
-      <div class="modal-content">
-        <span id="close-btn" class="close-btn">✖</span>
-        <canvas id="pdf-canvas"></canvas>
-        <div id="pdf-controls">
-          <button id="prev-page">Previous</button>
-          <span id="page-num"></span> / <span id="page-count"></span>
-          <button id="next-page">Next</button>
-        </div>
+    <div id="brochure-modal" class="custom-vertical-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+      <div style="background:white; width:85%; max-width:95vw; height:auto; max-height:95vh; position:relative; border-radius:10px; overflow-y:auto; -webkit-overflow-scrolling:touch;">
+        <span id="close-btn" class="close-btn" style="position:absolute; top:10px; right:20px; font-size:1.5em; cursor:pointer; z-index:10000;">✖</span>
+        <div id="pdf-controls" style="position:sticky; top:0; background:white; padding:10px; text-align:center; z-index:9999;">
+        <canvas id="pdf-canvas" style="width:100%; height:auto;"></canvas>
+          <div id="pdf-controls" style="position:sticky; bottom:0; background:white; padding:10px; text-align:center; z-index:9999;">
+            <button id="prev-page" style="padding:8px 16px; font-size:1em; background-color:#4F61C5; color:white; border:none; border-radius:5px; margin-right:10px;">Previous</button>
+            <span id="page-num"></span> / <span id="page-count"></span>
+            <button id="next-page" style="padding:8px 16px; font-size:1em; background-color:#4F61C5; color:white; border:none; border-radius:5px; margin-left:10px;">Next</button>
+          </div>
       </div>
     </div>
 
