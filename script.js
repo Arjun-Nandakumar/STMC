@@ -108,7 +108,7 @@ function loadContent(page) {
               ✅ Message sent successfully!
             </div>
             <div id="error-message" style="display:none; color:red; margin-top:15px; font-weight:bold; text-align:center;">
-              ❌ Failed to send message. Please try again or contact us at <a href="mailto:stmconsult@yahoo.com">stmconsult@yahoo.com</a>.
+              ❌ Failed to send message. Please try again later or contact us using one of the contact methods below:
             </div>
             <div class="contact-divider">
               <p><b>OR you can reach out to us at:</b></p>
@@ -161,13 +161,13 @@ function loadContent(page) {
 
         // Send both emails concurrently with a timeout
         const emailPromise = Promise.all([
-          emailjs.send("service_y78w5j2", "template_gs9b7k8", { // Auto-reply to user
+          emailjs.send("service_w0c9cag", "template_dtrl8bk", { // Admin notification *CHANGE SERVIE
             name,
             email,
             mobile,
             message
           }),
-          emailjs.send("service_r0ao5d9", "template_ocygj7k", { // Admin notification
+          emailjs.send("service_y78w5j2", "template_gs9b7k8", { // Autoreply
             name,
             email,
             mobile,
