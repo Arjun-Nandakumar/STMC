@@ -682,6 +682,20 @@ TO BE ADDED IN PRODUCTION */
   align-items: center;
 }
 
+/* Modal Buttons Container */
+.custom-vertical-modal .modal-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 3px;
+  margin-top: 20px;
+}
+
+.custom-vertical-modal .modal-buttons button {
+  width: 150px; /* Fixed width for each button on desktop */
+  box-sizing: border-box;
+}
+
 .custom-vertical-modal .modal-content {
   background-color: #000000;
   color: #FFFFFF;
@@ -709,7 +723,7 @@ TO BE ADDED IN PRODUCTION */
   color: #222;
   padding: 32px 24px;
   border-radius: 10px;
-  max-width: 70vw;
+  max-width: 50vw;
   max-height: 90vh;
   text-align: center;
   font-size: 1.2em;
@@ -1073,6 +1087,17 @@ TO BE ADDED IN PRODUCTION */
     background-color: #1a1a1a;
     background-attachment: fixed;
     padding: 50px 0;
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 768px) {
+    .custom-vertical-modal .modal-buttons {
+      flex-wrap: wrap; /* Allow buttons to wrap into two rows */
+    }
+
+    .custom-vertical-modal .modal-buttons button {
+      width: 120px; /* Fixed width for each button on mobile */
+    }
   }
 
   .form-group label {

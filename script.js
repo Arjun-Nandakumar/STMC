@@ -909,10 +909,12 @@ function setupWhatsAppEnquiring() {
     modalMessage.innerHTML = `
       <span id="modal-close-btn" class="close-btn">✖</span>
       <div class="modal-content-text">${message}</div>
-      <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Call</button>
-      <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Book (Calendly)</button>
-      <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Text (WhatsApp)</button>
-      <button id="email-btn" style="padding:8px 24px; border:none; background:gray; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
+      <div class="modal-buttons">
+        <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Call</button>
+        <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Book (Calendly)</button>
+        <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Text (WhatsApp)</button>
+        <button id="email-btn" style="padding:8px 24px; border:none; background:gray; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
+      </div>
     `;
   }
 
