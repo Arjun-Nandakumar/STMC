@@ -761,14 +761,16 @@
       </div>
     </div>
 
-    <div id="brochure-modal" style="display: none;">
+    <div id="brochure-modal">
       <div>
+        <span id="close-btn">✖</span>
         <canvas id="pdf-canvas"></canvas>
-        <div id="brochure-error"></div>
-        <button id="prev-page">Previous</button>
-        <button id="next-page">Next</button>
-        <span id="page-num"></span> of <span id="page-count"></span>
-        <button id="close-btn">Close</button>
+        <div id="brochure-error" style="display: none; color: red; text-align: center;"></div>
+        <div id="pdf-controls">
+          <button id="prev-page">Previous</button>
+          <span id="page-num"></span> of <span id="page-count"></span>
+          <button id="next-page">Next</button>
+        </div>
       </div>
     </div>
 

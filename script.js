@@ -55,8 +55,9 @@ function renderPage(num) {
   pdfDoc.getPage(num).then(page => {
     const viewport = page.getViewport({ scale: 1 });
     const qualityScale = 2;
-    const containerWidth = canvas.parentElement.clientWidth;
-    const containerHeight = canvas.parentElement.clientHeight;
+    const container = canvas.parentElement;
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
     const scale = Math.min(containerWidth / viewport.width, containerHeight / viewport.height) * qualityScale;
     const scaledViewport = page.getViewport({ scale });
 
@@ -86,6 +87,8 @@ function renderPage(num) {
       console.error("Error rendering PDF page:", error);
       pageRendering = false;
       pageNumDisplay.textContent = "Error";
+      document.getElementById("brochure-error").textContent = `Failed to render page: ${error.message}`;
+      document.getElementById("brochure-error").style.display = "block";
     });
 
     prevPageBtn.disabled = num <= 1;
@@ -94,6 +97,8 @@ function renderPage(num) {
     console.error("Error loading PDF page:", error);
     pageRendering = false;
     pageNumDisplay.textContent = "Error";
+    document.getElementById("brochure-error").textContent = `Failed to load page: ${error.message}`;
+    document.getElementById("brochure-error").style.display = "block";
   });
 }
 
@@ -120,12 +125,9 @@ function openBrochureModal() {
   const errorDisplay = document.getElementById("brochure-error");
 
   if (modal && canvas && pageNumDisplay && pageCountDisplay) {
-    // Clear any previous error message
-    if (errorDisplay) {
-      errorDisplay.style.display = "none";
-      errorDisplay.textContent = "";
-    }
-    const pdfUrl = "brochure.pdf";
+    errorDisplay.style.display = "none";
+    errorDisplay.textContent = "";
+    const pdfUrl = "brochure.pdf"; // Verify this path
     pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
       pdfDoc = pdf;
       pageCountDisplay.textContent = pdfDoc.numPages;
@@ -134,19 +136,16 @@ function openBrochureModal() {
       modal.style.display = "flex";
     }).catch(error => {
       console.error("Error loading PDF:", error);
-      if (errorDisplay) {
-        errorDisplay.textContent = "Failed to load the brochure. Please try again later.";
-        errorDisplay.style.display = "block";
-      } else {
-        alert("Failed to load the brochure. Please try again later.");
-      }
-      modal.style.display = "none";
+      errorDisplay.textContent = `Failed to load the brochure: ${error.message}. Please try again later.`;
+      errorDisplay.style.display = "block";
+      modal.style.display = "flex"; // Keep modal open to show error
     });
   } else {
     console.error("Brochure modal or required elements not found");
     if (errorDisplay) {
       errorDisplay.textContent = "Brochure modal elements are missing.";
       errorDisplay.style.display = "block";
+      modal.style.display = "flex";
     } else {
       alert("Brochure modal elements are missing.");
     }
@@ -738,12 +737,6 @@ function loadContent(page) {
   }
 }
 
-// Setup brochure button listener
-const brochureBtn = document.querySelector(".brochure");
-if (brochureBtn) {
-  brochureBtn.addEventListener("click", openBrochureModal);
-}
-
 /* TO BE ADDED IN PRODUCTION
 
 function renderReviewsPage(pageNum) {
@@ -925,12 +918,13 @@ function setupWhatsAppEnquiring() {
 
   modal.style.display = "flex";
 
-  const closeBtn = document.getElementById("modal-close-btn");
+  const closeBtn = document.getElementById("close-btn");
   if (closeBtn) {
     closeBtn.onclick = () => {
-      modal.style.display = "none";
-      // Clear modal content on close to prevent residual content
-      modalMessage.innerHTML = '';
+      const modal = document.getElementById("brochure-modal");
+      if (modal) {
+        modal.style.display = "none";
+      }
     };
   }
 
