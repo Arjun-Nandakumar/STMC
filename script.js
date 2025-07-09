@@ -112,7 +112,6 @@ function queueRenderPage(num) {
   }
 }
 
-// Open brochure modal with PDF.js
 function openBrochureModal() {
   const modal = document.getElementById("brochure-modal");
   const canvas = document.getElementById("pdf-canvas");
@@ -199,7 +198,19 @@ function loadContent(page) {
             STMC specializes in identifying and supplying the necessary tools for industries facing challenges, deploying quality improvement techniques, and guiding organizations to achieve certification from third-party certifying bodies. Our approach to corporate management is systematic and responsible, aiming to prevent accidents caused by human error through improved training and administration of the workforce, thereby ensuring the highest standards in Quality, Health, Safety, and Environment (QHSE).<br><br>
             As a data-driven organization, STMC is committed to offering viable solutions to make organizations more profitable and efficient, which is essential for future success. We specialize in providing sustainable solutions to empower and educate the workforce about the significance of QHSE and standards, underpinning our commitment to excellence and innovation.<br><br>
           </p>
-        ` +
+          <div style="text-align: center; margin-top: 20px;">
+            <button class="brochure">View Brochure</button>
+          </div>
+        </div>
+      `;
+
+      // Setup brochure button listener
+      const brochureBtn = document.querySelector(".brochure");
+      if (brochureBtn) {
+        brochureBtn.addEventListener("click", openBrochureModal);
+      }
+      break;
+
         /* TO BE ADDED WHEN READY TO MOVE TO PRODUCTION
         `
           <h4>What our customers say about us :</h4>
@@ -213,15 +224,8 @@ function loadContent(page) {
               <span class="next-arrow" id="next-review"></span>
             </div>
           </div>
-        ` +
-        */
-        `
-          <div style="text-align: center; margin-top: 20px;">
-            <button class="brochure">View Brochure</button>
-          </div>
-        </div>
-      `;
-        break;
+        `;
+
       /* TO BE ADDED IN PRODUCTION
 
       // Render initial reviews page
