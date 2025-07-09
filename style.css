@@ -687,8 +687,8 @@ TO BE ADDED IN PRODUCTION */
   color: #FFFFFF;
   margin: auto;
   padding: 20px;
-  width: 80%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 900px;
   height: auto;
   max-height: 79vh;
   overflow-y: auto;
