@@ -221,7 +221,7 @@ function loadContent(page) {
           </div>
         </div>
       `;
-
+        break;
       /* TO BE ADDED IN PRODUCTION
 
       // Render initial reviews page
@@ -243,10 +243,8 @@ function loadContent(page) {
           }
         });
       }
-
-      TO BE ADDED IN PRODUCTION */
-      
       break;
+      TO BE ADDED IN PRODUCTION */
 
     case "services":
       content.innerHTML = `
