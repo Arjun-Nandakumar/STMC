@@ -1333,7 +1333,7 @@ TO BE ADDED IN PRODUCTION */
   }
 
   #pdf-canvas {
-    width: 100%;
+    width: 80%;
     height: 100%;
     max-height: calc(85vh - 40px);
   }
