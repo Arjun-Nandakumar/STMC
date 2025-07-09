@@ -862,7 +862,7 @@ function setupWhatsAppEnquiring() {
       };
 
       if (isAllowed) {
-        const msg = `Service Name: <b>${serviceName}</b><br><br>Choose how you would like to contact:`;
+        const msg = `Service Name: <b>${serviceName}</b><br><br>Choose how you would like to contact:<br><br>`;
         showCustomModal(msg, confirmAction);
       } else {
         let hoursTo6am =
@@ -900,14 +900,14 @@ function setupWhatsAppEnquiring() {
   // Set the modal content based on lightsOut status
   if (lightsOut) {
     modalMessage.innerHTML = `
-      <span id="modal-close-btn">✖</span>
+      <span id="modal-close-btn" class="close-btn">✖</span>
       <div class="modal-content-text">
         ${message}
       </div>
     `;
   } else {
     modalMessage.innerHTML = `
-      <span id="modal-close-btn">✖</span>
+      <span id="modal-close-btn" class="close-btn">✖</span>
       <div class="modal-content-text">${message}</div>
       <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Call</button>
       <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer; margin-right: 10px;">Book (Calendly)</button>
@@ -918,10 +918,10 @@ function setupWhatsAppEnquiring() {
 
   modal.style.display = "flex";
 
-  const closeBtn = document.getElementById("close-btn");
+  const closeBtn = document.getElementById("modal-close-btn");
   if (closeBtn) {
     closeBtn.onclick = () => {
-      const modal = document.getElementById("brochure-modal");
+      const modal = document.getElementById("custom-modal");
       if (modal) {
         modal.style.display = "none";
       }
