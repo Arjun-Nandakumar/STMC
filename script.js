@@ -614,7 +614,7 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Visual and Dimensional Inspection</div>
             <div class="service-body">
-              <p>We ensure that clients receive defect-free material. <a href="#" class="read-more" data-modal="service-popup-diminsp">Read More...</a></p>
+              <p>We ensure that clients receive defect-free material. <a href="#" class="read-more" data-modal="service-popup-visinsp">Read More...</a></p>
               <span class="custom-br"></span>
               <a href="#" class="ENQUIRE" data-service="Dimensional Inspection">ENQUIRE</a>
             </div>
