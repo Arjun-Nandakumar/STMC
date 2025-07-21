@@ -17,5 +17,8 @@
     "express": "^5.1.0",
     "nodemailer": "^7.0.4"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^4.1.11"
+  }
 }

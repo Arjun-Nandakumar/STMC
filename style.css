@@ -704,7 +704,7 @@ TO BE ADDED IN PRODUCTION */
   width: 100%;
   max-width: 900px;
   height: auto;
-  max-height: 79vh;
+  max-height: 87vh; /* Height of Title & Description block after clicking Read More */
   overflow-y: auto;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
