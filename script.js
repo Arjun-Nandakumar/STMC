@@ -608,7 +608,7 @@ function loadContent(page) {
             <div class="service-body">
               <p>We carry out third party inspection on behalf of customers. <a href="#" class="read-more" data-modal="service-popup-tpi">Read More...</a></p>
               <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Third Party Inspection">ENQUIRE</a>
+              <a href="#" class="ENQUIRE" data-service="Third Party Inspection & Testing">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
@@ -616,7 +616,7 @@ function loadContent(page) {
             <div class="service-body">
               <p>We ensure that clients receive defect-free material. <a href="#" class="read-more" data-modal="service-popup-visinsp">Read More...</a></p>
               <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Dimensional Inspection">ENQUIRE</a>
+              <a href="#" class="ENQUIRE" data-service="Visual and Dimensional Inspection">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
@@ -624,7 +624,7 @@ function loadContent(page) {
             <div class="service-body">
               <p>We conduct all types of non-destructive testing. <a href="#" class="read-more" data-modal="service-popup-ndt">Read More...</a></p>
               <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Dye Penetrant Testing">ENQUIRE</a>
+              <a href="#" class="ENQUIRE" data-service="Non-Destructive Testing">ENQUIRE</a>
             </div>
           </div>
         </div>
