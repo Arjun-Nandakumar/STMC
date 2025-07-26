@@ -1,6 +1,4 @@
-/* Reset and Global Styles
-   - Resets default margins/padding and sets box-sizing
-   - Defines global font and height for body/html */
+/* Reset and Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -12,9 +10,19 @@ body, html {
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Background and Layout
-   - Styles the main background overlay with a fixed image and gradient for mobile
-   - Ensures content fits within the viewport */
+a {
+  color: #8fc0ff;  /* Your link color */
+  text-decoration: none;  /* Optional: to remove underline */
+  transition: text-shadow 0.3s ease-in-out;  /* Smooth transition for the glow effect */
+}
+
+a:hover {
+  color: #aed1ff;  /* Keep the same text color on hover */
+  text-shadow: 0 0 1px #8fc0ff, 0 0 2px #8fc0ff, 0 0 3px #8fc0ff;  /* Glowing effect */
+}
+
+
+/* Background and Layout */
 .background-overlay {
   background: url('background.png') no-repeat center center/cover;
   background-color: #1a1a1a;
@@ -26,9 +34,7 @@ body, html {
   background-attachment: fixed;
 }
 
-/* Header Styles
-   - Styles the header, company title, and logo container
-   - Centers content and applies text shadow for visibility */
+/* Header Styles */
 header {
   display: flex;
   flex-direction: column;
@@ -64,9 +70,7 @@ header {
   text-align: center;
 }
 
-/* Navigation Styles
-   - Styles the navigation bar and dropdown menus
-   - Uses grid layout for tabs and handles hover effects */
+/* Navigation Styles */
 nav {
   width: 100%;
   max-width: 75%;
@@ -147,9 +151,7 @@ nav {
   display: block;
 }
 
-/* Main Content Styles
-   - Styles the main content area and sections
-   - Applies semi-transparent backgrounds for readability */
+/* Main Content Styles */
 main {
   flex: 1 0 auto;
   margin-bottom: 60px;
@@ -181,9 +183,7 @@ main section {
   text-align: center;
 }
 
-/* About Section
-   - Styles for the About Us content and reviews
-   - Justifies paragraph text for a professional appearance */
+/* About Section */
 .about-content {
   text-align: left;
   font-family: Verdana, Geneva, sans-serif;
@@ -195,7 +195,7 @@ main section {
 }
 
 .about-content p {
-  text-align: justify; /* Justifies paragraph text for a professional look */
+  text-align: justify;
 }
 
 .about-content h3 {
@@ -204,16 +204,13 @@ main section {
   color: #ffffff;
 }
 
-/* TO BE ADDED IN PRODUCTION
-
 .reviews-section {
   margin-top: 20px;
   padding: 10px;
-  background: rgba(0, 0, 0, 0.33);
   border-radius: 5px;
   opacity: 0;
   transform: translateX(100px) rotateY(15deg);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.3s ease;
 }
 
 .reviews-section.flipInFromRight {
@@ -225,25 +222,93 @@ main section {
   margin-bottom: 15px;
   padding: 10px;
   border-left: 3px solid #4F61C5;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.review-content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
 .review-author {
-  font-weight: 600;
-  font-size: 1.1em;
-  color: #fff;
-  margin-bottom: 5px;
+  font-weight: normal;
+  font-size: 1em;
+  color: #bbb;
+  margin-top: 5px;
+  margin-left: 20px;
+  font-style: italic;
+  font-family: 'Georgia', serif;
+  text-align: left;
+}
+
+.review-author::before {
+  content: "- ";
+  color: #bbb;
 }
 
 .review-rating {
   font-size: 0.9em;
   color: #FFD700;
-  margin-bottom: 5px;
+  margin-bottom: 0;
+  line-height: 1.6;
+  flex-shrink: 0;
 }
 
 .review-text {
   font-size: 0.9em;
   color: #ddd;
-  line-height: 1.4;
+  line-height: 1.6;
+  margin-bottom: 0;
+  font-style: italic;
+  font-family: 'Georgia', serif;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  flex: 1;
+}
+
+.review-pipe {
+  font-size: 0.9em;
+  color: #ddd;
+  margin-left: 10px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.review-course {
+  font-size: 0.9em;
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.review-divider {
+  width: 1px;
+  height: auto;
+  min-height: 100px;
+  background-color: #ffffff;
+  margin: 0 15px;
+  border: none;
+}
+
+.course-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.course-text {
+  background-color: #40c4ff;
+  color: #000000;
+  padding: 0px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: font-weight 0.2s;
+}
+
+.course-link:hover .course-text {
+  font-weight: none;
 }
 
 .no-reviews {
@@ -253,27 +318,48 @@ main section {
 }
 
 .review-verification {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  box-sizing: border-box;
+  color: aqua;
+  font-weight: normal; /* Fixed invalid value */
+  display: block; /* Makes the link full-width */
+  text-align: center; /* Centers the text */
+  text-decoration: none; /* Optional: Removes default underline */
 }
 
-.google-reviews-link {
-  display: inline-block;
+.google-review-button {
+  display: inline-flex;
+  align-items: center;
   padding: 10px 20px;
-  background-color: #4285f4;
-  color: #FFFFFF;
+  background-color: #1565c0;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ea4335, #4285f4, #34a853, #fbbc05) 1;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 500;
   text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
-.google-reviews-link:hover {
-  background-color: #357ae8;
-  color: #E6E6E6;
+.google-review-button::before {
+  content: "G";
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  margin-right: 8px;
+  background: linear-gradient(45deg, #ea4335, #4285f4, #34a853, #fbbc05);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.google-review-button:hover {
+  background-color: #0d47a1;
+  box-shadow: 0 2px 6px rgba(43, 24, 88, 0.5), 0 0 8px rgba(43, 24, 88, 0.5);
+  border-image: linear-gradient(45deg, #fbbc05, #34a853, #4285f4, #ea4335) 1;
+}
+
 
 .review-pagination {
   display: flex;
@@ -289,8 +375,6 @@ main section {
   font-size: 1em;
   color: #87CEEB;
 }
-
-TO BE ADDED IN PRODUCTION */
 
 .prev-arrow, .next-arrow {
   width: 0;
@@ -326,12 +410,10 @@ TO BE ADDED IN PRODUCTION */
   border-color: transparent transparent transparent #5F9EA0;
 }
 
-/* Account Section
-   - Styles for login and registration forms
-   - Matches contact form styling for consistency */
+/* Account Section */
 .account-container {
   text-align: center;
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Verdana, sans-serif;
   font-size: 1.1em;
   line-height: 1.8;
   color: white;
@@ -362,7 +444,7 @@ TO BE ADDED IN PRODUCTION */
 
 .toggle-form a:hover {
   color: #99CCFF;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #login-message, #register-message {
@@ -372,8 +454,7 @@ TO BE ADDED IN PRODUCTION */
   color: #ffffff;
 }
 
-/* Service Blocks
-   - Styles for service grid and individual service blocks */
+/* Service Blocks */
 .service-blocks-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -398,11 +479,11 @@ TO BE ADDED IN PRODUCTION */
 
 .service-header {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(90deg, #282E3A 60%, #282E3A 100%);
+  background: linear-gradient(90deg, #282E3A 60%, #282E3A);
   color: #fff;
   padding: 12px;
   font-size: 1em;
-  font-weight: 700;
+  font-weight: bold;
   min-height: 60px;
   display: flex;
   align-items: center;
@@ -413,7 +494,7 @@ TO BE ADDED IN PRODUCTION */
 }
 
 .service-body {
-  padding: 12px;
+  padding: 10px;
   color: #fff;
   flex: 1;
   display: flex;
@@ -428,36 +509,38 @@ TO BE ADDED IN PRODUCTION */
   margin: 0 0 10px;
 }
 
-.service-body a.read-more {
+.service-body .read-more {
   color: #66B2FF;
   text-decoration: none;
 }
 
-.service-body a.read-more:hover {
+.service-body .read-more:hover {
   color: #99CCFF;
-  text-decoration: underline;
+  text-shadow: 0 0 1px rgb(193, 220, 255), 0 0 2px rgb(193, 220, 255), 0 0 3px rgb(193, 220, 255);  /* Glowing effect */
+  text-decoration: none;
 }
 
 .service-body a.ENQUIRE {
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   display: inline-block;
-  padding: 16px 16px;
+  padding: 16px 20px;
   background-color: rgb(79, 97, 197);
   border-radius: 5px;
   font-weight: bold;
 }
 
 .service-body a.ENQUIRE:hover {
-  color: #FFFFFF;
-  background-color: rgb(39, 48, 98);
+  color: #ffffff;
+  background-color: rgb(39, 40, 98);
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 2px #ffffff;  /* Glowing effect */
 }
 
 .service-body hr.short-divider {
   width: 100px;
   margin: 10px auto;
   border: 0;
-  border-top: 1px solid #FFFFFF;
+  border-top: 1px solid #ffffff;
 }
 
 .service-body .custom-br {
@@ -465,8 +548,7 @@ TO BE ADDED IN PRODUCTION */
   margin-bottom: 15px;
 }
 
-/* Contact Form
-   - Styles for contact form and its elements */
+/* Contact Form */
 .contact-block {
   border: 2px solid black;
   border-radius: 10px;
@@ -489,20 +571,20 @@ TO BE ADDED IN PRODUCTION */
 
 .contact-font {
   text-align: center;
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Verdana, sans-serif;
   font-size: 1.1em;
   line-height: 1.8;
-  color: white;
+  color: #ffffff;
   max-width: 100%;
   margin: 0 auto;
 }
 
 .contact-font p {
   text-align: left;
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 1.1em;
+  font-family: Verdana, sans-serif;
+  font-size: 1em;
   line-height: 1.8;
-  color: white;
+  color: #ffffff;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -520,8 +602,8 @@ TO BE ADDED IN PRODUCTION */
 .contact-divider {
   text-align: center;
   margin: 20px 0;
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 1.1em;
+  font-family: Verdana, sans-serif;
+  font-size: 1em;
   color: #ffffff;
 }
 
@@ -537,8 +619,8 @@ TO BE ADDED IN PRODUCTION */
 .form-group label {
   display: block;
   margin-bottom: 5px;
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 1.1em;
+  font-family: Verdana, sans-serif;
+  font-size: 1em;
   color: #ffffff;
   font-weight: bold;
 }
@@ -551,7 +633,7 @@ TO BE ADDED IN PRODUCTION */
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: sans-serif;
   font-size: 1em;
   line-height: 1.8;
 }
@@ -570,18 +652,18 @@ TO BE ADDED IN PRODUCTION */
 .form-group textarea:focus {
   outline: none;
   border-color: #66B2FF;
-  box-shadow: 0 0 5px rgba(102, 178, 255, 0.5);
+  box-shadow: 0 0 5px rgba(66, 178, 255, 0.5);
 }
 
 #contact-form button[type="submit"],
 #login-form button[type="submit"],
 #register-form button[type="submit"] {
-  background-color: #4F61C5;
+  background-color: #4d5ca7;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-size: 1em;
   font-weight: bold;
   cursor: pointer;
@@ -591,7 +673,9 @@ TO BE ADDED IN PRODUCTION */
 #contact-form button[type="submit"]:hover,
 #login-form button[type="submit"]:hover,
 #register-form button[type="submit"]:hover {
-  background-color: #283E7B;
+  background-color: #1c223f;
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;  /* Glowing effect */
+  
 }
 
 #loading-message {
@@ -616,29 +700,41 @@ TO BE ADDED IN PRODUCTION */
   text-align: center;
 }
 
-/* Brochure Button
-   - Styles for the brochure button in the About section */
+/* Brochure Button */
 .brochure-container {
   text-align: center;
   margin-top: 10px;
 }
 
 .brochure {
-  background-color: #4F61C5;
-  color: white;
+  background-color: #4d5ca7;
+  color: #ffffff;
   border: none;
   width: 200px;
-  border-radius: 5px;
+  border-radius: 4px;
   margin-bottom: 20px;
-  padding: 10px 10px;
+  padding: 10px 0;
   font-size: 1em;
   cursor: pointer;
 }
 
-/* Header Bar
-   - Styles for the logged-in header bar and logout button */
+.brochure:hover {
+  background-color: #1c223f;
+  color: #ffffff;
+  border: none;
+  width: 200px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  font-size: 1em;
+  cursor: pointer;
+  text-shadow: 0 0 1px #b0bdff, 0 0 2px #b0bdff, 0 0 3px #b0bdff;  /* Glowing effect */
+
+}
+
+/* Header Bar */
 #header-bar {
-  background: #0D0F14;
+  background: none;
   width: 100%;
   padding: 10px;
   display: flex;
@@ -649,29 +745,28 @@ TO BE ADDED IN PRODUCTION */
 }
 
 .logged-in-text {
-  color: white;
+  color: #ffffff;
   margin-right: 15px;
 }
 
 #logout-btn {
   padding: 6px 12px;
-  background: maroon;
-  color: white;
+  background-color: #800000;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #logout-btn:hover {
-  background: #800000;
+  background: #333333;
 }
 
-/* Modal Styles
-   - Styles for custom modal, brochure modal, and related buttons */
+/* Modal Styles */
 .custom-vertical-modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
@@ -682,29 +777,28 @@ TO BE ADDED IN PRODUCTION */
   align-items: center;
 }
 
-/* Modal Buttons Container */
 .custom-vertical-modal .modal-buttons {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 3px;
+  gap: 10px;
   margin-top: 20px;
 }
 
 .custom-vertical-modal .modal-buttons button {
-  width: 150px; /* Fixed width for each button on desktop */
+  width: 150px;
   box-sizing: border-box;
 }
 
 .custom-vertical-modal .modal-content {
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: auto;
   padding: 20px;
   width: 100%;
   max-width: 900px;
   height: auto;
-  max-height: 87vh; /* Height of Title & Description block after clicking Read More */
+  max-height: 87vh;
   overflow-y: auto;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -719,10 +813,10 @@ TO BE ADDED IN PRODUCTION */
 }
 
 #custom-modal > div {
-  background: #fff;
-  color: #222;
-  padding: 32px 24px;
-  border-radius: 10px;
+  background: #ffffff;
+  color: #333333;
+  padding: 20px;
+  border-radius: 4px;
   max-width: 50vw;
   max-height: 90vh;
   text-align: center;
@@ -735,8 +829,8 @@ TO BE ADDED IN PRODUCTION */
   top: 8px;
   right: 12px;
   cursor: pointer;
-  font-size: 1.2em;
-  color: #FFFFFF;
+  font-size: 1em;
+  color: #ffffff;
   background-color: rgba(0, 0, 0, 1);
   padding: 5px 10px;
 }
@@ -744,60 +838,60 @@ TO BE ADDED IN PRODUCTION */
 #call-btn {
   padding: 8px 24px;
   border: none;
-  background: #4F61C5;
-  color: #fff;
-  border-radius: 5px;
+  background: #4CAF50;
+  color: #ffffff;
+  border-radius: 4px;
   font-size: 1em;
   cursor: pointer;
   margin-right: 10px;
 }
 
 #call-btn:hover {
-  background: #3B4A9B;
+  background: #333333;
 }
 
 #calend-btn {
   padding: 8px 24px;
   border: none;
-  background: maroon;
-  color: #fff;
-  border-radius: 5px;
+  background: #333333;
+  color: #ffffff;
+  border-radius: 4px;
   font-size: 1em;
   cursor: pointer;
   margin-right: 10px;
 }
 
 #calend-btn:hover {
-  background: #800000;
+  background: #555555;
 }
 
 #whatsapp-btn {
   padding: 8px 24px;
   border: none;
-  background: #518A7E;
-  color: #fff;
-  border-radius: 5px;
+  background: #25A5D4;
+  color: #ffffff;
+  border-radius: 4px;
   font-size: 1em;
   cursor: pointer;
   margin-right: 10px;
 }
 
 #whatsapp-btn:hover {
-  background: #3D6A5E;
+  background: #333333;
 }
 
 #email-btn {
   padding: 8px 24px;
   border: none;
-  background: gray;
-  color: #fff;
-  border-radius: 5px;
+  background: #555555;
+  color: #ffffff;
+  border-radius: 4px;
   font-size: 1em;
   cursor: pointer;
 }
 
 #email-btn:hover {
-  background: #4D4D4D;
+  background: #333333;
 }
 
 #calling-popup {
@@ -805,8 +899,8 @@ TO BE ADDED IN PRODUCTION */
   top: 20px;
   right: 20px;
   padding: 10px 20px;
-  background: #0D0F14;
-  color: white;
+  background: #333333;
+  color: #ffffff;
   border-radius: 5px;
   z-index: 1000;
   display: flex;
@@ -816,14 +910,14 @@ TO BE ADDED IN PRODUCTION */
 
 #calling-popup-close-btn {
   cursor: pointer;
-  font-size: 1.2em;
-  color: white;
+  font-size: 1em;
+  color: #ffffff;
 }
 
 #brochure-modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
@@ -834,13 +928,13 @@ TO BE ADDED IN PRODUCTION */
 }
 
 #brochure-modal > div {
-  background: white;
+  background: #ffffff;
   width: 80%;
   max-width: 95vw;
   height: 90%;
   max-height: 95vh;
   position: relative;
-  border-radius: 10px;
+  border-radius: 4px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -855,20 +949,20 @@ TO BE ADDED IN PRODUCTION */
 #pdf-controls {
   position: sticky;
   bottom: 0;
-  background: white;
+  background: #ffffff;
   padding: 5px;
   text-align: center;
-  z-index: 9999;
+  z-index: 1000;
 }
 
 #pdf-controls button {
-  padding: 8px 16px;
-  font-size: 1em;
-  background-color: #4F61C5;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 10px 16px;
   margin: 0 10px;
+  font-size: 1em;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
 }
 
 #close-btn {
@@ -877,11 +971,11 @@ TO BE ADDED IN PRODUCTION */
   right: 15px;
   font-size: 1.5em;
   cursor: pointer;
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 5px 10px;
-  border-radius: 5px;
-  z-index: 10001;
+  border-radius: 4px;
+  z-index: 1000;
   font-family: Arial, sans-serif;
 }
 
@@ -891,20 +985,19 @@ TO BE ADDED IN PRODUCTION */
   right: 15px;
   font-size: 1.5em;
   cursor: pointer;
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 5px 10px;
-  border-radius: 5px;
-  z-index: 10000;
+  border-radius: 4px;
+  z-index: 1000;
   font-family: Arial, sans-serif;
 }
 
-/* Footer Styles
-   - Styles for the footer and social media icons */
+/* Footer Styles */
 .footer {
   background: rgba(0, 0, 0, 0.6);
-  color: white;
-  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
   text-align: center;
   padding: 20px 0;
   width: 100%;
@@ -926,25 +1019,25 @@ TO BE ADDED IN PRODUCTION */
 
 .social-heading {
   font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 2px;
+  font-family: 'Arial', sans-serif;
   font-weight: bold;
-  font-family: 'Inter', sans-serif;
-  color: white;
-  margin-bottom: 8px;
 }
 
 .social-divider {
   width: 100px;
-  margin: 8px auto;
+  margin: 10px auto;
   border: 0;
-  border-top: 1px solid #FFFFFF;
+  border-top: 1px solid #ffffff;
 }
 
 .social-icons {
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-  gap: 30px;
-  padding: 10px 20px;
+  gap: 20px;
+  padding: 0 20px;
   width: 100%;
 }
 
@@ -953,22 +1046,23 @@ TO BE ADDED IN PRODUCTION */
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 200;
-  font-family: 'Inter', sans-serif;
-  transition: color 0.3s ease;
+  font-weight: lighter;
+  font-family: 'Arial', sans-serif;
+  transition: color 0.3s ease-in-out;
 }
 
 .social-icons img {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: auto;
   margin-bottom: 4px;
 }
 
 .social-icons a:hover {
-  color: #66B2FF;
+  color: #ffffff;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff, 0 0 3px #ffffff;  /* Glowing effect */
 }
 
 .social-icons a span {
@@ -980,13 +1074,12 @@ TO BE ADDED IN PRODUCTION */
   padding-top: 10px;
 }
 
-/* Animations
-   - Defines glow animation for calling popup and spin for loading */
+/* Animations */
 .loader {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid #4F61C5;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #fff;
   border-top: 3px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -999,45 +1092,45 @@ TO BE ADDED IN PRODUCTION */
   100% { transform: rotate(360deg); }
 }
 
-.glow-popup {
+.glow-animate {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #283E7B;
-  color: #fff;
+  background-color: #333333;
   padding: 20px 40px;
-  border-radius: 12px;
-  font-size: 1.2em;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: bold;
+  color: #ffffff;
   box-shadow: 0 0 15px rgba(40, 62, 123, 0.8);
-  z-index: 9999;
+  z-index: 1000;
   text-align: center;
   animation: glow 1.2s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
   0% {
-    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   }
   100% {
-    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+    box-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff;
   }
 }
 
 @-webkit-keyframes glow {
   0% {
-    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   }
   100% {
-    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+    box-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff;
   }
 }
 
 @keyframes flipInFromRight {
   from {
     opacity: 0;
-    transform: translateX(100px) rotateY(15deg);
+    transform: translateX(25px) rotateY(0deg);
   }
   to {
     opacity: 1;
@@ -1045,59 +1138,41 @@ TO BE ADDED IN PRODUCTION */
   }
 }
 
-/* Media Queries
-   - Responsive adjustments for different screen sizes */
+/* Responsive Adjustments */
 @media (max-width: 1200px) {
   .service-blocks-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 800px) {
+@media screen (max-width: 800px) {
   .service-blocks-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 769px) {
-  #brochure-modal > div {
-    background: white;
-    width: 100%;
-    max-width: 95vw;
-    height: 90%;
-    max-height: 95vh;
-    position: relative;
-    border-radius: 10px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  #pdf-canvas {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
+@media screen (max-width: 768px) {
   .background-overlay {
     background: 
       url('background-mobile.png') no-repeat center top/100% auto,
       linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%);
-    background-color: #1a1a1a;
+    background-color: #333333;
     background-attachment: fixed;
     padding: 50px 0;
   }
 
-  /* Mobile Layout */
-  @media (max-width: 768px) {
-    .custom-vertical-modal .modal-buttons {
-      flex-wrap: wrap; /* Allow buttons to wrap into two rows */
-    }
+  .custom-vertical-modal .modal-buttons {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-    .custom-vertical-modal .modal-buttons button {
-      width: 120px; /* Fixed width for each button on mobile */
-    }
+  .custom-vertical-modal .modal-buttons button {
+    width: 120px;
+    margin-bottom: 2px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
   }
 
   .form-group label {
@@ -1106,41 +1181,69 @@ TO BE ADDED IN PRODUCTION */
 
   .form-group input,
   .form-group textarea {
-    font-size: 0.9em;
-    padding: 8px;
+    font-size: 14px;
+    padding: 10px;
   }
 
   #contact-form button[type="submit"],
   #login-form button[type="submit"],
   #register-form button[type="submit"] {
     padding: 8px 16px;
-    font-size: 0.9em;
+    font-size: 10px;
   }
 
-  .contact-divider {
-    font-size: 0.9em;
+  #contact-form .contact-divider {
+    font-size: 14px;
   }
 
   .modal-content ul {
     padding-left: 0;
-    list-style-position: inside;
-    margin: 0 0 1em 0;
+    list-style: none;
+    margin: 0 0 1em;
   }
-
-  /* TO BE ADDED IN PRODUCTION
 
   .reviews-section {
     padding: 8px;
   }
 
   .review-item {
-    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
-  .review-verification {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+  .review-content {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .review-divider {
+    width: 100%;
+    height: 1px;
+    margin: 10px 0;
+  }
+
+  .review-pipe {
+    margin-left: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .review-rating {
+    margin-bottom: 5px;
+  }
+
+  .review-text {
+    margin-bottom: 0;
+  }
+
+  .google-review-button {
+    width: 100%;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 12px;
   }
 
   .review-author {
@@ -1149,22 +1252,22 @@ TO BE ADDED IN PRODUCTION */
 
   .review-text {
     font-size: 0.85em;
+    margin-bottom: 8px;
   }
-
-*/
 
   .company-title {
     font-size: 28px;
-    font-weight: 600;
+    font-weight: bold;
     color: #ffffff;
-    margin: -50px 0 0 0;
-    padding-top: 0px;
+    margin: 0;
+    padding-top: 0;
     position: relative;
     white-space: nowrap;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   }
 
   .header-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1173,9 +1276,8 @@ TO BE ADDED IN PRODUCTION */
   }
 
   .header-container img {
-    max-height: 95px;
+    height: 95px;
     width: auto;
-    height: auto;
   }
 
   nav {
@@ -1187,12 +1289,12 @@ TO BE ADDED IN PRODUCTION */
 
   .nav-tabs {
     display: flex;
-    flex-wrap: nowrap;
     justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 0;
     margin: 0;
-    list-style-type: none;
+    list-style: none;
   }
 
   .nav-tabs li {
@@ -1205,17 +1307,17 @@ TO BE ADDED IN PRODUCTION */
   }
 
   .nav-tabs li a {
-    padding: 8px 0;
-    font-size: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
     border-radius: 2px;
-    border: 0.1px solid black;
+    border: 1px solid #333;
     width: 100%;
     margin: 0;
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
     text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
-    transition: background 0.3s;
+    transition: background-color 0.3s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1243,19 +1345,19 @@ TO BE ADDED IN PRODUCTION */
 
   .nav-tabs .dropdown-content {
     min-width: 100%;
-    width: 100%;
-    top: 100%;
+    width: auto;
+    top: auto;
     left: 0;
-    background-color: rgba(20, 27, 46, 0.95);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+    background-color: rgba(20, 20, 20, 0.95);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
     z-index: 1;
     border-radius: 5px;
     display: none;
     position: absolute;
   }
 
-  .nav-tabs .dropdown-content a {
-    color: #fff;
+  .dropdown-content a {
+    color: #ffffff;
     padding: 12px 2px;
     text-decoration: none;
     display: block;
@@ -1263,13 +1365,13 @@ TO BE ADDED IN PRODUCTION */
     text-align: center;
   }
 
-  .nav-tabs .dropdown:hover .dropdown-content {
+  .dropdown:hover .dropdown-content {
     display: block;
   }
 
-  .nav-tabs .dropdown-content a:hover {
-    background-color: rgba(81, 106, 154, 1);
-    color: #fff;
+  .dropdown-content a:hover {
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
   }
 
   .service-body .custom-br {
@@ -1287,21 +1389,18 @@ TO BE ADDED IN PRODUCTION */
     margin-top: 20px;
   }
 
-  .footer.fixed {
-    position: relative;
-  }
-
   .social-footer {
     padding: 10px 0;
     width: 100%;
   }
 
   .social-icons {
-    justify-content: space-between;
+    justify-content: space-around;
+    display: flex;
     flex-wrap: nowrap;
     gap: 0;
     padding: 5px 0;
-    width: 100%;
+    width: auto;
   }
 
   .social-icons a {
@@ -1318,85 +1417,68 @@ TO BE ADDED IN PRODUCTION */
   }
 
   .social-icons img {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: auto;
     margin-bottom: 0;
   }
 
   .social-heading {
     font-size: 16px;
+    margin-bottom: 2px;
   }
 
   .social-divider {
     width: 80px;
+    margin: 10px auto;
   }
 
   .motto {
-    order: 1;
+    order: 0;
     width: 100%;
     font-size: 24px;
+    margin-bottom: 10px;
   }
 
-  .custom-vertical-modal {
+  .custom-modal {
     order: 2;
     position: fixed;
+    z-index: 1;
   }
 
   .footer {
     order: 3;
   }
 
-  .contact-font p {
-    font-size: 0.9em;
+  .contact-font {
+    font-size: 14px;
   }
 
-  #brochure-modal > div {
-    width: 65%;
-    max-width: 75vw;
-    height: 100%;
-    max-height: 95vh;
-  }
+  #bro
 
-  #pdf-canvas {
-    width: 80%;
-    height: 100%;
-    max-height: calc(85vh - 40px);
-  }
 
-  #pdf-controls {
-    padding: 2px;
-  }
 
-  #pdf-controls button {
-    padding: 6px 12px;
-    font-size: 0.9em;
+  @media screen (max-height: 700px) {
+    main {
+      margin-bottom: 20px;
+    }
+  
+    #content-area {
+      min-height: auto;
+      height: auto;
+    }
   }
-}
-
-@media screen and (max-height: 700px) {
-  main {
-    margin-bottom: 80px;
+  
+  @media screen (max-width: 480px) {
+    .social-icons {
+      gap: 0;
+    }
+  
+    .social-footer {
+      padding-bottom: 10px;
+    }
+  
+    .service-blocks-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
   }
-
-  .footer {
-    position: relative;
-  }
-
-  #content-area {
-    min-height: auto;
-  }
-}
-
-@media (max-width: 500px) {
-  .social-icons {
-    gap: 0;
-  }
-
-  .social-footer {
-    padding: 10px 0;
-  }
-
-  .service-blocks-grid {
-    grid-template-columns: 1fr;
-  }
-}

@@ -7,40 +7,17 @@ let pdfDoc = null,
     pageRendering = false,
     pageNumPending = null;
 
-/*
-
-// TO BE ADDED IN PRODUCTION Reviews pagination variables
+// Reviews pagination variables
 let currentReviewPage = 1;
 const reviewsPerPage = 2;
 const googleReviews = [
   {
-    author_name: "John D.",
+    author_name: "Prajwal S.",
     rating: 5,
-    text: "STMC provided excellent training on ISO 9001. Their expertise helped us achieve certification seamlessly!"
-  },
-  {
-    author_name: "Sarah M.",
-    rating: 4,
-    text: "The Kaizen workshop was insightful and practical. Highly recommend their services!"
-  },
-  {
-    author_name: "Amit P.",
-    rating: 5,
-    text: "Their communication skills training transformed our team’s performance. Fantastic experience!"
-  },
-  {
-    author_name: "Priya S.",
-    rating: 5,
-    text: "STMC’s consultation for ISO 14001 was thorough and effective. Great team to work with!"
-  },
-  {
-    author_name: "Rahul K.",
-    rating: 4,
-    text: "The 5S training was well-structured and improved our workplace efficiency significantly."
+    text: "The teaching experience and the teaching way is really amazing and damn good teacher.",
+    course: "Spoken English"
   }
 ];
-
-TO BE ADDED IN PRODUTION */
 
 function renderPage(num) {
   const canvas = document.getElementById("pdf-canvas");
@@ -200,32 +177,20 @@ function loadContent(page) {
           <div style="text-align: center; margin-top: 20px;">
             <button class="brochure">View Brochure</button>
           </div>
-        </div>
-      `;
-
-      // Setup brochure button listener
-      const brochureBtn = document.querySelector(".brochure");
-      if (brochureBtn) {
-        brochureBtn.addEventListener("click", openBrochureModal);
-      }
-      break;
-
-        /* TO BE ADDED WHEN READY TO MOVE TO PRODUCTION
-        `
-          <h4>What our customers say about us :</h4>
+          <h4>What our customers say about us:</h4>
           <div class="reviews-section">
-            <div class="review-verification">
-              <a href="https://maps.app.goo.gl/AZqQpEVQL2V3jZcz7" target="_blank" class="google-reviews-link">See All Reviews on Google</a>
-            </div>
+            <div class="review-placeholder"></div>
             <div class="review-pagination">
               <span class="prev-arrow" id="prev-review"></span>
               <span id="review-page-num">1</span> / <span id="review-page-count">${Math.ceil(googleReviews.length / reviewsPerPage)}</span>
               <span class="next-arrow" id="next-review"></span>
             </div>
+            <div class="review-verification">
+              <a href="https://maps.app.goo.gl/AZqQpEVQL2V3jZcz7" target="_blank" class="google-reviews-link">See All Reviews on Google</a>
+            </div>
           </div>
-        `;
-
-      /* TO BE ADDED IN PRODUCTION
+        </div>
+      `;
 
       // Render initial reviews page
       renderReviewsPage(currentReviewPage);
@@ -246,8 +211,13 @@ function loadContent(page) {
           }
         });
       }
+
+      // Setup brochure button listener
+      const brochureBtn = document.querySelector(".brochure");
+      if (brochureBtn) {
+        brochureBtn.addEventListener("click", openBrochureModal);
+      }
       break;
-      TO BE ADDED IN PRODUCTION */
 
     case "services":
       content.innerHTML = `
@@ -492,11 +462,11 @@ function loadContent(page) {
             </div>
           </div>
           <div class="service-block">
-            <div class="service-header">Environment Management System<br>(ISO 14001:2015)</div>
+            <div class="service-header">Environment Management System<br>(ISO 14001-61)</div>
             <div class="service-body">
               <p>STMC helps you address regulatory requirements systematically and cost-effectively, reducing the risk of non-compliance. <a href="#" class="read-more" data-modal="service-popup-ems">Read More...</a></p>
               <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Environment Management System (ISO 14001:2015)">ENQUIRE</a>
+              <a href="#" class="ENQUIRE" data-service="Environment Management System (ISO 14001)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
@@ -512,7 +482,7 @@ function loadContent(page) {
             <div class="service-body">
               <p>We help you document and regulate the production, control, storage and shipment of cosmetic products. <a href="#" class="read-more" data-modal="service-popup-gmp">Read More...</a></p>
               <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Good Manufacturing Practices (ISO 22716:2007)">ENQUIRE</a>
+              <a href="#" class="ENQUIRE" data-service="Good Manufacturing Practices (ISO 22716)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
@@ -520,7 +490,7 @@ function loadContent(page) {
             <div class="service-body">
               <p>We help you maintain and monitor regulatory and safety requirements of the medical devices used by you. <a href="#" class="read-more" data-modal="service-popup-md">Read More...</a></p>
               <span class="custom-br"></span>
-              <a href="#" class="ENQUIRE" data-service="Medical Devices (ISO 13485:2021)">ENQUIRE</a>
+              <a href="#" class="ENQUIRE" data-service="Medical Devices (ISO 13485)">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block">
@@ -550,7 +520,7 @@ function loadContent(page) {
           <div class="service-block">
             <div class="service-header">Kaizen</div>
             <div class="service-body">
-              <p>STMC helps you implement and maintain Kaizen (a japanese concept) and helps foster a culture of continuous improvement within your company. <a href="#" class="read-more" data-modal="service-popup-kaizen">Read More...</a></p>
+              <p>STMC helps you implement and maintain Kaizen (a Japanese concept) and helps foster a culture of continuous improvement within your company. <a href="#" class="read-more" data-modal="service-popup-kaizen">Read More...</a></p>
               <span class="custom-br"></span>
               <a href="#" class="ENQUIRE" data-service="Kaizen">ENQUIRE</a>
             </div>
@@ -678,49 +648,49 @@ function loadContent(page) {
     case "academic-support":
       content.innerHTML = `
         <div class="service-blocks-grid">
-          <div class="service-block">
+          <div class="service-block" id="spoken-french">
             <div class="service-header">Spoken French</div>
             <div class="service-body">
               <p>Learn to speak French with ease — open doors to new experiences. <a href="#" class="read-more" data-modal="service-popup-spokenfrench">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken French">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block">
+          <div class="service-block" id="spoken-english">
             <div class="service-header">Spoken English</div>
             <div class="service-body">
               <p>At STMC, learn English with confidence — speak clearly, connect with the world. <a href="#" class="read-more" data-modal="service-popup-spokenenglish">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken English">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block">
+          <div class="service-block" id="spoken-hindi">
             <div class="service-header">Spoken Hindi</div>
             <div class="service-body">
               <p>Learn to speak Hindi with clarity and confidence — only at STMC! <a href="#" class="read-more" data-modal="service-popup-spokenhindi">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Spoken Hindi">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block">
+          <div class="service-block" id="stem-tutoring">
             <div class="service-header">STEM (Science, Technology, Engineering and Mathematics) Tutoring</div>
             <div class="service-body">
               <p>Fuel your brain. Engineer your edge. The future runs on STEM. <a href="#" class="read-more" data-modal="service-popup-stem">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="STEM Tutoring">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block">
+          <div class="service-block" id="exam-confidence-skills">
             <div class="service-header">Exam Confidence Skills</div>
             <div class="service-body">
               <p>We turn self-doubt into self-belief — one exam at a time. <a href="#" class="read-more" data-modal="service-popup-ecs">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Exam Confidence Skills">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block">
+          <div class="service-block" id="stress-management">
             <div class="service-header">Stress Management</div>
             <div class="service-body">
               <p>Beat stress before it beats you — STMC teaches calm, focus, and control. <a href="#" class="read-more" data-modal="service-popup-stressmgmt">Read More...</a></p>
               <a href="#" class="ENQUIRE" data-service="Stress Management">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block">
+          <div class="service-block" id="behavioral-science">
             <div class="service-header">Behavioral Science</div>
             <div class="service-body">
               <p>Understand how people think, feel, and act — explore minds with Behavioral Science at STMC. <a href="#" class="read-more" data-modal="service-popup-behscience">Read More...</a></p>
@@ -737,8 +707,6 @@ function loadContent(page) {
   }
 }
 
-/* TO BE ADDED IN PRODUCTION
-
 function renderReviewsPage(pageNum) {
   const reviewContainer = document.querySelector('.review-placeholder');
   const prevReviewArrow = document.getElementById('prev-review');
@@ -754,14 +722,25 @@ function renderReviewsPage(pageNum) {
   // Clear and populate reviews
   reviewContainer.innerHTML = '';
   reviewsToShow.forEach(review => {
-    const reviewElement = document.createElement('div');
-    reviewElement.classList.add('review-item');
-    reviewElement.innerHTML = `
-      <div class="review-author">${review.author_name}</div>
-      <div class="review-rating">Rating: ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
-      <div class="review-text">${review.text.length > 100 ? review.text.substring(0, 100) + '...' : review.text}</div>
-    `;
-    reviewContainer.appendChild(reviewElement);
+      const reviewElement = document.createElement('div');
+      reviewElement.classList.add('review-item');
+      const courseContent = review.course ? 
+        `<div class="review-pipe">|</div>
+        <div class="review-course"><a href="#${review.course.toLowerCase().replace(' ', '-')}-section" onclick="loadContent('academic-support'); setTimeout(() => document.getElementById('${review.course.toLowerCase().replace(' ', '-')}-section').scrollIntoView({ behavior: 'smooth' }), 100);" class="course-link"><span class="course-text">${review.course}</span></a></div>` : 
+        '';
+      reviewElement.innerHTML = `
+        <div class="review-content">
+          <div class="review-author">${review.author_name}</div>
+          <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+          <div class="review-text">${review.text.length > 100 ? review.text.substring(0, 100) + '...' : review.text}</div>
+          ${courseContent}
+        </div>
+        <hr class="review-divider">
+        <div class="review-buttons">
+          <button onclick="window.open('https://maps.app.goo.gl/y2a8BALPonDxNFkR8', '_blank')" class="google-review-button">View on Google</button>
+        </div>
+      `;
+      reviewContainer.appendChild(reviewElement);
   });
 
   // Update pagination UI
@@ -794,8 +773,6 @@ function setupReviewAnimations() {
     observer.observe(section);
   });
 }
-
-TO BE ADDED IN PRODUCTION */
 
 function setupReadMoreButtons() {
   const contentArea = document.getElementById("content-area");
@@ -856,8 +833,8 @@ function setupWhatsAppEnquiring() {
           }),
         })
           .then((res) => res.text())
-          .then((response) => console.log("Admin notified:", response))
-          .catch((err) => console.error("Email notification failed:", err));
+          .then((response) => console.log("Admin succeeded:", response))
+          .catch((err) => console.error("Error notifying admin:", err));
         window.open(whatsappURL, "_blank");
       };
 
@@ -868,12 +845,13 @@ function setupWhatsAppEnquiring() {
         let hoursTo6am =
           hours < 6
             ? 6 - hours - (minutes > 0 ? 1 : 0)
-            : 24 - hours + 6 - (minutes > 0 ? 1 : 0);
+            : 24 - hours + 6 - 10;
         const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
         const boldTime = `<b>${hoursTo6am} hour(s)${
-          minsToNextHour ? " and " + minsToNextHour + " minute(s)" : ""
-        }</b>`;
-        const msg = `The lights may be out in India 🌙 — but I’ll circle back once they’re on.<br><br>
+          minsToNextHour ? " and ' + minsTo6am + ' minute(s)" : ""
+        }` + `</b>`;
+        const msg =
+          `The lights may be out in India 🌙 — but I’ll circle back once they’re on.<br><br>
         Enquiries resume in ${boldTime}.<br><br>
         Thanks for your patience!`;
         showCustomModal(msg, null, true);
@@ -882,38 +860,34 @@ function setupWhatsAppEnquiring() {
   }
 }
 
-  // Show custom modal for enquiry options
-  function showCustomModal(message, onConfirm = null, lightsOut = false) {
-  const modal = document.getElementById("custom-modal");
-  const modalMessage = document.getElementById("modal-content");
-  if (!modal || !modalMessage) {
-    console.error("Modal elements not found");
+// Show custom modal for enquiry options
+function showCustomModal(message, onConfirm = null, lightsOut = false) {
+  const modal = document.getElementById("custom-vertical-modal");
+  const modalMessageContent = document.getElementById("modal-content");
+  if (!modal || !modalMessageContent) {
+    console.error("Modal content not found");
     return;
   }
 
-  // Clear previous content to prevent residual buttons
-  modalMessage.innerHTML = '';
+  // Clear previous modal content to prevent residual buttons
+  modalMessageContent.innerHTML = '';
 
-  // Debugging to confirm lightsOut state
-  console.log(`showCustomModal called with lightsOut: ${lightsOut}, message: ${message}`);
-
-  // Set the modal content based on lightsOut status
   if (lightsOut) {
-    modalMessage.innerHTML = `
-      <span id="modal-close-btn" class="close-btn">✖</span>
+    modalMessageContent.innerHTML = `
+      <span class="modal-close-btn" id="modal-close-btn">✖</span>
       <div class="modal-content-text">
         ${message}
       </div>
     `;
   } else {
-    modalMessage.innerHTML = `
+    modalMessageContent.innerHTML = `
       <span id="modal-close-btn" class="close-btn">✖</span>
       <div class="modal-content-text">${message}</div>
       <div class="modal-buttons">
-        <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Call</button>
-        <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Book (Calendly)</button>
-        <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Text (WhatsApp)</button>
-        <button id="email-btn" style="padding:8px 24px; border:none; background:gray; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
+        <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5C;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Call</button>
+        <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Book (Calendly)</button>
+        <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Text (WhatsApp)</button>
+        <button id="email-btn" style="padding:8px 24px; border:none; background:gray;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
       </div>
     `;
   }
@@ -923,10 +897,7 @@ function setupWhatsAppEnquiring() {
   const closeBtn = document.getElementById("modal-close-btn");
   if (closeBtn) {
     closeBtn.onclick = () => {
-      const modal = document.getElementById("custom-modal");
-      if (modal) {
-        modal.style.display = "none";
-      }
+      modal.style.display = "none";
     };
   }
 
@@ -944,7 +915,7 @@ function setupWhatsAppEnquiring() {
     }
     if (callBtn) {
       callBtn.onclick = () => {
-        modal.style.display = "none";
+        modal.style.display = 'none';
         const callingPopup = document.createElement("div");
         callingPopup.id = "calling-popup";
         callingPopup.innerText = "📞 Calling: +91-7624947307...";
@@ -973,22 +944,22 @@ function setupWhatsAppEnquiring() {
     if (emailBtn) {
       emailBtn.onclick = () => {
         window.location.href =
-          "mailto:stmconsult@yahoo.com?subject=Service Enquiry Request&body=Hello, I would like to enquire about a service.";
+          "mailto:stmconsult@yahoo.com?subject=Service%20Enquiry%20Request&body=Hello,%20I%20would%20like%20to%20enquire%20about%20a%20service.";
         modal.style.display = "none";
       };
     }
   }
 }
 
-// Show logged-in header
+// Show logged-in user header
 function showLoggedInHeader(username) {
   const header = document.getElementById("header-bar") || document.createElement("div");
   header.id = "header-bar";
   header.innerHTML = `
-    <div class="logged-in-text">👤 Logged in as <b>${username}</b></div>
-    <button id="logout-btn">Sign Out</button>
+    <div class="logged-in-text">Logged in as <b>${username}</b></div>
+    <button id="logout-btn">Logout</button>
   `;
-  const nav = document.querySelector("nav");
+  const nav = document.querySelector("header");
   if (nav) {
     nav.insertAdjacentElement("afterend", header);
   }
@@ -1002,7 +973,7 @@ function showLoggedInHeader(username) {
   }
 }
 
-// Initialize page and setup event listeners
+// Initialize page load and setup event listeners
 window.addEventListener("DOMContentLoaded", () => {
   loadContent("home");
 
@@ -1016,7 +987,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-// Generic modal setup for "Read More"
+  // Generic modal setup for "Read More"
   document.addEventListener("click", (event) => {
     if (event.target.classList.contains("read-more")) {
       event.preventDefault();
