@@ -15,7 +15,7 @@ const googleReviews = [
     author_name: "Prajwal S.",
     rating: 5,
     text: "The teaching experience and the teaching way is really amazing and damn good teacher.",
-    course: "Spoken English"
+    course: "STEM (Science, Technology, Engineering and Mathematics) Tutoring"
   }
 ];
 
