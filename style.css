@@ -356,10 +356,14 @@ main section {
 
 .google-review-button:hover {
   background-color: #0d47a1;
+  cursor: pointer;
   box-shadow: 0 2px 6px rgba(43, 24, 88, 0.5), 0 0 8px rgba(43, 24, 88, 0.5);
   border-image: linear-gradient(45deg, #fbbc05, #34a853, #4285f4, #ea4335) 1;
 }
 
+.google-review-button .hover-bold:hover {
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;  /* Glowing effect */
+}
 
 .review-pagination {
   display: flex;

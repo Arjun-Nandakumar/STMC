@@ -737,7 +737,9 @@ function renderReviewsPage(pageNum) {
         </div>
         <hr class="review-divider">
         <div class="review-buttons">
-          <button onclick="window.open('https://maps.app.goo.gl/y2a8BALPonDxNFkR8', '_blank')" class="google-review-button">View on Google</button>
+          <button onclick="window.open('https://maps.app.goo.gl/AZqQpEVQL2V3jZcz7', '_blank')" class="google-review-button">
+            <span class="hover-bold">View on Google</span>
+          </button>
         </div>
       `;
       reviewContainer.appendChild(reviewElement);
