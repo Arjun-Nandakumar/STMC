@@ -9,7 +9,7 @@ let pdfDoc = null,
 
 // Reviews pagination variables
 let currentReviewPage = 1;
-const reviewsPerPage = 2;
+const reviewsPerPage = 1; // Changed to 1 for single review per cycle
 const googleReviews = [
   {
     author_name: "Prajwal S.",
@@ -25,6 +25,11 @@ function renderPage(num) {
   const prevPageBtn = document.getElementById("prev-page");
   const nextPageBtn = document.getElementById("next-page");
   const pageNumDisplay = document.getElementById("page-num");
+
+  if (!canvas || !ctx || !prevPageBtn || !nextPageBtn || !pageNumDisplay) {
+    console.error("PDF rendering elements missing:", { canvas, ctx, prevPageBtn, nextPageBtn, pageNumDisplay });
+    return;
+  }
 
   pageRendering = true;
   pageNumDisplay.textContent = "Loading...";
@@ -130,23 +135,182 @@ function openBrochureModal() {
 }
 
 // Setup PDF navigation buttons
-document.getElementById('next-page').addEventListener('click', function() {
+document.getElementById('next-page')?.addEventListener('click', function() {
   if (pageNum >= pdfDoc.numPages) return;
   pageNum++;
   queueRenderPage(pageNum);
 });
 
-document.getElementById('prev-page').addEventListener('click', function() {
+document.getElementById('prev-page')?.addEventListener('click', function() {
   if (pageNum <= 1) return;
   pageNum--;
   queueRenderPage(pageNum);
 });
 
+function typeReviewText(element, text, callback) {
+  let index = 0;
+  element.textContent = "";
+  element.classList.add('typing'); // Add typing class for cursor
+  const typingSpeed = 25; // 25ms per character
+
+  function type() {
+    if (index < text.length) {
+      element.textContent += text.charAt(index);
+      index++;
+      setTimeout(type, typingSpeed);
+    } else {
+      element.classList.remove('typing'); // Remove typing class to stop cursor
+      callback(); // Call callback immediately after typing
+    }
+  }
+  type();
+}
+
+function renderReviewsPage(pageNum) {
+  console.log('Rendering reviews page:', pageNum, new Date());
+  const reviewContainer = document.querySelector('.review-placeholder');
+  const prevReviewArrow = document.getElementById('prev-review');
+  const nextReviewArrow = document.getElementById('next-review');
+  const reviewPageNum = document.getElementById('review-page-num');
+
+  if (!reviewContainer || !prevReviewArrow || !nextReviewArrow || !reviewPageNum) {
+    console.error("Review elements missing:", {
+      reviewContainer: !!reviewContainer,
+      prevReviewArrow: !!prevReviewArrow,
+      nextReviewArrow: !!nextReviewArrow,
+      reviewPageNum: !!reviewPageNum
+    });
+    return;
+  }
+
+  // Calculate the slice of reviews to display
+  const start = (pageNum - 1) * reviewsPerPage;
+  const end = start + reviewsPerPage;
+  const reviewsToShow = googleReviews.slice(start, end);
+
+  // Clear and populate reviews
+  reviewContainer.innerHTML = '';
+  reviewsToShow.forEach((review) => {
+    console.log('Rendering review:', review.author_name, new Date());
+    const reviewElement = document.createElement('div');
+    reviewElement.classList.add('review-item');
+    reviewElement.style.opacity = '0'; // Start invisible for fade-in
+    const courseContent = review.course ? 
+      `<div class="review-pipe">|</div>
+       <div class="review-course"><a href="#${review.course.toLowerCase().replace(' ', '-')}-section" onclick="loadContent('academic-support'); setTimeout(() => document.getElementById('${review.course.toLowerCase().replace(' ', '-')}-section').scrollIntoView({ behavior: 'smooth' }), 100);" class="course-link"><span class="course-text">${review.course}</span></a></div>` : 
+      '';
+    reviewElement.innerHTML = `
+      <div class="review-content">
+        <div class="review-author">${review.author_name}</div>
+        <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+        <div class="review-text" data-typed="false"></div>
+        ${courseContent}
+      </div>
+      <hr class="review-divider">
+      <div class="review-buttons">
+        <button onclick="window.open('https://maps.app.goo.gl/AZqQpEVQL2V3jZcz7', '_blank')" class="google-review-button">
+          <span class="hover-bold">View on Google</span>
+        </button>
+      </div>
+    `;
+    reviewContainer.appendChild(reviewElement);
+  });
+
+  // Update pagination UI
+  reviewPageNum.textContent = pageNum;
+  prevReviewArrow.classList.toggle('disabled', true); // Disable arrows for auto-cycling
+  nextReviewArrow.classList.toggle('disabled', true);
+}
+
+function setupReviewAnimations() {
+  const reviewSections = document.querySelectorAll('.reviews-section');
+  if (!reviewSections.length) {
+    console.error("No reviews-section elements found for animation");
+    return;
+  }
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let currentPage = 1;
+        const cycleReviews = () => {
+          const reviewContainer = entry.target.querySelector('.review-placeholder');
+          const reviewItem = reviewContainer.querySelector('.review-item');
+          if (reviewItem) {
+            // Fade out current review
+            reviewItem.style.transition = 'opacity 0.5s ease';
+            reviewItem.style.opacity = '0';
+            setTimeout(() => {
+              // Render next review
+              currentPage = currentPage >= googleReviews.length ? 1 : currentPage + 1;
+              renderReviewsPage(currentPage);
+              const newReviewItem = reviewContainer.querySelector('.review-item');
+              const reviewTextElement = newReviewItem.querySelector('.review-text');
+              if (reviewTextElement && reviewTextElement.dataset.typed === 'false') {
+                // Fade in new review
+                newReviewItem.style.transition = 'opacity 0.5s ease';
+                newReviewItem.style.opacity = '1';
+                setTimeout(() => {
+                  reviewTextElement.dataset.typed = 'true';
+                  const fullText = googleReviews[currentPage - 1].text.length > 100 ? 
+                    googleReviews[currentPage - 1].text.substring(0, 100) + '...' : 
+                    googleReviews[currentPage - 1].text;
+                  typeReviewText(reviewTextElement, fullText, () => {
+                    console.log('Finished typing review:', googleReviews[currentPage - 1].author_name, new Date());
+                    entry.target.classList.add('flipInFromRight');
+                    // Schedule next cycle
+                    setTimeout(cycleReviews, 2000); // Wait 2.00s before next fade-out
+                  });
+                }, 0); // 0.1s delay before typing
+              }
+            }, 500); // Wait for fade-out to complete
+          } else {
+            // Initial render
+            renderReviewsPage(currentPage);
+            const newReviewItem = reviewContainer.querySelector('.review-item');
+            const reviewTextElement = newReviewItem.querySelector('.review-text');
+            newReviewItem.style.transition = 'opacity 0.5s ease';
+            newReviewItem.style.opacity = '1';
+            if (reviewTextElement && reviewTextElement.dataset.typed === 'false') {
+              setTimeout(() => {
+                reviewTextElement.dataset.typed = 'true';
+                const fullText = googleReviews[currentPage - 1].text.length > 100 ? 
+                  googleReviews[currentPage - 1].text.substring(0, 100) + '...' : 
+                  googleReviews[currentPage - 1].text;
+                typeReviewText(reviewTextElement, fullText, () => {
+                  console.log('Finished typing review:', googleReviews[currentPage - 1].author_name, new Date());
+                  entry.target.classList.add('flipInFromRight');
+                  // Schedule next cycle
+                  setTimeout(cycleReviews, 2850); // Wait 2.85s before next fade-out
+                });
+              }, 0); // 0.3s delay before typing
+            }
+          }
+        };
+        cycleReviews(); // Start the cycle
+        observer.unobserve(entry.target); // Observe once to start cycling
+      }
+    });
+  }, observerOptions);
+
+  reviewSections.forEach(section => {
+    observer.observe(section);
+  });
+}
+
 function loadContent(page) {
+  console.log('Loading content for page:', page, new Date());
   const content = document.getElementById("content-area");
   const footer = document.querySelector(".footer");
   if (!content || !footer) {
-    console.error("Content area or footer element not found");
+    console.error("Content area or footer element not found:", { content: !!content, footer: !!footer });
+    content.innerHTML = "<p>Error: Content area or footer missing.</p>";
     return;
   }
 
@@ -181,9 +345,9 @@ function loadContent(page) {
           <div class="reviews-section">
             <div class="review-placeholder"></div>
             <div class="review-pagination">
-              <span class="prev-arrow" id="prev-review"></span>
-              <span id="review-page-num">1</span> / <span id="review-page-count">${Math.ceil(googleReviews.length / reviewsPerPage)}</span>
-              <span class="next-arrow" id="next-review"></span>
+              <span class="prev-arrow disabled" id="prev-review"></span>
+              <span id="review-page-num">1</span> / <span id="review-page-count">${googleReviews.length}</span>
+              <span class="next-arrow disabled" id="next-review"></span>
             </div>
             <div class="review-verification">
               <a href="https://maps.app.goo.gl/AZqQpEVQL2V3jZcz7" target="_blank" class="google-reviews-link">See All Reviews on Google</a>
@@ -193,29 +357,29 @@ function loadContent(page) {
       `;
 
       // Render initial reviews page
+      console.log('Calling renderReviewsPage for about page');
       renderReviewsPage(currentReviewPage);
-      // Setup pagination listeners
+      setupReviewAnimations(); // Ensure animations are set up after rendering
+      // Setup pagination listeners (disabled for auto-cycling)
       const prevReviewArrow = document.getElementById("prev-review");
       const nextReviewArrow = document.getElementById("next-review");
       if (prevReviewArrow && nextReviewArrow) {
         prevReviewArrow.addEventListener("click", () => {
-          if (currentReviewPage > 1) {
-            currentReviewPage--;
-            renderReviewsPage(currentReviewPage);
-          }
+          console.log("Previous arrow clicked (disabled)");
         });
         nextReviewArrow.addEventListener("click", () => {
-          if (currentReviewPage < Math.ceil(googleReviews.length / reviewsPerPage)) {
-            currentReviewPage++;
-            renderReviewsPage(currentReviewPage);
-          }
+          console.log("Next arrow clicked (disabled)");
         });
+      } else {
+        console.error("Pagination arrows not found:", { prevReviewArrow: !!prevReviewArrow, nextReviewArrow: !!nextReviewArrow });
       }
 
       // Setup brochure button listener
       const brochureBtn = document.querySelector(".brochure");
       if (brochureBtn) {
         brochureBtn.addEventListener("click", openBrochureModal);
+      } else {
+        console.error("Brochure button not found");
       }
       break;
 
@@ -281,59 +445,65 @@ function loadContent(page) {
       } else {
         console.error("EmailJS is not loaded.");
         const errorMessage = document.getElementById('error-message');
-        errorMessage.textContent = "❌ Email service is unavailable. Please try again later.";
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-        }, 5000);
-        return;
+        if (errorMessage) {
+          errorMessage.textContent = "❌ Email service is unavailable. Please try again later.";
+          errorMessage.style.display = 'block';
+          setTimeout(() => {
+            errorMessage.style.display = 'none';
+          }, 5000);
+        }
       }
 
-      document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const form = this;
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const mobile = form.mobile.value.trim();
-        const message = form.message.value.trim();
-        const loadingMessage = document.getElementById('loading-message');
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
-        const submitButton = form.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        loadingMessage.style.display = 'block';
-        successMessage.style.display = 'none';
-        errorMessage.style.display = 'none';
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+          event.preventDefault();
+          const form = this;
+          const name = form.name.value.trim();
+          const email = form.email.value.trim();
+          const mobile = form.mobile.value.trim();
+          const message = form.message.value.trim();
+          const loadingMessage = document.getElementById('loading-message');
+          const successMessage = document.getElementById('success-message');
+          const errorMessage = document.getElementById('error-message');
+          const submitButton = form.querySelector('button[type="submit"]');
+          submitButton.disabled = true;
+          loadingMessage.style.display = 'block';
+          successMessage.style.display = 'none';
+          errorMessage.style.display = 'none';
 
-        const emailPromise = Promise.all([
-          emailjs.send("service_w0c9cag", "template_dtrl8bk", { name, email, mobile, message }),
-          emailjs.send("service_y78w5j2", "template_gs9b7k8", { name, email, mobile, message })
-        ]);
+          const emailPromise = Promise.all([
+            emailjs.send("service_w0c9cag", "template_dtrl8bk", { name, email, mobile, message }),
+            emailjs.send("service_y78w5j2", "template_gs9b7k8", { name, email, mobile, message })
+          ]);
 
-        const timeoutPromise = new Promise((resolve, reject) => {
-          setTimeout(() => reject(new Error("Request timed out")), 10000);
-        });
-
-        Promise.race([emailPromise, timeoutPromise])
-          .then(() => {
-            loadingMessage.style.display = 'none';
-            successMessage.style.display = 'block';
-            setTimeout(() => {
-              successMessage.style.display = 'none';
-              form.reset();
-              submitButton.disabled = false;
-            }, 3000);
-          })
-          .catch((error) => {
-            loadingMessage.style.display = 'none';
-            errorMessage.style.display = 'block';
-            console.error("EmailJS error:", error);
-            submitButton.disabled = false;
-            setTimeout(() => {
-              errorMessage.style.display = 'none';
-            }, 5000);
+          const timeoutPromise = new Promise((resolve, reject) => {
+            setTimeout(() => reject(new Error("Request timed out")), 10000);
           });
-      });
+
+          Promise.race([emailPromise, timeoutPromise])
+            .then(() => {
+              loadingMessage.style.display = 'none';
+              successMessage.style.display = 'block';
+              setTimeout(() => {
+                successMessage.style.display = 'none';
+                form.reset();
+                submitButton.disabled = false;
+              }, 3000);
+            })
+            .catch((error) => {
+              console.error("EmailJS error:", error);
+              loadingMessage.style.display = 'none';
+              errorMessage.style.display = 'block';
+              submitButton.disabled = false;
+              setTimeout(() => {
+                errorMessage.style.display = 'none';
+              }, 5000);
+            });
+        });
+      } else {
+        console.error("Contact form not found");
+      }
       break;
 
     case "account":
@@ -382,6 +552,8 @@ function loadContent(page) {
             console.error("Login error:", err);
           }
         };
+      } else {
+        console.error("Login form not found");
       }
       if (showRegisterLink) {
         showRegisterLink.addEventListener("click", (e) => {
@@ -439,14 +611,20 @@ function loadContent(page) {
                 console.error("Registration error:", err);
               }
             };
+          } else {
+            console.error("Register form not found");
           }
           if (showLoginLink) {
             showLoginLink.addEventListener("click", (e) => {
               e.preventDefault();
               loadContent("account");
             });
+          } else {
+            console.error("Show login link not found");
           }
         });
+      } else {
+        console.error("Show register link not found");
       }
       break;
 
@@ -707,85 +885,23 @@ function loadContent(page) {
   }
 }
 
-function renderReviewsPage(pageNum) {
-  const reviewContainer = document.querySelector('.review-placeholder');
-  const prevReviewArrow = document.getElementById('prev-review');
-  const nextReviewArrow = document.getElementById('next-review');
-  const reviewPageNum = document.getElementById('review-page-num');
-  if (!reviewContainer || !prevReviewArrow || !nextReviewArrow || !reviewPageNum) return;
-
-  // Calculate the slice of reviews to display
-  const start = (pageNum - 1) * reviewsPerPage;
-  const end = start + reviewsPerPage;
-  const reviewsToShow = googleReviews.slice(start, end);
-
-  // Clear and populate reviews
-  reviewContainer.innerHTML = '';
-  reviewsToShow.forEach(review => {
-      const reviewElement = document.createElement('div');
-      reviewElement.classList.add('review-item');
-      const courseContent = review.course ? 
-        `<div class="review-pipe">|</div>
-        <div class="review-course"><a href="#${review.course.toLowerCase().replace(' ', '-')}-section" onclick="loadContent('academic-support'); setTimeout(() => document.getElementById('${review.course.toLowerCase().replace(' ', '-')}-section').scrollIntoView({ behavior: 'smooth' }), 100);" class="course-link"><span class="course-text">${review.course}</span></a></div>` : 
-        '';
-      reviewElement.innerHTML = `
-        <div class="review-content">
-          <div class="review-author">${review.author_name}</div>
-          <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
-          <div class="review-text">${review.text.length > 100 ? review.text.substring(0, 100) + '...' : review.text}</div>
-          ${courseContent}
-        </div>
-        <hr class="review-divider">
-        <div class="review-buttons">
-          <button onclick="window.open('https://maps.app.goo.gl/AZqQpEVQL2V3jZcz7', '_blank')" class="google-review-button">
-            <span class="hover-bold">View on Google</span>
-          </button>
-        </div>
-      `;
-      reviewContainer.appendChild(reviewElement);
-  });
-
-  // Update pagination UI
-  reviewPageNum.textContent = pageNum;
-  prevReviewArrow.classList.toggle('disabled', pageNum === 1);
-  nextReviewArrow.classList.toggle('disabled', pageNum === Math.ceil(googleReviews.length / reviewsPerPage));
-
-  // Reapply animations
-  setupReviewAnimations();
-}
-
-function setupReviewAnimations() {
-  const reviewSections = document.querySelectorAll('.reviews-section');
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('flipInFromRight');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  reviewSections.forEach(section => {
-    observer.observe(section);
-  });
-}
-
 function setupReadMoreButtons() {
   const contentArea = document.getElementById("content-area");
-  if (!contentArea) return;
+  if (!contentArea) {
+    console.error("Content area not found for read-more buttons");
+    return;
+  }
 
   contentArea.addEventListener("click", (event) => {
     if (event.target.classList.contains("read-more")) {
       event.preventDefault();
       const modalId = event.target.getAttribute("data-modal");
       const modal = document.getElementById(modalId);
-      if (modal) modal.style.display = "flex";
+      if (modal) {
+        modal.style.display = "flex";
+      } else {
+        console.error("Modal not found for ID:", modalId);
+      }
     }
   });
 }
@@ -796,7 +912,10 @@ document.addEventListener("contextmenu", (e) => e.preventDefault());
 // Setup WhatsApp enquiry handling with event delegation
 function setupWhatsAppEnquiring() {
   const contentArea = document.getElementById("content-area");
-  if (!contentArea) return;
+  if (!contentArea) {
+    console.error("Content area not found for WhatsApp enquiry setup");
+    return;
+  }
 
   // Remove existing listeners to prevent duplicates
   const existingButtons = document.querySelectorAll(".ENQUIRE");
@@ -847,11 +966,11 @@ function setupWhatsAppEnquiring() {
         let hoursTo6am =
           hours < 6
             ? 6 - hours - (minutes > 0 ? 1 : 0)
-            : 24 - hours + 6 - 10;
+            : 24 - hours + 6;
         const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
         const boldTime = `<b>${hoursTo6am} hour(s)${
-          minsToNextHour ? " and ' + minsTo6am + ' minute(s)" : ""
-        }` + `</b>`;
+          minsToNextHour ? ` and ${minsToNextHour} minute(s)` : ""
+        }</b>`;
         const msg =
           `The lights may be out in India 🌙 — but I’ll circle back once they’re on.<br><br>
         Enquiries resume in ${boldTime}.<br><br>
@@ -886,7 +1005,7 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
       <span id="modal-close-btn" class="close-btn">✖</span>
       <div class="modal-content-text">${message}</div>
       <div class="modal-buttons">
-        <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5C;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Call</button>
+        <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Call</button>
         <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Book (Calendly)</button>
         <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Text (WhatsApp)</button>
         <button id="email-btn" style="padding:8px 24px; border:none; background:gray;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
@@ -901,6 +1020,8 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
     closeBtn.onclick = () => {
       modal.style.display = "none";
     };
+  } else {
+    console.error("Modal close button not found");
   }
 
   if (!lightsOut && onConfirm) {
@@ -939,7 +1060,7 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
     }
     if (calendBtn) {
       calendBtn.onclick = () => {
-        window.open("https://calendly.com/vnk-arjun-brinda/new-meeting", "_blank");
+        window.open("https://calendly.com/nk-arjun-brinda/new-meeting", "_blank");
         modal.style.display = "none";
       };
     }
@@ -964,6 +1085,8 @@ function showLoggedInHeader(username) {
   const nav = document.querySelector("header");
   if (nav) {
     nav.insertAdjacentElement("afterend", header);
+  } else {
+    console.error("Header element not found for logged-in header");
   }
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) {
@@ -972,12 +1095,33 @@ function showLoggedInHeader(username) {
       header.remove();
       loadContent("home");
     };
+  } else {
+    console.error("Logout button not found");
   }
 }
 
 // Initialize page load and setup event listeners
 window.addEventListener("DOMContentLoaded", () => {
+  console.log('DOMContentLoaded triggered', new Date());
   loadContent("home");
+
+  // Setup navigation listeners
+  const navLinks = document.querySelectorAll('.nav-link');
+  if (navLinks.length === 0) {
+    console.error("No elements with class 'nav-link' found. Please check HTML navigation structure.");
+  }
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const page = link.getAttribute('data-page');
+      console.log('Navigation link clicked:', page, new Date());
+      if (page) {
+        loadContent(page);
+      } else {
+        console.error("No data-page attribute found on nav link:", link);
+      }
+    });
+  });
 
   const closeBtn = document.getElementById("close-btn");
   if (closeBtn) {
@@ -987,6 +1131,8 @@ window.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
       }
     };
+  } else {
+    console.error("Brochure modal close button not found");
   }
 
   // Generic modal setup for "Read More"
@@ -995,12 +1141,20 @@ window.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const modalId = event.target.getAttribute("data-modal");
       const modal = document.getElementById(modalId);
-      if (modal) modal.style.display = "flex";
+      if (modal) {
+        modal.style.display = "flex";
+      } else {
+        console.error("Read-more modal not found for ID:", modalId);
+      }
     }
 
     if (event.target.classList.contains("close-btn")) {
       const modal = event.target.closest(".custom-vertical-modal");
-      if (modal) modal.style.display = "none";
+      if (modal) {
+        modal.style.display = "none";
+      } else {
+        console.error("Modal not found for close button");
+      }
     }
   });
 });
