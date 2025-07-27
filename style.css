@@ -1067,7 +1067,7 @@ main section {
 
 .social-icons a:hover {
   color: #ffffff;
-  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff, 0 0 3px #ffffff;  /* Glowing effect */
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;  /* Glowing effect */
 }
 
 .social-icons a span {
