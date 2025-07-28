@@ -9,7 +9,7 @@ let pdfDoc = null,
 
 // Reviews pagination variables
 let currentReviewPage = 1;
-const reviewsPerPage = 1; // Changed to 1 for single review per cycle
+const reviewsPerPage = 1; // Single review per cycle
 const googleReviews = [
   {
     author_name: "Prajwal S.",
@@ -912,10 +912,7 @@ document.addEventListener("contextmenu", (e) => e.preventDefault());
 // Setup WhatsApp enquiry handling with event delegation
 function setupWhatsAppEnquiring() {
   const contentArea = document.getElementById("content-area");
-  if (!contentArea) {
-    console.error("Content area not found for WhatsApp enquiry setup");
-    return;
-  }
+  if (!contentArea) return;
 
   // Remove existing listeners to prevent duplicates
   const existingButtons = document.querySelectorAll(".ENQUIRE");
@@ -954,8 +951,8 @@ function setupWhatsAppEnquiring() {
           }),
         })
           .then((res) => res.text())
-          .then((response) => console.log("Admin succeeded:", response))
-          .catch((err) => console.error("Error notifying admin:", err));
+          .then((response) => console.log("Admin notified:", response))
+          .catch((err) => console.error("Email notification failed:", err));
         window.open(whatsappURL, "_blank");
       };
 
@@ -966,13 +963,12 @@ function setupWhatsAppEnquiring() {
         let hoursTo6am =
           hours < 6
             ? 6 - hours - (minutes > 0 ? 1 : 0)
-            : 24 - hours + 6;
+            : 24 - hours + 6 - (minutes > 0 ? 1 : 0);
         const minsToNextHour = minutes > 0 ? 60 - minutes : 0;
         const boldTime = `<b>${hoursTo6am} hour(s)${
-          minsToNextHour ? ` and ${minsToNextHour} minute(s)` : ""
+          minsToNextHour ? " and " + minsToNextHour + " minute(s)" : ""
         }</b>`;
-        const msg =
-          `The lights may be out in India 🌙 — but I’ll circle back once they’re on.<br><br>
+        const msg = `The lights may be out in India 🌙 — but I’ll circle back once they’re on.<br><br>
         Enquiries resume in ${boldTime}.<br><br>
         Thanks for your patience!`;
         showCustomModal(msg, null, true);
@@ -981,34 +977,38 @@ function setupWhatsAppEnquiring() {
   }
 }
 
-// Show custom modal for enquiry options
-function showCustomModal(message, onConfirm = null, lightsOut = false) {
-  const modal = document.getElementById("custom-vertical-modal");
-  const modalMessageContent = document.getElementById("modal-content");
-  if (!modal || !modalMessageContent) {
-    console.error("Modal content not found");
+  // Show custom modal for enquiry options
+  function showCustomModal(message, onConfirm = null, lightsOut = false) {
+  const modal = document.getElementById("custom-modal");
+  const modalMessage = document.getElementById("modal-content");
+  if (!modal || !modalMessage) {
+    console.error("Modal elements not found");
     return;
   }
 
-  // Clear previous modal content to prevent residual buttons
-  modalMessageContent.innerHTML = '';
+  // Clear previous content to prevent residual buttons
+  modalMessage.innerHTML = '';
 
+  // Debugging to confirm lightsOut state
+  console.log(`showCustomModal called with lightsOut: ${lightsOut}, message: ${message}`);
+
+  // Set the modal content based on lightsOut status
   if (lightsOut) {
-    modalMessageContent.innerHTML = `
-      <span class="modal-close-btn" id="modal-close-btn">✖</span>
+    modalMessage.innerHTML = `
+      <span id="modal-close-btn" class="close-btn">✖</span>
       <div class="modal-content-text">
         ${message}
       </div>
     `;
   } else {
-    modalMessageContent.innerHTML = `
+    modalMessage.innerHTML = `
       <span id="modal-close-btn" class="close-btn">✖</span>
       <div class="modal-content-text">${message}</div>
       <div class="modal-buttons">
-        <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Call</button>
-        <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Book (Calendly)</button>
-        <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Text (WhatsApp)</button>
-        <button id="email-btn" style="padding:8px 24px; border:none; background:gray;color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
+        <button id="call-btn" style="padding:8px 24px; border:none; background:#4F61C5; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Call</button>
+        <button id="calend-btn" style="padding:8px 24px; border:none; background:maroon; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Book (Calendly)</button>
+        <button id="whatsapp-btn" style="padding:8px 24px; border:none; background:#518A7E; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Text (WhatsApp)</button>
+        <button id="email-btn" style="padding:8px 24px; border:none; background:gray; color:#fff; border-radius:5px; font-size:1em; cursor:pointer;">Email</button>
       </div>
     `;
   }
@@ -1018,10 +1018,11 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
   const closeBtn = document.getElementById("modal-close-btn");
   if (closeBtn) {
     closeBtn.onclick = () => {
-      modal.style.display = "none";
+      const modal = document.getElementById("custom-modal");
+      if (modal) {
+        modal.style.display = "none";
+      }
     };
-  } else {
-    console.error("Modal close button not found");
   }
 
   if (!lightsOut && onConfirm) {
@@ -1038,7 +1039,7 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
     }
     if (callBtn) {
       callBtn.onclick = () => {
-        modal.style.display = 'none';
+        modal.style.display = "none";
         const callingPopup = document.createElement("div");
         callingPopup.id = "calling-popup";
         callingPopup.innerText = "📞 Calling: +91-7624947307...";
@@ -1060,33 +1061,31 @@ function showCustomModal(message, onConfirm = null, lightsOut = false) {
     }
     if (calendBtn) {
       calendBtn.onclick = () => {
-        window.open("https://calendly.com/nk-arjun-brinda/new-meeting", "_blank");
+        window.open("https://calendly.com/vnk-arjun-brinda/new-meeting", "_blank");
         modal.style.display = "none";
       };
     }
     if (emailBtn) {
       emailBtn.onclick = () => {
         window.location.href =
-          "mailto:stmconsult@yahoo.com?subject=Service%20Enquiry%20Request&body=Hello,%20I%20would%20like%20to%20enquire%20about%20a%20service.";
+          "mailto:stmconsult@yahoo.com?subject=Service Enquiry Request&body=Hello, I would like to enquire about a service.";
         modal.style.display = "none";
       };
     }
   }
 }
 
-// Show logged-in user header
+// Show logged-in header
 function showLoggedInHeader(username) {
   const header = document.getElementById("header-bar") || document.createElement("div");
   header.id = "header-bar";
   header.innerHTML = `
-    <div class="logged-in-text">Logged in as <b>${username}</b></div>
-    <button id="logout-btn">Logout</button>
+    <div class="logged-in-text">👤 Logged in as <b>${username}</b></div>
+    <button id="logout-btn">Sign Out</button>
   `;
-  const nav = document.querySelector("header");
+  const nav = document.querySelector("nav");
   if (nav) {
     nav.insertAdjacentElement("afterend", header);
-  } else {
-    console.error("Header element not found for logged-in header");
   }
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) {
@@ -1095,33 +1094,12 @@ function showLoggedInHeader(username) {
       header.remove();
       loadContent("home");
     };
-  } else {
-    console.error("Logout button not found");
   }
 }
 
-// Initialize page load and setup event listeners
+// Initialize page and setup event listeners
 window.addEventListener("DOMContentLoaded", () => {
-  console.log('DOMContentLoaded triggered', new Date());
   loadContent("home");
-
-  // Setup navigation listeners
-  const navLinks = document.querySelectorAll('.nav-link');
-  if (navLinks.length === 0) {
-    console.error("No elements with class 'nav-link' found. Please check HTML navigation structure.");
-  }
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const page = link.getAttribute('data-page');
-      console.log('Navigation link clicked:', page, new Date());
-      if (page) {
-        loadContent(page);
-      } else {
-        console.error("No data-page attribute found on nav link:", link);
-      }
-    });
-  });
 
   const closeBtn = document.getElementById("close-btn");
   if (closeBtn) {
@@ -1131,30 +1109,20 @@ window.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
       }
     };
-  } else {
-    console.error("Brochure modal close button not found");
   }
 
-  // Generic modal setup for "Read More"
+// Generic modal setup for "Read More"
   document.addEventListener("click", (event) => {
     if (event.target.classList.contains("read-more")) {
       event.preventDefault();
       const modalId = event.target.getAttribute("data-modal");
       const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = "flex";
-      } else {
-        console.error("Read-more modal not found for ID:", modalId);
-      }
+      if (modal) modal.style.display = "flex";
     }
 
     if (event.target.classList.contains("close-btn")) {
       const modal = event.target.closest(".custom-vertical-modal");
-      if (modal) {
-        modal.style.display = "none";
-      } else {
-        console.error("Modal not found for close button");
-      }
+      if (modal) modal.style.display = "none";
     }
   });
 });
