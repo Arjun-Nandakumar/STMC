@@ -826,32 +826,42 @@ function loadContent(page) {
     case "academic-support":
       content.innerHTML = `
         <div class="service-blocks-grid">
-          <div class="service-block" id="spoken-french">
-            <div class="service-header">Spoken French</div>
+          <div class="service-block" id="french">
+            <div class="service-header">French</div>
             <div class="service-body">
-              <p>Learn to speak French with ease — open doors to new experiences. <a href="#" class="read-more" data-modal="service-popup-spokenfrench">Read More...</a></p>
-              <a href="#" class="ENQUIRE" data-service="Spoken French">ENQUIRE</a>
+              <p>Learn to speak French with ease — open doors to new experiences. <a href="#" class="read-more" data-modal="service-popup-french">Read More...</a></p>
+              <a href="#" class="ENQUIRE" data-service="French">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block" id="spoken-english">
-            <div class="service-header">Spoken English</div>
+          <div class="service-block" id="english">
+            <div class="service-header">English</div>
             <div class="service-body">
-              <p>At STMC, learn English with confidence — speak clearly, connect with the world. <a href="#" class="read-more" data-modal="service-popup-spokenenglish">Read More...</a></p>
-              <a href="#" class="ENQUIRE" data-service="Spoken English">ENQUIRE</a>
+              <p>At STMC, learn English with confidence — speak clearly, connect with the world. <a href="#" class="read-more" data-modal="service-popup-english">Read More...</a></p>
+              <a href="#" class="ENQUIRE" data-service="English">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block" id="spoken-hindi">
-            <div class="service-header">Spoken Hindi</div>
+
+          <div class="service-block" id="hindi">
+            <div class="service-header">Hindi</div>
             <div class="service-body">
-              <p>Learn to speak Hindi with clarity and confidence — only at STMC! <a href="#" class="read-more" data-modal="service-popup-spokenhindi">Read More...</a></p>
-              <a href="#" class="ENQUIRE" data-service="Spoken Hindi">ENQUIRE</a>
+              <p>Learn to speak Hindi with clarity and confidence — only at STMC! <a href="#" class="read-more" data-modal="service-popup-hindi">Read More...</a></p>
+              <a href="#" class="ENQUIRE" data-service="Hindi">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block" id="stem-tutoring">
-            <div class="service-header">STEM (Science, Technology, Engineering and Mathematics) Tutoring</div>
+
+          <div class="service-block" id="german">
+            <div class="service-header">German</div>
             <div class="service-body">
-              <p>Fuel your brain. Engineer your edge. The future runs on STEM. <a href="#" class="read-more" data-modal="service-popup-stem">Read More...</a></p>
-              <a href="#" class="ENQUIRE" data-service="STEM Tutoring">ENQUIRE</a>
+              <p>Learn the German language! <a href="#" class="read-more" data-modal="service-popup-german">Read More...</a></p>
+              <a href="#" class="ENQUIRE" data-service="German">ENQUIRE</a>
+            </div>            
+          </div>
+
+          <div class="service-block" id="academic-coaching">
+            <div class="service-header">Academic Coaching</div>
+            <div class="service-body">
+              <p>Jumpstart academic success — Personalized coaching for brighter futures, higher scores, and lifelong curiosity. <a href="#" class="read-more" data-modal="service-popup-academic-coaching">Read More...</a></p>
+              <a href="#" class="ENQUIRE" data-service="Academic Coaching">ENQUIRE</a>
             </div>
           </div>
           <div class="service-block" id="exam-confidence-skills">
