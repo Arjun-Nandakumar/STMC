@@ -864,7 +864,7 @@ function loadContent(page) {
               <a href="#" class="ENQUIRE" data-service="Academic Coaching">ENQUIRE</a>
             </div>
           </div>
-          <div class="service-block" id="exam-confidence-skills">
+          <div class="service-block" id="ecs">
             <div class="service-header">Exam Confidence Skills</div>
             <div class="service-body">
               <p>We turn self-doubt into self-belief — one exam at a time. <a href="#" class="read-more" data-modal="service-popup-ecs">Read More...</a></p>
