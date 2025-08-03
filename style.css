@@ -11,16 +11,15 @@ body, html {
 }
 
 a {
-  color: #8fc0ff;  /* Your link color */
-  text-decoration: none;  /* Optional: to remove underline */
-  transition: text-shadow 0.3s ease-in-out;  /* Smooth transition for the glow effect */
+  color: #8fc0ff;
+  text-decoration: none;
+  transition: text-shadow 0.3s ease-in-out;
 }
 
 a:hover {
-  color: #aed1ff;  /* Keep the same text color on hover */
-  text-shadow: 0 0 1px #8fc0ff, 0 0 2px #8fc0ff, 0 0 3px #8fc0ff;  /* Glowing effect */
+  color: #aed1ff;
+  text-shadow: 0 0 1px #8fc0ff, 0 0 2px #8fc0ff, 0 0 3px #8fc0ff;
 }
-
 
 /* Background and Layout */
 .background-overlay {
@@ -106,7 +105,7 @@ nav {
   border-radius: 5px;
   transition: background 0.3s;
   display: block;
-  box-shadow: 0 2px 4px rgba(21, 22, 30, 0), 0 0 5px rgba(21, 22, 30, 0.42);
+  box-shadow: 0 2px 4px rgba(21, 22, 30, 0.2), 0 0 5px rgba(21, 22, 30, 0.42);
 }
 
 .nav-tabs li a:hover {
@@ -143,7 +142,7 @@ nav {
 }
 
 .nav-tabs .dropdown-content a:hover {
-  background-color: rgba(14, 15, 20, 0.85);
+  background-color: rgba(14, 15, 20, 0.9);
   color: #fff;
 }
 
@@ -308,7 +307,7 @@ main section {
 }
 
 .course-link:hover .course-text {
-  font-weight: none;
+  font-weight: normal;
 }
 
 .no-reviews {
@@ -319,10 +318,10 @@ main section {
 
 .review-verification {
   color: aqua;
-  font-weight: normal; /* Fixed invalid value */
-  display: block; /* Makes the link full-width */
-  text-align: center; /* Centers the text */
-  text-decoration: none; /* Optional: Removes default underline */
+  font-weight: normal;
+  display: block;
+  text-align: center;
+  text-decoration: none;
 }
 
 .google-review-button {
@@ -359,11 +358,11 @@ main section {
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(43, 24, 88, 0.5), 0 0 8px rgba(43, 24, 88, 0.5);
   border-image: linear-gradient(45deg, #fbbc05, #34a853, #4285f4, #ea4335) 1;
-  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;  /* Glowing effect */
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;
 }
 
 .google-review-button .hover-bold:hover {
-  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;  /* Glowing effect */
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;
 }
 
 .review-pagination {
@@ -521,7 +520,7 @@ main section {
 
 .service-body .read-more:hover {
   color: #99CCFF;
-  text-shadow: 0 0 1px rgb(193, 220, 255), 0 0 2px rgb(193, 220, 255), 0 0 3px rgb(193, 220, 255);  /* Glowing effect */
+  text-shadow: 0 0 1px rgb(193, 220, 255), 0 0 2px rgb(193, 220, 255), 0 0 3px rgb(193, 220, 255);
   text-decoration: none;
 }
 
@@ -538,7 +537,7 @@ main section {
 .service-body a.ENQUIRE:hover {
   color: #ffffff;
   background-color: rgb(39, 40, 98);
-  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 2px #ffffff;  /* Glowing effect */
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 2px #ffffff;
 }
 
 .service-body hr.short-divider {
@@ -679,8 +678,7 @@ main section {
 #login-form button[type="submit"]:hover,
 #register-form button[type="submit"]:hover {
   background-color: #1c223f;
-  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;  /* Glowing effect */
-  
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;
 }
 
 #loading-message {
@@ -725,16 +723,7 @@ main section {
 
 .brochure:hover {
   background-color: #1c223f;
-  color: #ffffff;
-  border: none;
-  width: 200px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  padding: 10px 0;
-  font-size: 1em;
-  cursor: pointer;
-  text-shadow: 0 0 1px #b0bdff, 0 0 2px #b0bdff, 0 0 3px #b0bdff;  /* Glowing effect */
-
+  text-shadow: 0 0 1px #b0bdff, 0 0 2px #b0bdff, 0 0 3px #b0bdff;
 }
 
 /* Header Bar */
@@ -1067,7 +1056,7 @@ main section {
 
 .social-icons a:hover {
   color: #ffffff;
-  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;  /* Glowing effect */
+  text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 1px #ffffff;
 }
 
 .social-icons a span {
@@ -1150,13 +1139,13 @@ main section {
   }
 }
 
-@media screen (max-width: 800px) {
+@media (max-width: 800px) {
   .service-blocks-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen (max-width: 768px) {
+@media (max-width: 768px) {
   .background-overlay {
     background: 
       url('background-mobile.png') no-repeat center top/100% auto,
@@ -1327,12 +1316,12 @@ main section {
     align-items: center;
     justify-content: center;
     text-align: center;
+    word-wrap: break-word;
     overflow-wrap: break-word;
     box-sizing: border-box;
   }
 
   .nav-tabs .dropdown {
-    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -1375,7 +1364,7 @@ main section {
   }
 
   .dropdown-content a:hover {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
     color: #ffffff;
   }
 
@@ -1457,33 +1446,30 @@ main section {
   .contact-font {
     font-size: 14px;
   }
+}
 
-  #bro
-
-
-
-  @media screen (max-height: 700px) {
-    main {
-      margin-bottom: 20px;
-    }
-  
-    #content-area {
-      min-height: auto;
-      height: auto;
-    }
+@media (max-height: 700px) {
+  .main {
+    margin-bottom: 20px;
   }
-  
-  @media screen (max-width: 480px) {
-    .social-icons {
-      gap: 0;
-    }
-  
-    .social-footer {
-      padding-bottom: 10px;
-    }
-  
-    .service-blocks-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-    }
+
+  #content-area {
+    min-height: auto;
+    height: auto;
   }
+}
+
+@media (max-width: 480px) {
+  .social-icons {
+    gap: 0;
+  }
+
+  .social-footer {
+    padding-bottom: 10px;
+  }
+
+  .service-blocks-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
