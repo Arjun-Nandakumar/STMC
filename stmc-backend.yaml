@@ -1,3 +1,18 @@
+# 1️⃣ PersistentVolumeClaim for users.json
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stmc-backend-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+# 2️⃣ Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,9 +31,41 @@ spec:
       - name: stmc-backend
         image: stmc-backend:latest
         ports:
-        - containerPort: 5000
+          - containerPort: 5000
         imagePullPolicy: Never
+        env:
+          - name: ADMINUSR
+            valueFrom:
+              secretKeyRef:
+                name: stmc-backend-secrets
+                key: ADMINUSR
+          - name: ADMINPWD
+            valueFrom:
+              secretKeyRef:
+                name: stmc-backend-secrets
+                key: ADMINPWD
+          - name: EMAIL_USER
+            valueFrom:
+              secretKeyRef:
+                name: stmc-backend-secrets
+                key: EMAIL_USER
+          - name: EMAIL_PASS
+            valueFrom:
+              secretKeyRef:
+                name: stmc-backend-secrets
+                key: EMAIL_PASS
+        volumeMounts:
+          - name: users-storage
+            mountPath: /usr/src/app/users.json
+            subPath: users.json
+      volumes:
+        - name: users-storage
+          persistentVolumeClaim:
+            claimName: stmc-backend-pvc
+
 ---
+
+# 3️⃣ Service
 apiVersion: v1
 kind: Service
 metadata:
