@@ -9,28 +9,32 @@ const path = require('path');
 
 const app = express();
 const PORT = 5000;
-const USERS_FILE = path.join(__dirname, 'users.json');
+
+// Path to users.json on mounted PVC
+const USERS_FILE = path.join('/usr/src/app', 'users.json');
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Initialize users.json if it doesn't exist
+// Initialize users.json from Secret if it doesn't exist
 async function initUsersFile() {
   try {
     await fs.access(USERS_FILE);
   } catch {
-    // Initialize with admin user from .env
+    // Initialize from Kubernetes Secret environment variables
     const adminUser = {
       username: process.env.ADMINUSR,
       password: await bcrypt.hash(process.env.ADMINPWD, 10)
     };
+
     const initialUsers = [adminUser];
     await fs.writeFile(USERS_FILE, JSON.stringify(initialUsers, null, 2));
+    console.log('✅ users.json created from Secret');
   }
 }
 
-// 🟢 ENQUIRY Route (unchanged)
+// 🟢 ENQUIRY Route
 app.post('/enquiry', (req, res) => {
   const { service, timestamp } = req.body;
 
@@ -46,7 +50,7 @@ app.post('/enquiry', (req, res) => {
     from: process.env.EMAIL_USER,
     to: process.env.EMAIL_USER,
     subject: 'New Service Enquiry',
-    text: `A user is enquiring more information for the service: ${service}\n\nTime: ${timestamp}`
+    text: `A user is enquiring about service: ${service}\nTime: ${timestamp}`
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -60,24 +64,17 @@ app.post('/enquiry', (req, res) => {
   });
 });
 
-// 🟢 LOGIN Route (updated to use users.json and bcrypt)
+// 🟢 LOGIN Route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-
   try {
     const users = JSON.parse(await fs.readFile(USERS_FILE));
     const user = users.find(u => u.username === username);
-
-    if (!user) {
-      return res.status(400).json({ success: false, message: 'Invalid username or password' });
-    }
+    if (!user) return res.status(400).json({ success: false, message: 'Invalid username or password' });
 
     const match = await bcrypt.compare(password, user.password);
-    if (match) {
-      res.json({ success: true });
-    } else {
-      res.status(400).json({ success: false, message: 'Invalid username or password' });
-    }
+    if (match) res.json({ success: true });
+    else res.status(400).json({ success: false, message: 'Invalid username or password' });
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).json({ success: false, message: 'Server error' });
@@ -87,18 +84,12 @@ app.post('/login', async (req, res) => {
 // 🟢 REGISTER Route
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ success: false, message: 'Username and password are required' });
-  }
+  if (!username || !password) return res.status(400).json({ success: false, message: 'Username and password are required' });
 
   try {
     const users = JSON.parse(await fs.readFile(USERS_FILE));
-    const userExists = users.some(u => u.username === username);
-
-    if (userExists) {
+    if (users.some(u => u.username === username))
       return res.status(400).json({ success: false, message: 'Username already exists' });
-    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     users.push({ username, password: hashedPassword });
@@ -111,12 +102,12 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// 🟢 Root Route (unchanged)
+// 🟢 Root Route
 app.get('/', (req, res) => {
   res.send('Server is running ✅');
 });
 
-// 🟢 Start server and initialize users file
+// 🟢 Start server
 app.listen(PORT, async () => {
   await initUsersFile();
   console.log(`✅ Server running at http://localhost:${PORT}`);
