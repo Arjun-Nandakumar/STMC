@@ -22,14 +22,22 @@ async function initUsersFile() {
   try {
     await fs.access(USERS_FILE);
   } catch {
-    // Initialize from Kubernetes Secret environment variables
-    const adminUser = {
-      username: process.env.ADMINUSR,
-      password: await bcrypt.hash(process.env.ADMINPWD, 10)
-    };
+    // Initialize admin users from Kubernetes Secret environment variables
+    const admins = [
+      {
+        username: process.env.ADM1USR,
+        password: await bcrypt.hash(process.env.ADM1PWD, 10)
+      },
+      // Optional second admin
+      ...(process.env.ADM2USR && process.env.ADM2PWD
+        ? [{
+            username: process.env.ADM2USR,
+            password: await bcrypt.hash(process.env.ADM2PWD, 10)
+          }]
+        : [])
+    ];
 
-    const initialUsers = [adminUser];
-    await fs.writeFile(USERS_FILE, JSON.stringify(initialUsers, null, 2));
+    await fs.writeFile(USERS_FILE, JSON.stringify(admins, null, 2));
     console.log('✅ users.json created from Secret');
   }
 }
