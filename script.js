@@ -534,11 +534,11 @@ function loadContent(page) {
           const password = document.getElementById("password").value.trim();
           const msg = document.getElementById("login-message");
           try {
-            const res = await fetch("http://localhost:5000/login", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ username, password }),
-            });
+	    const res = await fetch("http://localhost:30924/login", {
+  	      method: "POST",
+  	      headers: { "Content-Type": "application/json" },
+  	      body: JSON.stringify({ username, password }),
+	    });
             const data = await res.json();
             if (data.success) {
               msg.innerHTML = `✅ Welcome, <b>${username}</b>!`;
