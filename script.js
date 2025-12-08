@@ -534,7 +534,7 @@ function loadContent(page) {
           const password = document.getElementById("password").value.trim();
           const msg = document.getElementById("login-message");
           try {
-	    const res = await fetch("http://localhost:30924/login", {
+	    const res = await fetch("http://stmc-backend:5000/login", {
   	      method: "POST",
   	      headers: { "Content-Type": "application/json" },
   	      body: JSON.stringify({ username, password }),

@@ -85,6 +85,7 @@ app.post('/login', async (req, res) => {
     else res.status(400).json({ success: false, message: 'Invalid username or password' });
   } catch (err) {
     console.error('Login error:', err);
+    console.log('Server error due to Login');
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
@@ -107,6 +108,7 @@ app.post('/register', async (req, res) => {
   } catch (err) {
     console.error('Registration error:', err);
     res.status(500).json({ success: false, message: 'Server error' });
+    console.log('Server error during registration');
   }
 });
 

@@ -34,16 +34,26 @@ spec:
           - containerPort: 5000
         imagePullPolicy: Never
         env:
-          - name: ADMINUSR
+          - name: ADM1USR
             valueFrom:
               secretKeyRef:
                 name: stmc-backend-secrets
-                key: ADMINUSR
-          - name: ADMINPWD
+                key: ADM1USR
+          - name: ADM1PWD
             valueFrom:
               secretKeyRef:
                 name: stmc-backend-secrets
-                key: ADMINPWD
+                key: ADM1PWD
+          - name: ADM2USR
+            valueFrom:
+              secretKeyRef:
+                name: stmc-backend-secrets
+                key: ADM2USR
+          - name: ADM2PWD
+            valueFrom:
+              secretKeyRef:
+                name: stmc-backend-secrets
+                key: ADM2PWD
           - name: EMAIL_USER
             valueFrom:
               secretKeyRef:
